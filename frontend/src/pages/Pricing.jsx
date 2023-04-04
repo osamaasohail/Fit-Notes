@@ -6,17 +6,20 @@ import { Margin, Wrapper } from "../components/Style";
 import { Spacer } from "../components/Spacer";
 import HomeImage from "../images/Homeimage.svg";
 import Startted from "../components/Startted";
+import PricingCard from "../components/PricingCard";
+import Accordian from "../components/Accordian";
+import { Footer } from "../components/Footer";
 
-export default function HomePage() {
+export default function Pricing() {
   return (
     <>
       <Wrapper>
         <Navbar />
-        <Margin>{/* <HeroSection image={HomeImage} /> */}</Margin>
+        <PricingCard />
+
         <Spacer height="127px" />
-        <Card />
-        <Spacer height="179px" />
-        <Startted />
+        <Accordian />
+        <Footer color={"#CACA0F"} />
       </Wrapper>
     </>
   );

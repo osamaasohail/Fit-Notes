@@ -23,7 +23,7 @@ const Buttons = styled(Button)`
   text-align: center;
 `;
 
-export default function HeroSection({ box, buttonText, image }) {
+export default function HeroSection({ box, buttonText, image, boxText }) {
   return (
     <>
       <Wrapper>
@@ -36,15 +36,27 @@ export default function HeroSection({ box, buttonText, image }) {
           )
         ) : (
           <Box>
-            <H1
-              lHeight="137%"
-              style={{ textAlign: "center" }}
-              fontSize="36px"
-              fontWeight="700"
-              color="black"
-            >
-              Welcome to The <br /> Hospitality Guardian
-            </H1>
+            {boxText ? (
+              <H1
+                lHeight="137%"
+                style={{ textAlign: "center" }}
+                fontSize="36px"
+                fontWeight="700"
+                color="black"
+              >
+                {boxText}
+              </H1>
+            ) : (
+              <H1
+                lHeight="137%"
+                style={{ textAlign: "center" }}
+                fontSize="36px"
+                fontWeight="700"
+                color="black"
+              >
+                Welcome to The <br /> Hospitality Guardian
+              </H1>
+            )}
           </Box>
         )}
       </Wrapper>

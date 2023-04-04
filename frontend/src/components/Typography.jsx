@@ -7,10 +7,13 @@ const H1 = styled.h1`
   font-size: ${(props) => props.fontSize && props.fontSize};
   color: ${(props) => (props.color ? props.color : "#ffffff")};
   margin-bottom: 0px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 const H2 = styled.h2``;
 const H3 = styled.h3``;
-
 
 const P = styled.p`
   font-style: normal;
@@ -19,5 +22,8 @@ const P = styled.p`
   font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
   color: ${(props) => (props.color ? props.color : "#ffffff")};
   margin-bottom: 0px;
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 export { H1, H2, H3, P };
