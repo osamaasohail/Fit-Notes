@@ -14,7 +14,7 @@ export default function Pricing() {
   return (
     <>
       <Wrapper>
-        <Navbar />
+        {/* <Navbar /> */}
         <PricingCard />
 
         <Spacer height="127px" />

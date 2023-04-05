@@ -6,6 +6,7 @@ import Profile from "../images/profile.svg";
 import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   // background: black;
@@ -39,6 +40,7 @@ const WrapeNavBar = styled.div`
 `;
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
+  const [active,setActive]=useState("home")
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -78,60 +80,97 @@ export default function Navbar() {
             <Flex alignItems="center">
               {/* <div style={{width:"100%"}}> */}
               <UL display={isResponsive && openMenu ? "block" : "none"}>
-                <LI>
-                  <a
-                    style={{
+                <LI onClick={()=>{setActive("home")}}>
+                  <Link to={"/"}
+                    style={active==="home"?{
+                      color: "#caca0f",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+                    }:{
                       color: "white",
                       marginRight: "29px",
                       fontSize: "16px",
+                      textDecoration:"none"
                     }}
                   >
                     Home
-                  </a>
+                  </Link>
                 </LI>
-                <LI>
-                  <a
-                    style={{
+                <LI onClick={()=>{setActive("pricing")}}>
+                  <Link to={"/pricing"}
+                    style={active==="pricing"?{
+                      color: "#caca0f",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+
+                    }:{
                       color: "white",
                       marginRight: "29px",
                       fontSize: "16px",
+                      textDecoration:"none"
+
                     }}
                   >
                     Pricing
-                  </a>
+                  </Link>
                 </LI>
-                <LI>
-                  <a
-                    style={{
+                <LI onClick={()=>{setActive("singup")}}>
+                  <Link
+                    style={active==="singup"?{
+                      color: "#caca0f",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+
+                    }:{
                       color: "white",
                       marginRight: "29px",
                       fontSize: "16px",
+                      textDecoration:"none"
+
                     }}
                   >
                     Sign Up
-                  </a>
+                  </Link>
                 </LI>
-                <LI>
-                  <a
-                    style={{
+                <LI onClick={()=>{setActive("privacy")}}>
+                  <Link to={"/privacypolicy"}
+                    style={active==="privacy"?{
+                      color: "#caca0f",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+                    }:
+                    {
                       color: "white",
                       marginRight: "29px",
                       fontSize: "16px",
+                      textDecoration:"none"
                     }}
                   >
                     Privacy Policy
-                  </a>
+                  </Link>
                 </LI>
-                <LI>
-                  <a
-                    style={{
+                <LI onClick={()=>{setActive("about")}}>
+                  <Link to={"/aboutus"}
+                    style={ active==="about"?{
+                      color: "#caca0f",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+
+                    }:{
                       color: "white",
                       marginRight: "29px",
                       fontSize: "16px",
+                      textDecoration:"none"
+
                     }}
                   >
                     About Us
-                  </a>
+                  </Link>
                 </LI>
               </UL>
               {/* </div> */}

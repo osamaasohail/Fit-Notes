@@ -11,8 +11,10 @@ export default function HomePage() {
   return (
     <>
       <Wrapper>
-        <Navbar />
-        <Margin>{/* <HeroSection image={HomeImage} /> */}</Margin>
+        {/* <Navbar /> */}
+        <Margin>
+          <HeroSection image={HomeImage} />
+        </Margin>
         <Spacer height="127px" />
         <Card />
         <Spacer height="179px" />

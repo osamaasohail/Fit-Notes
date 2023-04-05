@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
   return (
     <>
       <Wrapper>
-        <Navbar />
+        {/* <Navbar /> */}
         <Margin>
           <PrivacyContent>
             <H1 fontSize="36px" color="#CACA0F">
