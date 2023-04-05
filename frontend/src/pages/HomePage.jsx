@@ -6,8 +6,13 @@ import { Margin, Wrapper } from "../components/Style";
 import { Spacer } from "../components/Spacer";
 import HomeImage from "../images/Homeimage.svg";
 import Startted from "../components/Startted";
+import { useMediaQuery } from "react-responsive";
+
 
 export default function HomePage() {
+  const isResponsive = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
   return (
     <>
       <Wrapper>
@@ -15,9 +20,9 @@ export default function HomePage() {
         <Margin>
           <HeroSection image={HomeImage} />
         </Margin>
-        <Spacer height="127px" />
+        <Spacer height={isResponsive?"70px":"127px"} />
         <Card />
-        <Spacer height="179px" />
+        <Spacer height={isResponsive?"70px":"179px"} />
         <Startted />
       </Wrapper>
     </>

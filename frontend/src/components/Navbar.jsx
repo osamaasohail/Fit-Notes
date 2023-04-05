@@ -187,7 +187,7 @@ export default function Navbar() {
         </WrapeNavBar>
       </Wrapper>
 
-      <Spacer height={"48px"} />
+      <Spacer height={isResponsive?"25px":"48px"} />
     </>
   );
 }

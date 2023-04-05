@@ -4,6 +4,8 @@ import { Container } from "react-bootstrap";
 import { Spacer } from "./Spacer";
 import DropArrow from "../images/dropdown.svg";
 import { useState } from "react";
+import { useMediaQuery } from "react-responsive";
+
 const Wrapper = styled.div`
   padding-top: 40px;
   background: black;
@@ -45,13 +47,16 @@ const data = [
 function Accordian() {
   const [accordianOpen, setAccordianOpen] = useState(false);
   const [accordianId, setAccordianId] = useState(1);
+  const isResponsive = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
   return (
     <Wrapper>
       <H1 style={{ textAlign: "center" }} fontSize="30px" color="#CACA0F">
         Frequently Asked Questions
       </H1>
       <Spacer height="39px" />
-      <P fontSize="20px" style={{ textAlign: "center" }}>
+      <P fontSize="20px" style={isResponsive?{ textAlign: "center",padding:"0 15px" }:{textAlign: "center",padding:"0"}}>
         Please reach us at{" "}
         <span style={{ color: "#CACA0F" }}>info@hospitalityguardian.co </span>{" "}
         .nz if you cannot find an answer to your question.
