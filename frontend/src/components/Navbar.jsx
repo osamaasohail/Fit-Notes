@@ -80,7 +80,7 @@ export default function Navbar() {
             <Flex alignItems="center">
               {/* <div style={{width:"100%"}}> */}
               <UL display={isResponsive && openMenu ? "block" : "none"}>
-                <LI onClick={()=>{setActive("home")}}>
+                <LI onClick={()=>{setActive("home");setOpenMenu(false)}}>
                   <Link to={"/"}
                     style={active==="home"?{
                       color: "#caca0f",
@@ -97,7 +97,7 @@ export default function Navbar() {
                     Home
                   </Link>
                 </LI>
-                <LI onClick={()=>{setActive("pricing")}}>
+                <LI onClick={()=>{setActive("pricing");setOpenMenu(false)}}>
                   <Link to={"/pricing"}
                     style={active==="pricing"?{
                       color: "#caca0f",
@@ -116,7 +116,7 @@ export default function Navbar() {
                     Pricing
                   </Link>
                 </LI>
-                <LI onClick={()=>{setActive("singup")}}>
+                <LI onClick={()=>{setActive("singup");setOpenMenu(false)}}>
                   <Link
                     style={active==="singup"?{
                       color: "#caca0f",
@@ -135,7 +135,7 @@ export default function Navbar() {
                     Sign Up
                   </Link>
                 </LI>
-                <LI onClick={()=>{setActive("privacy")}}>
+                <LI onClick={()=>{setActive("privacy");setOpenMenu(false)}}>
                   <Link to={"/privacypolicy"}
                     style={active==="privacy"?{
                       color: "#caca0f",
@@ -153,7 +153,7 @@ export default function Navbar() {
                     Privacy Policy
                   </Link>
                 </LI>
-                <LI onClick={()=>{setActive("about")}}>
+                <LI onClick={()=>{setActive("about");setOpenMenu(false)}}>
                   <Link to={"/aboutus"}
                     style={ active==="about"?{
                       color: "#caca0f",

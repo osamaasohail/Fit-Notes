@@ -13,11 +13,11 @@ import { Spacer } from "./Spacer";
 const CardWrape = styled.div`
   background: black;
   text-align: center;
-    padding: 50px;
+    padding: 20px;
   padding-top: 45px;
   padding-bottom: 25px;
   border-radius: 25px;
-  height: 601px;
+  height: 650px;
   // margin: 0 20px 0 20px;
   width:100%;
   @media (max-width: 998px) {
@@ -26,6 +26,27 @@ const CardWrape = styled.div`
     width: 100%;
     margin: 0px !important;
   }
+  @media(min-width:1760px){
+    height:700px;
+  }
+  @media(min-width:2000px){
+    height:800px;
+  }
+  @media screen and (min-width: 990px) and (max-width:1464px) {
+
+   
+    height:600px;
+    }
+  
+  @media screen and (min-width: 768px) and (max-width:990px) {
+
+    p {
+    
+      line-height:40px;
+    
+    }
+    
+    }
 `;
 export default function Card() {
   const isResponsive = useMediaQuery({
@@ -46,7 +67,7 @@ export default function Card() {
               alignItems="space-between"
               style={{ flexDirection: "column", height: "100%" }}
             >
-              <H1 color="#CACA0F" fontSize="32px" fontWeight="700">
+              <H1 color="#CACA0F" fontSize="32px" weight="700">
                 Getting Started
               </H1>
               <P
@@ -82,7 +103,7 @@ export default function Card() {
               alignItems="space-between"
               style={{ flexDirection: "column", height: "100%" }}
             >
-              <H1 color="#CACA0F" fontSize="32px" fontWeight="700">
+              <H1 color="#CACA0F" fontSize="32px" weight="700">
                 Getting Started
               </H1>
               <P
@@ -116,7 +137,7 @@ export default function Card() {
               alignItems="space-between"
               style={{ flexDirection: "column", height: "100%" }}
             >
-              <H1 color="#CACA0F" fontSize="32px" fontWeight="700">
+              <H1 color="#CACA0F" fontSize="32px" weight="700">
                 Getting Started
               </H1>
               <P
