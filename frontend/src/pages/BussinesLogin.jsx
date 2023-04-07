@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   }
 `;
 export default function BussinessLogin() {
+  
   return (
     <>
       <Wrapper>

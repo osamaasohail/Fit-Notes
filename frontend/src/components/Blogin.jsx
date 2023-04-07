@@ -5,12 +5,14 @@ import { Input } from "./Input";
 import { Col, Row } from "react-bootstrap";
 import { Button } from "./Button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Wrapper = styled.div`
   background: white;
   height: 90vh;
-  @media(max-width:768px){
-    height:100%;
-    padding:50px 0px 50px 0px
+  @media (max-width: 768px) {
+    height: 100%;
+    padding: 50px 0px 50px 0px;
   }
 `;
 const TextContainer = styled.div`
@@ -19,6 +21,8 @@ const TextContainer = styled.div`
 `;
 export default function Blogin() {
   const [signup, setSignUp] = useState(true);
+  const navigate = useNavigate();
+
   return (
     <>
       <Wrapper>
@@ -89,24 +93,29 @@ export default function Blogin() {
                 weight="400"
               >
                 Alreay have Account?{" "}
-                <span style={{ fontWeight: "bold" }}>Login</span>
+                <span
+                  onClick={() => setSignUp(false)}
+                  style={{ fontWeight: "bold", cursor: "pointer" }}
+                >
+                  Login
+                </span>
               </P>
             </div>
           </TextContainer>
         ) : (
-            <TextContainer>
+          <TextContainer>
             <div>
               <H1 color="#161616" weight="500" fontSize="40px">
-              Login
+                Login
               </H1>
               <Spacer height="21px" />
-              <P color="#161616" fontSize="14px" >
+              <P color="#161616" fontSize="14px">
                 Email<span style={{ color: "red" }}>*</span>
               </P>
               <Input type="email" />
               <Spacer height="21px" />
 
-              <P color="#161616" fontSize="14px" >
+              <P color="#161616" fontSize="14px">
                 Password<span style={{ color: "red" }}>*</span>
               </P>
               <Input type="password" />
@@ -117,7 +126,12 @@ export default function Blogin() {
                   <Input type="checkbox" />
                 </Col>
                 <Col style={{ paddingLeft: "0px" }}>
-                  <P lHeight="21px" color="#161616" fontSize="14px" weight="400">
+                  <P
+                    lHeight="21px"
+                    color="#161616"
+                    fontSize="14px"
+                    weight="400"
+                  >
                     By creating an account you are agreeing to <br /> our Terms
                     and Conditions and Privacy Policy
                   </P>
@@ -126,6 +140,9 @@ export default function Blogin() {
               <Spacer height="21px" />
 
               <Button
+                onClick={() => {
+                  navigate("/home");
+                }}
                 background="black"
                 style={{ color: "white", width: "100%" }}
               >
@@ -138,8 +155,15 @@ export default function Blogin() {
                 fontSize="14px"
                 weight="400"
               >
-                Alreay have Account?{" "}
-                <span style={{ fontWeight: "bold" }}>Login</span>
+                Donot have Account?{" "}
+                <span
+                  onClick={() => {
+                    setSignUp(true);
+                  }}
+                  style={{ fontWeight: "bold", cursor: "pointer" }}
+                >
+                  Signup
+                </span>
               </P>
             </div>
           </TextContainer>

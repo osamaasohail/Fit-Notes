@@ -9,17 +9,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { Wrapper } from "./components/Style";
 import BussinessLogin from "./pages/BussinesLogin";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [pathName,setPathName]=useState()
   // console.log(window.location.pathname);
-  const pathname=window.location.pathname
+  useEffect(()=>{
+    
+    const pathname=window.location.pathname;
+    console.log(pathname)
+    setPathName(pathname)
+  })
 
   return (
     <>
       <BrowserRouter>
       <Wrapper>
         {
-          pathname !== "/"? <Navbar/>:<BussinessLogin />
+          pathName === "/"?<BussinessLogin />: <Navbar/>
         }
 
      
