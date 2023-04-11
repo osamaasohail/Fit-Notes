@@ -45,7 +45,8 @@ export default function Blogin() {
                   color: "#222427",
                 }}
               >
-                <option>Bussiness</option>
+                <option>Business</option>
+                <option>Individual</option>
               </select>
               <Spacer height="21px" />
               <P color="#161616" fontSize="14px" weight="400">
