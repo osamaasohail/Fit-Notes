@@ -12,36 +12,30 @@ import BussinessLogin from "./pages/BussinesLogin";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [pathName,setPathName]=useState()
+  const [pathName, setPathName] = useState();
   // console.log(window.location.pathname);
-  useEffect(()=>{
-    
-    const pathname=window.location.pathname;
-    console.log(pathname)
-    setPathName(pathname)
-  })
+  useEffect(() => {
+    const pathname = window.location.pathname;
+    console.log(pathname);
+    setPathName(pathname);
+  });
 
   return (
     <>
       <BrowserRouter>
-      <Wrapper>
-        {
-          pathName === "/"?<BussinessLogin />: <Navbar/>
-        }
-
-     
-      </Wrapper>
+        <Wrapper>
+          {pathName === "/signup" ? <BussinessLogin /> : <Navbar />}
+        </Wrapper>
         <Routes>
-        {/* <Route path="/"  element={<BussinessLogin />}/> */}
+          {/* <Route path="/"  element={<BussinessLogin />}/> */}
 
-          <Route path="/home"  element={<HomePage />}/>
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/aboutus" element={<AboutUs />} />
-            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-          
+          <Route path="/" element={<HomePage />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/how-it-works" element={<HowWorks />} />
         </Routes>
       </BrowserRouter>
-    
     </>
   );
 }

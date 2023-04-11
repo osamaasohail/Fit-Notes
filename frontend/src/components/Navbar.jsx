@@ -116,9 +116,10 @@ export default function Navbar() {
                     Pricing
                   </Link>
                 </LI>
-                <LI onClick={()=>{setActive("singup");setOpenMenu(false)}}>
+                <LI onClick={()=>{setActive("signup");setOpenMenu(false)}}>
                   <Link
-                    style={active==="singup"?{
+                    onClick={() => window.location.href = "/signup"}
+                    style={active==="signup"?{
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
@@ -136,7 +137,7 @@ export default function Navbar() {
                   </Link>
                 </LI>
                 <LI onClick={()=>{setActive("privacy");setOpenMenu(false)}}>
-                  <Link to={"/privacypolicy"}
+                  <Link to={"/privacy-policy"}
                     style={active==="privacy"?{
                       color: "#caca0f",
                       marginRight: "29px",
@@ -154,7 +155,7 @@ export default function Navbar() {
                   </Link>
                 </LI>
                 <LI onClick={()=>{setActive("about");setOpenMenu(false)}}>
-                  <Link to={"/aboutus"}
+                  <Link to={"/about-us"}
                     style={ active==="about"?{
                       color: "#caca0f",
                       marginRight: "29px",

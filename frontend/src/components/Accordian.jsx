@@ -25,12 +25,12 @@ const data = [
   {
     id: 1,
     head: "What types of payment do we accept?",
-    para: "We accept Visa and Mastercard payments through Stripe. Direct Debits are available to New Zealand customers.",
+    para: "We accept Visa and Mastercard payments through Stripe.",
   },
   {
     id: 2,
     head: "When will I be billed?",
-    para: "We will bill you at the end of each month for that month's usage.",
+    para: "At the end of your first year or first expiry date, whichever comes first. Then annually on this date of renewal.",
   },
   {
     id: 3,
@@ -41,6 +41,18 @@ const data = [
     id: 4,
     head: "What happens if I cancel my account?",
     para: "If you decide to cancel your membership with us, no hard feelings, any expiry dates during the rest of the year you will still be notified of, but your billing payments will be canceled. Your account data will be deleted in accordance with our privacy policy.",
+  },
+  {
+    id: 5,
+    head: "What are the differences between the plans?",
+    para: `liquor licenses are free to add but the cost is calculated on how many mangers the business will add. Our single certificate category is for solo licensees or certifications business owners and is a free service.
+    Our 2 to 4 certificates option is for most small to medium hospitality businesses with management of multiple duty managers certificates. This service is $7.00 NZD monthly plus GST and applicable fees.
+    Our 5+ certificate option is designed for medium to large hospitality businesses, accounting for multiple duty managers for each day. This service is $10.00 monthly plus GST and applicable fees.`,
+  },
+  {
+    id: 6,
+    head: "What is Fixed price for the individuals?",
+    para: " Fixed price for individuals is $5.00 plus GST and applicable fees (if any).",
   },
 ];
 

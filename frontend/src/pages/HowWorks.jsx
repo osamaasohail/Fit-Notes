@@ -35,8 +35,9 @@ export default function HowWorks() {
                 Hospitality Guardian helps your business manage Duty Manager
                 certificate expiration and Liquor licensing expiration by
                 sending you reminders when certain documents are coming up for
-                renewal. Our systems send out prompts and reminders two months
-                before, six weeks before, and one month before expiry.
+                renewal. 60 days, 50 days, 40 days, and 30 days. Our reminders 
+                will turn off once you update with new information or remove the 
+                date you are being prompted about.
               </P>
               <Spacer height="30px" />
               <Button>Get Started</Button>

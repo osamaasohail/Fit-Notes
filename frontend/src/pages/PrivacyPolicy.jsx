@@ -23,8 +23,7 @@ export default function PrivacyPolicy() {
             <Spacer height={isResponsive ? "10px" : "48px"} />
             <div>
               <P fontSize="24px" weight="400">
-                We collect personal information from you, including information
-                about your:
+              We collect personal information from you, including information about your:
               </P>
               <ul>
                 <li
@@ -42,7 +41,7 @@ export default function PrivacyPolicy() {
                         }
                   }
                 >
-                  name
+                  duty managers' names
                 </li>
                 <li
                   style={
@@ -96,6 +95,10 @@ export default function PrivacyPolicy() {
                   Business Trading Name
                 </li>
               </ul>
+{/* If you choose not to enter we'll
+We keep your information safe by storing it in encrypted files and only allowing certain staff to access it .
+We keep your information for a maximum of two years upon service cancelation, at which point we will securely destroy all your data by erasing all related data connected with your account.
+You have the right to ask for a copy of any personal information we hold about you, and to ask for it to be corrected if you think it is wrong. If you’d like to ask for a copy of your information, or to have it corrected, please contact us at info@hospitalityguardian.co.nz. */}
               <P fontSize="24px" weight="400">
                 We collect your personal information in order to:
               </P>
