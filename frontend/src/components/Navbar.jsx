@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import styled from "styled-components";
 import { Flex, Margin } from "./Style";
 import { H1, P } from "./Typography";
@@ -7,6 +8,9 @@ import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 
 const Wrapper = styled.div`
   // background: black;
@@ -40,10 +44,13 @@ const WrapeNavBar = styled.div`
 `;
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
+
   const [active,setActive]=useState("home")
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
+
   return (
     <>
       <Wrapper>
@@ -81,8 +88,9 @@ export default function Navbar() {
               {/* <div style={{width:"100%"}}> */}
               <UL display={isResponsive && openMenu ? "block" : "none"}>
                 <LI onClick={()=>{setActive("home");setOpenMenu(false)}}>
-                  <Link to={"/"}
-                    style={active==="home"?{
+                  <a
+                   onClick={()=>{navigate("/")}}
+                    style={window.location.pathname==="/"?{
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
@@ -95,11 +103,12 @@ export default function Navbar() {
                     }}
                   >
                     Home
-                  </Link>
+                  </a>
                 </LI>
                 <LI onClick={()=>{setActive("pricing");setOpenMenu(false)}}>
-                  <Link to={"/pricing"}
-                    style={active==="pricing"?{
+                  <a 
+                  onClick={()=>{navigate("/pricing")}}
+                    style={window.location.pathname==="/pricing"?{
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
@@ -114,12 +123,12 @@ export default function Navbar() {
                     }}
                   >
                     Pricing
-                  </Link>
+                  </a>
                 </LI>
-                <LI onClick={()=>{setActive("signup");setOpenMenu(false)}}>
-                  <Link
-                    onClick={() => window.location.href = "/signup"}
-                    style={active==="signup"?{
+                <LI onClick={()=>{setOpenMenu(false)}}>
+                  <a
+                    onClick={()=>{navigate("/sign-up")}}
+                    style={window.location.pathname==="/sign-up"?{
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
@@ -134,11 +143,12 @@ export default function Navbar() {
                     }}
                   >
                     Sign Up
-                  </Link>
+                  </a>
                 </LI>
                 <LI onClick={()=>{setActive("privacy");setOpenMenu(false)}}>
-                  <Link to={"/privacy-policy"}
-                    style={active==="privacy"?{
+                  <a 
+                   onClick={()=>{navigate("/privacy-policy")}}
+                    style={window.location.pathname==="/privacy-policy"?{
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
@@ -152,11 +162,14 @@ export default function Navbar() {
                     }}
                   >
                     Privacy Policy
-                  </Link>
+                  </a>
                 </LI>
                 <LI onClick={()=>{setActive("about");setOpenMenu(false)}}>
-                  <Link to={"/about-us"}
-                    style={ active==="about"?{
+                  <a 
+                   onClick={()=>{navigate("/about-us")}}
+                  
+                  
+                    style={ window.location.pathname==="/about-us"?{
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
@@ -171,7 +184,7 @@ export default function Navbar() {
                     }}
                   >
                     About Us
-                  </Link>
+                  </a>
                 </LI>
               </UL>
               {/* </div> */}

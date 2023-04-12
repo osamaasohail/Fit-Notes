@@ -142,7 +142,7 @@ export default function Blogin() {
 
               <Button
                 onClick={() => {
-                  navigate("/home");
+                  navigate("/");
                 }}
                 background="black"
                 style={{ color: "white", width: "100%" }}

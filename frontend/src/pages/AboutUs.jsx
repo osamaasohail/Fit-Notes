@@ -26,7 +26,7 @@ export default function AboutUs() {
   return (
     <>
       <Wrapper>
-        {/* <Navbar /> */}
+        <Navbar />
         <Margin>
           <HeroSection boxText={"About Us"} image={AboutImage} />
         </Margin>

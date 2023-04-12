@@ -24,16 +24,21 @@ function App() {
     <>
       <BrowserRouter>
         <Wrapper>
-          {pathName === "/signup" ? <BussinessLogin /> : <Navbar />}
+          {/* {pathName === "/signup" ? <BussinessLogin /> : <Navbar />} */}
         </Wrapper>
         <Routes>
-          {/* <Route path="/"  element={<BussinessLogin />}/> */}
+         
+      
 
           <Route path="/" element={<HomePage />} />
+   
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/how-it-works" element={<HowWorks />} />
+          <Route path="/sign-up" element={<BussinessLogin />} />
+
+     
         </Routes>
       </BrowserRouter>
     </>
