@@ -91,10 +91,13 @@ export default function Navbar() {
                   <a
                    onClick={()=>{navigate("/")}}
                     style={window.location.pathname==="/"?{
+                      
                       color: "#caca0f",
                       marginRight: "29px",
                       fontSize: "16px",
-                      textDecoration:"none"
+                      textDecoration:"none",
+                      
+                      
                     }:{
                       color: "white",
                       marginRight: "29px",
@@ -186,14 +189,45 @@ export default function Navbar() {
                     About Us
                   </a>
                 </LI>
+                {
+                  isResponsive &&
+                  <Flex style={{cursor:"pointer"}} JustifyContent="center" alignItems="flex-start">
+                  <img className="mx-2" src={Profile} />
+                
+                  <LI onClick={()=>{setActive("about");setOpenMenu(false)}}>
+                  <a 
+                   onClick={()=>{navigate("/profile/edit-profile")}}
+                  
+                  
+                    style={ window.location.pathname==="/edit-profile"?{
+                      color: "#caca0f",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+
+                    }:{
+                      color: "white",
+                      marginRight: "29px",
+                      fontSize: "16px",
+                      textDecoration:"none"
+
+                    }}
+                  >
+                    Profile
+                  </a>
+                </LI>
+                {/* <P onClick={()=>{navigate("/profile/edit-profile")}} style={{ marginLeft: "10px" }}>Profile</P> */}
+                </Flex>
+
+                }
               </UL>
               {/* </div> */}
               {isResponsive ? (
                 ""
               ) : (
-                <Flex alignItems="center">
+                <Flex style={{cursor:"pointer"}} alignItems="center">
                   <img src={Profile} />
-                  <P style={{ marginLeft: "10px" }}>Profile</P>
+                  <P onClick={()=>{navigate("/profile/edit-profile")}} style={{ marginLeft: "10px" }}>Profile</P>
                 </Flex>
               )}
             </Flex>

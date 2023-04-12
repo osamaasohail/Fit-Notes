@@ -6,6 +6,8 @@ import { Col, Row } from "react-bootstrap";
 import { Button } from "./Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+
 
 const Wrapper = styled.div`
   background: white;
@@ -22,6 +24,9 @@ const TextContainer = styled.div`
 export default function Blogin() {
   const [signup, setSignUp] = useState(true);
   const navigate = useNavigate();
+  const isResponsive = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
 
   return (
     <>
@@ -68,12 +73,12 @@ export default function Blogin() {
               <Spacer height="21px" />
 
               <Row className="align-items-center">
-                <Col style={{ paddingRight: "0px" }} sm={1}>
+                <Col style={{ paddingRight: "0px" }} sm={1} xs={2}>
                   <Input type="checkbox" />
                 </Col>
                 <Col style={{ paddingLeft: "0px" }}>
-                  <P color="#161616" fontSize="14px" weight="400">
-                    By creating an account you are agreeing to <br /> our Terms
+                  <P lHeight={isResponsive&&"17px"} color="#161616" fontSize="14px" weight="400">
+                    By creating an account you are agreeing to {!isResponsive && <br /> }  our Terms
                     and Conditions and Privacy Policy
                   </P>
                 </Col>

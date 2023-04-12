@@ -10,6 +10,12 @@ import Navbar from "./components/Navbar";
 import { Wrapper } from "./components/Style";
 import BussinessLogin from "./pages/BussinesLogin";
 import { useEffect, useState } from "react";
+import Profile from "./pages/profile/Profile";
+import Subscribtion from "./pages/profile/Subscribtion";
+import Notification from "./pages/profile/Notification";
+import ResetEmail from "./pages/profile/ResetEmail";
+import ConfrimPassword from "./pages/profile/ConfirmPassword";
+import Payment from "./pages/Payment";
 
 function App() {
   const [pathName, setPathName] = useState();
@@ -27,18 +33,21 @@ function App() {
           {/* {pathName === "/signup" ? <BussinessLogin /> : <Navbar />} */}
         </Wrapper>
         <Routes>
-         
-      
-
           <Route path="/" element={<HomePage />} />
-   
+
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/how-it-works" element={<HowWorks />} />
           <Route path="/sign-up" element={<BussinessLogin />} />
+          <Route path="/profile/edit-profile" element={<Profile />} />
+          <Route path="/profile/subscribtion" element={<Subscribtion />} />
+          <Route path="/profile/notification" element={<Notification />} />
+          <Route path="/profile/reset" element={<ResetEmail />} />
+          <Route path="/profile/reset-password" element={<ConfrimPassword/>} />
+          <Route path="/payment" element={<Payment/>} />  
 
-     
+
         </Routes>
       </BrowserRouter>
     </>
