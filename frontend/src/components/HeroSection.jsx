@@ -77,7 +77,7 @@ export default function HeroSection({ box, buttonText, image, boxText }) {
                   height: "100%",
                 }}
                 fontSize="36px"
-                fontWeight="700"
+                weight="700"
                 color="black"
               >
                 {boxText}
@@ -93,7 +93,7 @@ export default function HeroSection({ box, buttonText, image, boxText }) {
                   height: "100%",
                 }}
                 fontSize="36px"
-                fontWeight="700"
+                weight="700"
                 color="black"
               >
                 Welcome to The <br /> Hospitality Guardian

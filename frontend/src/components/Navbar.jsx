@@ -57,7 +57,7 @@ export default function Navbar() {
         <Spacer height="27px" />
         <Margin>
           <Flex>
-            <H1 fontSize="20px" weight="700">
+            <H1 style={{cursor:"pointer"}} onClick={()=>{navigate("/")}} fontSize="20px" weight="700">
               The Hospitality Guardian
             </H1>
             {isResponsive ? (

@@ -128,17 +128,18 @@ export default function Blogin() {
               <Spacer height="21px" />
 
               <Row className="align-items-center">
-                <Col style={{ paddingRight: "0px" }} sm={1}>
+                <Col style={{ paddingRight: "0px" }} sm={1} xs={1}>
                   <Input type="checkbox" />
                 </Col>
                 <Col style={{ paddingLeft: "0px" }}>
                   <P
-                    lHeight="21px"
+                  className={isResponsive?"px-1":""}
+                    lHeight={isResponsive?"16px":"19px"}
                     color="#161616"
                     fontSize="14px"
                     weight="400"
                   >
-                    By creating an account you are agreeing to <br /> our Terms
+                    By creating an account you are agreeing to {isResponsive?"":<br />} our Terms
                     and Conditions and Privacy Policy
                   </P>
                 </Col>
