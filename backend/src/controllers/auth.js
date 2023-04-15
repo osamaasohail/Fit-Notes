@@ -65,11 +65,11 @@ module.exports = {
                     verificationToken: token
                 });
                 console.log(myUser);
+                if (myUser.isVerified) return res.status(201).json({ error: "Email Already Verified" });
                 if (!myUser) return res.status(400).json({ error: "Email Not Verified" });
                 else {
                     await User.updateOne({_id: req.params.id, isVerified: true});
                     res.status(201).json({ message: "Successfully Verified User" });
-                    
                 } 
             }
         } catch (error) {
