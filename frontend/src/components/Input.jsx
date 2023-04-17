@@ -9,4 +9,6 @@ export const Input = styled.input`
   background: #f2f2f2;
   border-radius: 3px;
   color: #222427;
+  
+ 
 `;

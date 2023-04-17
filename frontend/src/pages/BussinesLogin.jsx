@@ -25,6 +25,7 @@ const Logo = styled(H1)`
   :hover {
     color: #caca0f;
   }
+  
 `;
 export default function BussinessLogin() {
   const navigate = useNavigate();
