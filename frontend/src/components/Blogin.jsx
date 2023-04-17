@@ -23,6 +23,7 @@ const TextContainer = styled.div`
 `;
 export default function Blogin() {
   const [signup, setSignUp] = useState(true);
+  const [accountType,setAccountType]=useState("Bussiness")
   const navigate = useNavigate();
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
@@ -42,6 +43,7 @@ export default function Blogin() {
                 Account Type <span style={{ color: "red" }}>*</span>
               </P>
               <select
+              onChange={(e)=>{setAccountType(e.target.value)}}
                 style={{
                   width: "100%",
                   padding: "10px 12px",
@@ -50,8 +52,8 @@ export default function Blogin() {
                   color: "#222427",
                 }}
               >
-                <option>Business</option>
-                <option>Individual</option>
+                <option value={"Bussiness"}>Business</option>
+                <option value={"Individual"}>Individual</option>
               </select>
               <Spacer height="21px" />
               <P color="#161616" fontSize="14px" weight="400">
@@ -86,6 +88,13 @@ export default function Blogin() {
               <Spacer height="21px" />
 
               <Button
+              onClick={()=>{
+                if(accountType==="Bussiness"){
+                  navigate("/payment")
+                } else  if(accountType==="Individual"){
+                  navigate("/individual-payment")
+                }
+              }}
                 background="black"
                 style={{ color: "white", width: "100%" }}
               >
@@ -128,17 +137,18 @@ export default function Blogin() {
               <Spacer height="21px" />
 
               <Row className="align-items-center">
-                <Col style={{ paddingRight: "0px" }} sm={1}>
+                <Col style={{ paddingRight: "0px" }} sm={1} xs={1}>
                   <Input type="checkbox" />
                 </Col>
                 <Col style={{ paddingLeft: "0px" }}>
                   <P
-                    lHeight="21px"
+                  className={isResponsive?"px-1":""}
+                    lHeight={isResponsive?"16px":"19px"}
                     color="#161616"
                     fontSize="14px"
                     weight="400"
                   >
-                    By creating an account you are agreeing to <br /> our Terms
+                    By creating an account you are agreeing to {isResponsive?"":<br />} our Terms
                     and Conditions and Privacy Policy
                   </P>
                 </Col>

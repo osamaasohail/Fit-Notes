@@ -11,6 +11,7 @@ import ActiveEdit from "../images/activeedit.svg";
 import ActveSub from "../images/activesub.svg";
 import ActiveNoti from "../images/activenot.svg";
 import ActivePass from "../images/activepass.svg";
+import Home from "../images/home.png"
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
@@ -101,6 +102,31 @@ export default function SideNavbar() {
             }
             <div className="d-flex justify-content-center">
               <UL display={active?"block":"none"}>
+              <LI>
+                  <img
+                    width={"18px"}
+                    height={"18px"}
+                    alt="edit"
+                    src={
+                      window.location.pathname === "/profile/edit-profil"
+                        ? Home
+                        : Home
+                    }
+                  />
+
+                  <A
+                    color={
+                      window.location.pathname === "/profile/edit-profil"
+                        ? "#CACA0F"
+                        : "white"
+                    }
+                    onClick={() => {
+                      navigate("/");
+                    }}
+                  >
+                    Home
+                  </A>
+                </LI>
                 <LI>
                   <img
                     width={"18px"}
