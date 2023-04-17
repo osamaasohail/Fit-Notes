@@ -26,7 +26,7 @@ export default function AboutUs() {
   return (
     <>
       <Wrapper>
-        {/* <Navbar /> */}
+        <Navbar />
         <Margin>
           <HeroSection boxText={"About Us"} image={AboutImage} />
         </Margin>
@@ -41,6 +41,8 @@ export default function AboutUs() {
             certification and <br /> licensing a thing of the past. We make it
             easy to take away the hassle of managing Duty <br /> Manager's
             certificate expiry and Venue Liquor licensing expiry.
+            Additionally, we provide<br/> the option to include your Gaming license,
+            along with its expiration date, for <br />comprehensive license management.
           </P>
           <Spacer height={isResponsive?"23px":"89px"} />
 

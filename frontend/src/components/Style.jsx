@@ -8,6 +8,7 @@ export const Flex = styled.div`
 
 export const Wrapper = styled.div`
   background: #161616;
+  position:relative;
 `;
 
 export const Margin = styled.div`

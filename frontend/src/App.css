@@ -37,4 +37,10 @@
   }
 }
 
+input[type='checkbox']:checked {
+  accent-color: #323232;
+}
+input[type='radio']:checked {
+  accent-color: #323232;
+}
 
