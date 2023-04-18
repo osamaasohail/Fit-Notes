@@ -21,6 +21,7 @@ app.get('/', function (req,res) {
 	res.json({sucess: true});
 });
 require('./src/routes/auth')(app);
+require('./src/routes/certs')(app);
 app.use((req, res, next) => {
     next(createError(404));
 });
