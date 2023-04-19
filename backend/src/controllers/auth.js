@@ -54,6 +54,37 @@ module.exports = {
             res.status(500).json({ error: "Internal server error" });
         }
     },
+    getUsers: async(req,res) => {
+        User.find({})
+        .then(docs => {
+            res.status(201).json({users: docs});
+        })
+        .catch(err => {
+            res.status(500).json({ error: "Internal server error" });
+        });
+    },
+    login: async(req, res) => {
+        const { email, password } = req.body;
+        try {
+            const user = await User.findOne({ email });
+            if (!user) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+            }
+            console.log(user);
+            const isMatch = await comparePassword(password, user.password);
+
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Invalid credentials' });
+            }
+
+            const token = user.generateAuthToken();
+
+            res.status(201).json({ message: 'User Logged In Succesfully', token: token });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    },
     verifyEmail: async (req, res) => {    
         try {
             const { token } = req.query;
@@ -77,4 +108,16 @@ module.exports = {
         }
     }
 }
+const comparePassword = async (password, hash) => {
+    try {
+      const isMatch = await bcrypt.compare(password, hash);
+      return isMatch;
+    } catch (error) {
+      console.error(error);
+    }
+};
+User.prototype.generateAuthToken = function() {
+    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    return token;
+};  
 
