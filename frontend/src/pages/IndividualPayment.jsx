@@ -30,6 +30,16 @@ const Logo = styled(H1)`
 
 export default function IndividualPayment() {
   const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [role, setRole] = useState("");
+  const [addduttyManagerEmail, setAddDuttyManagerEmail] = useState("");
+  const [duttyManagerName, setDuttyManagerName] = useState("");
+
+  
+  const [managerLicenseExpiry, setManagerLicenseExpiry] = useState("");
+  // const [dutyManagerName, setDutyManagerName] = useState("");
+
+  const [term, setTerm] = useState(false);
   const checkData = [
     { id: 1, name: "60", isChecked: false },
     { id: 2, name: "50", isChecked: false },
@@ -98,6 +108,7 @@ export default function IndividualPayment() {
                 <Spacer height="2px" />
                 <div style={{ position: "relative" }}>
                   <Input
+                  onChange={(e) => {setFullName(e.target.value)}}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -123,6 +134,8 @@ export default function IndividualPayment() {
                   <Col md={6}>
                     <div className="d-flex align-items-center ">
                       <Input
+                      onChange={(e) => {setRole(e.target.value)}}
+                      value="bussiness-owner"
                       name="a"
                         style={{
                           fontSize: "14px",
@@ -132,7 +145,7 @@ export default function IndividualPayment() {
                           marginRight: "10px",
                         }}
                         type="radio"
-                        placeholder="Liquor Browdy"
+                        // placeholder="Liquor Browdy"
                       />
                       <P color="#161616" fontSize="14px" weight="500">
                         Business Owner
@@ -144,6 +157,8 @@ export default function IndividualPayment() {
                   <Col md={6}>
                     <div className="d-flex  align-items-center">
                       <Input
+                       onChange={(e) => {setRole(e.target.value)}}
+                       value="individual"
                       name="a"
                         style={{
                           fontSize: "14px",
@@ -172,6 +187,7 @@ export default function IndividualPayment() {
                   Add Duty Manager<span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
+                    onChange={(e) => {setDuttyManagerName(e.target.value)}}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -194,6 +210,7 @@ export default function IndividualPayment() {
                   Add Duty Manager Email<span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
+                    onChange={(e) => {setAddDuttyManagerEmail(e.target.value)}}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -218,13 +235,14 @@ export default function IndividualPayment() {
                   <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
+                    onChange={(e) => {setManagerLicenseExpiry(e.target.value)}} 
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
                         width: "100%",
                       }}
                       type="date"
-                      placeholder="12345"
+                      
                     />
 
                     <Spacer height="16px" />
@@ -277,6 +295,7 @@ export default function IndividualPayment() {
                 <Spacer height="16px" />
                 <div className="d-flex">
                   <Input
+                  onChange={(e) => {setTerm(e.target.value)}}
                     className="inputGreen"
                     style={{
                       fontSize: "14px",
