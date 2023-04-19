@@ -8,6 +8,7 @@ import Check from "../images/check.svg";
 import { Button } from "../components/Button";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -29,10 +30,26 @@ const Logo = styled(H1)`
 
 export default function IndividualPayment() {
   const navigate = useNavigate();
-
+  const checkData = [
+    { id: 1, name: "60", isChecked: false },
+    { id: 2, name: "50", isChecked: false },
+    { id: 3, name: "40", isChecked: false },
+    { id: 4, name: "30", isChecked: false },
+  ];
+  const [data, setData] = useState(checkData);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
+
+  function handleChange(e) {
+    const value = e.target.value;
+    const modifiedData = [...data];
+    modifiedData.map((item) => {
+      item.isChecked = item.id === +value;
+      return item;
+    });
+    setData(modifiedData);
+  }
   return (
     <>
       <Wrapper>
@@ -106,6 +123,7 @@ export default function IndividualPayment() {
                   <Col md={6}>
                     <div className="d-flex align-items-center ">
                       <Input
+                      name="a"
                         style={{
                           fontSize: "14px",
                           //   background: "#FCFCFC",
@@ -126,6 +144,7 @@ export default function IndividualPayment() {
                   <Col md={6}>
                     <div className="d-flex  align-items-center">
                       <Input
+                      name="a"
                         style={{
                           fontSize: "14px",
                           //   background: "#FCFCFC",
@@ -170,6 +189,28 @@ export default function IndividualPayment() {
                 </P>
               </div>
               <Spacer height="24px" />
+              <div>
+                <P color="#161616" fontSize="14px" weight="600">
+                  Add Duty Manager Email<span style={{ color: "red" }}>*</span>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      style={{
+                        fontSize: "14px",
+                        //   background: "#FCFCFC",
+                        width: "100%",
+                      }}
+                      placeholder="Email"
+                    />
+                    <div
+                      style={{ position: "absolute", top: "15%", right: "2%" }}
+                    >
+                      <img src={Check} />
+                    </div>
+                    <Spacer height="16px" />
+                  </div>
+                </P>
+              </div>
+              <Spacer height="24px" />
 
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
@@ -201,78 +242,34 @@ export default function IndividualPayment() {
 
                 {/* <div className="d-flex"> */}
                 <Row>
-                  <Col className="mb-2" lg={3} md={6} sm={6}>
-                    <div className="d-flex">
-                      <Input
-                        style={{
-                          fontSize: "14px",
-                          //   background: "#FCFCFC",
-                          width: "50px",
-                        }}
-                        type="checkbox"
-                        placeholder="Liquor Browdy"
-                      />
-                      <P color="#161616" fontSize="14px" weight="500">
-                        60 days
-                      </P>
+                  {data.map((item, index) => {
+                    return (
+                      <>
+                        <Col className="mb-2" lg={3} md={6} sm={6}>
+                          <div className="d-flex">
+                            <Input
+                            value={item.id}
+                            onChange={(e) => handleChange(e)}
+                              
+                              style={{
+                                fontSize: "14px",
+                                //   background: "#FCFCFC",
+                                width: "50px",
+                              }}
+                              type="checkbox"
+                              placeholder="Liquor Browdy"
+                              checked={item.isChecked}
+                            />
+                            <P color="#161616" fontSize="14px" weight="500">
+                              {item.name} days
+                            </P>
 
-                      {/* <Spacer height="16px" /> */}
-                    </div>
-                  </Col>
-                  <Col className="mb-2" lg={3} md={6} sm={6}>
-                    <div className="d-flex">
-                      <Input
-                        style={{
-                          fontSize: "14px",
-                          //   background: "#FCFCFC",
-                          width: "50px",
-                        }}
-                        type="checkbox"
-                        placeholder="Liquor Browdy"
-                      />
-                      <P color="#161616" fontSize="14px" weight="500">
-                        50 days
-                      </P>
-
-                      {/* <Spacer height="16px" /> */}
-                    </div>
-                  </Col>
-                  <Col className="mb-2" lg={3} md={6} sm={6}>
-                    <div className="d-flex">
-                      <Input
-                        style={{
-                          fontSize: "14px",
-                          //   background: "#FCFCFC",
-                          width: "50px",
-                        }}
-                        type="checkbox"
-                        placeholder="Liquor Browdy"
-                      />
-                      <P color="#161616" fontSize="14px" weight="500">
-                        50 days
-                      </P>
-
-                      {/* <Spacer height="16px" /> */}
-                    </div>
-                  </Col>
-                  <Col className="mb-2" lg={3} md={6} sm={6}>
-                    <div className="d-flex">
-                      <Input
-                        style={{
-                          fontSize: "14px",
-                          //   background: "#FCFCFC",
-                          width: "50px",
-                        }}
-                        type="checkbox"
-                        placeholder="Liquor Browdy"
-                      />
-                      <P color="#161616" fontSize="14px" weight="500">
-                        30 days
-                      </P>
-
-                      {/* <Spacer height="16px" /> */}
-                    </div>
-                  </Col>
+                            {/* <Spacer height="16px" /> */}
+                          </div>
+                        </Col>
+                      </>
+                    );
+                  })}
                 </Row>
                 {/* </div> */}
                 <Spacer height="12px" />
