@@ -30,6 +30,16 @@ const Logo = styled(H1)`
 `;
 export default function Payment() {
   const navigate = useNavigate();
+  const [businessName, setBusinessName] = useState("");
+  const [role, setRole] = useState("");
+  const [bussinerOwnerEmail, setBussinerOwnerEmail] = useState("");
+  const [licenseNumber, setLicenseNumber] = useState("");
+  const [liquorLicenseExpiry, setLiquorLicenseExpiry] = useState("");
+  // const [dutyManagerName, setDutyManagerName] = useState("");
+  const [gammingLicense, setGammingLicense] = useState("");
+  const [licenseExpiry, setLicenseExpiry] = useState("");
+  const [term, setTerm] = useState(false);
+
   const [serviceList, setServiceList] = useState([
     { service: "", date: "", email: "" },
   ]);
@@ -118,6 +128,9 @@ export default function Payment() {
                 <Spacer height="2px" />
                 <div style={{ position: "relative" }}>
                   <Input
+                    onChange={(e) => {
+                      setBusinessName(e.target.value);
+                    }}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -147,6 +160,7 @@ export default function Payment() {
                       <Input
                         onChange={(e) => {
                           console.log(e.target.value);
+                          setRole(e.target.value);
                         }}
                         value={"owner"}
                         name="a"
@@ -170,6 +184,9 @@ export default function Payment() {
                   <Col md={6}>
                     <div className="d-flex  align-items-center">
                       <Input
+                        onCanPlay={(e) => {
+                          setRole(e.target.value);
+                        }}
                         value={"Manager"}
                         name="a"
                         style={{
@@ -200,6 +217,9 @@ export default function Payment() {
                 <Spacer height="2px" />
                 <div style={{ position: "relative" }}>
                   <Input
+                    onChange={(e) => {
+                      setBussinerOwnerEmail(e.target.value);
+                    }}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -220,6 +240,9 @@ export default function Payment() {
                   Liquor license number<span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
+                      onChange={(e) => {
+                        setLicenseNumber(e.target.value);
+                      }}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -244,6 +267,7 @@ export default function Payment() {
                   <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
+                    onChange={(e) => {setLiquorLicenseExpiry(e.target.value)}}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -400,6 +424,7 @@ export default function Payment() {
                       <span style={{ color: "red" }}>*</span>
                       <div style={{ position: "relative" }}>
                         <Input
+                        onChange={(e)=>{setGammingLicense(e.target.value)}}
                           style={{
                             fontSize: "14px",
                             //   background: "#FCFCFC",
@@ -427,6 +452,7 @@ export default function Payment() {
                       License Expiry Date<span style={{ color: "red" }}>*</span>
                       <div style={{ position: "relative" }}>
                         <Input
+                        onChange={(e)=>{setLicenseExpiry(e.target.value)}}
                           style={{
                             fontSize: "14px",
                             //   background: "#FCFCFC",
@@ -460,9 +486,8 @@ export default function Payment() {
                         <Col className="mb-2" lg={3} md={6} sm={6}>
                           <div className="d-flex">
                             <Input
-                            value={item.id}
-                            onChange={(e) => handleChange(e)}
-                              
+                              value={item.id}
+                              onChange={(e) => handleChange(e)}
                               style={{
                                 fontSize: "14px",
                                 //   background: "#FCFCFC",
@@ -490,6 +515,7 @@ export default function Payment() {
                 <Spacer height="16px" />
                 <div className="d-flex">
                   <Input
+                  onChange={(e)=>{setTerm(!term)}}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",

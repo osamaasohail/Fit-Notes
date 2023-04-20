@@ -7,6 +7,7 @@ import { H1 } from "../components/Typography";
 import { Spacer } from "../components/Spacer";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 
 
 const WrapperIn = styled.div`
@@ -28,6 +29,8 @@ const Logo = styled(H1)`
   
 `;
 export default function BussinessLogin() {
+  
+
   const navigate = useNavigate();
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",

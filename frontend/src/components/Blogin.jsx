@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-
 const Wrapper = styled.div`
   background: white;
   height: 90vh;
@@ -23,7 +22,16 @@ const TextContainer = styled.div`
 `;
 export default function Blogin() {
   const [signup, setSignUp] = useState(true);
-  const [accountType,setAccountType]=useState("Bussiness")
+  const [bussinessType, setBussinessType] = useState("");
+  const [bussinessName, setBussinessName] = useState("");
+  const [bussinessEmail, setBussinessEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [terms, setTerms] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginTerms, setLoginTerms] = useState(false);
+
+  const [accountType, setAccountType] = useState("Bussiness");
   const navigate = useNavigate();
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
@@ -43,7 +51,10 @@ export default function Blogin() {
                 Account Type <span style={{ color: "red" }}>*</span>
               </P>
               <select
-              onChange={(e)=>{setAccountType(e.target.value)}}
+                onChange={(e) => {
+                  setAccountType(e.target.value);
+                  setBussinessType(e.target.value);
+                }}
                 style={{
                   width: "100%",
                   padding: "10px 12px",
@@ -59,42 +70,48 @@ export default function Blogin() {
               <P color="#161616" fontSize="14px" weight="400">
                 Business Name <span style={{ color: "red" }}>*</span>
               </P>
-              <Input />
+              <Input onChange={(e)=>{setBussinessName(e.target.value)}} />
               <Spacer height="21px" />
 
               <P color="#161616" fontSize="14px" weight="400">
                 Email<span style={{ color: "red" }}>*</span>
               </P>
-              <Input type="email" />
+              <Input onChange={(e)=>{setBussinessEmail(e.target.value)}} type="email" />
               <Spacer height="21px" />
 
               <P color="#161616" fontSize="14px" weight="400">
                 Password<span style={{ color: "red" }}>*</span>
               </P>
-              <Input type="password" />
+              <Input onChange={(e)=>{setPassword(e.target.value)}} type="password" />
               <Spacer height="21px" />
 
               <Row className="align-items-center">
                 <Col style={{ paddingRight: "0px" }} sm={1} xs={2}>
-                  <Input type="checkbox" />
+                  <Input onChange={()=>{setTerms(!terms)}} type="checkbox" />
                 </Col>
                 <Col style={{ paddingLeft: "0px" }}>
-                  <P lHeight={isResponsive&&"17px"} color="#161616" fontSize="14px" weight="400">
-                    By creating an account you are agreeing to {!isResponsive && <br /> }  our Terms
-                    and Conditions and Privacy Policy
+                  <P
+                    lHeight={isResponsive && "17px"}
+                    color="#161616"
+                    fontSize="14px"
+                    weight="400"
+                  >
+                    By creating an account you are agreeing to{" "}
+                    {!isResponsive && <br />} our Terms and Conditions and
+                    Privacy Policy
                   </P>
                 </Col>
               </Row>
               <Spacer height="21px" />
 
               <Button
-              onClick={()=>{
-                if(accountType==="Bussiness"){
-                  navigate("/payment")
-                } else  if(accountType==="Individual"){
-                  navigate("/individual-payment")
-                }
-              }}
+                onClick={() => {
+                  if (accountType === "Bussiness") {
+                    navigate("/payment");
+                  } else if (accountType === "Individual") {
+                    navigate("/individual-payment");
+                  }
+                }}
                 background="black"
                 style={{ color: "white", width: "100%" }}
               >
@@ -127,29 +144,30 @@ export default function Blogin() {
               <P color="#161616" fontSize="14px">
                 Email<span style={{ color: "red" }}>*</span>
               </P>
-              <Input type="email" />
+              <Input onChange={(e)=>{setLoginEmail(e.target.value)}} type="email" />
               <Spacer height="21px" />
 
               <P color="#161616" fontSize="14px">
                 Password<span style={{ color: "red" }}>*</span>
               </P>
-              <Input type="password" />
+              <Input onChange={(e)=>{setLoginPassword(e.target.value)}} type="password" />
               <Spacer height="21px" />
 
               <Row className="align-items-center">
                 <Col style={{ paddingRight: "0px" }} sm={1} xs={1}>
-                  <Input type="checkbox" />
+                  <Input onChange={()=>{setLoginTerms(!loginTerms)}} type="checkbox" />
                 </Col>
                 <Col style={{ paddingLeft: "0px" }}>
                   <P
-                  className={isResponsive?"px-1":""}
-                    lHeight={isResponsive?"16px":"19px"}
+                    className={isResponsive ? "px-1" : ""}
+                    lHeight={isResponsive ? "16px" : "19px"}
                     color="#161616"
                     fontSize="14px"
                     weight="400"
                   >
-                    By creating an account you are agreeing to {isResponsive?"":<br />} our Terms
-                    and Conditions and Privacy Policy
+                    By creating an account you are agreeing to{" "}
+                    {isResponsive ? "" : <br />} our Terms and Conditions and
+                    Privacy Policy
                   </P>
                 </Col>
               </Row>
