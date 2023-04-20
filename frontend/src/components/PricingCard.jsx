@@ -77,8 +77,11 @@ function PricingCard() {
                     fontSize="20px"
                   >
                     {" "}
-                    Registering the only Duty Manager at <br /> your business?
-                    Don't worry this one is <br /> free
+                    Liquor Licenses are free to add, but the <br /> 
+                    price for registering duty managers is $5.00 <br /> 
+                    plus GST and applicable fees (if any). This price is annually.
+                    {/* Registering the only Duty Manager at <br /> your business?
+                    Don't worry this one is <br /> free */}
                   </P>
                 </Card.Text>
                 <Button style={{ fontWeight: "600" }}>Apply Here</Button>

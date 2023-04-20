@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <>
       <Wrapper>
-        {/* <Navbar /> */}
+        <Navbar />
         <Margin>
           <HeroSection image={HomeImage} />
         </Margin>

@@ -9,12 +9,16 @@ import Startted from "../components/Startted";
 import PricingCard from "../components/PricingCard";
 import Accordian from "../components/Accordian";
 import { Footer } from "../components/Footer";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Pricing() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Wrapper>
-        {/* <Navbar /> */}
+        <Navbar />
         <PricingCard />
 
         <Spacer height="127px" />

@@ -6,6 +6,7 @@ const H1 = styled.h1`
   line-height: ${(props) => props.lHeight && props.lHeight};
   font-size: ${(props) => props.fontSize && props.fontSize};
   color: ${(props) => (props.color ? props.color : "#ffffff")};
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 0px;
 
   @media (max-width: 768px) {
@@ -21,6 +22,7 @@ const P = styled.p`
   line-height: ${(props) => (props.lHeight ? props.lHeight : "24px")};
   font-size: ${(props) => (props.fontSize ? props.fontSize : "16px")};
   color: ${(props) => (props.color ? props.color : "#ffffff")};
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 0px;
   @media (max-width: 768px) {
     font-size: 15px;

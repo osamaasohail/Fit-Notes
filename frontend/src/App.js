@@ -10,38 +10,49 @@ import Navbar from "./components/Navbar";
 import { Wrapper } from "./components/Style";
 import BussinessLogin from "./pages/BussinesLogin";
 import { useEffect, useState } from "react";
+import Profile from "./pages/profile/Profile";
+import Subscribtion from "./pages/profile/Subscribtion";
+import Notification from "./pages/profile/Notification";
+import ResetEmail from "./pages/profile/ResetEmail";
+import ConfrimPassword from "./pages/profile/ConfirmPassword";
+import Payment from "./pages/Payment";
+import IndividualPayment from "./pages/IndividualPayment";
 
 function App() {
-  const [pathName,setPathName]=useState()
+  const [pathName, setPathName] = useState();
   // console.log(window.location.pathname);
-  useEffect(()=>{
-    
-    const pathname=window.location.pathname;
-    console.log(pathname)
-    setPathName(pathname)
-  })
+  useEffect(() => {
+    const pathname = window.location.pathname;
+    console.log(pathname);
+    setPathName(pathname);
+  });
 
   return (
     <>
       <BrowserRouter>
-      <Wrapper>
-        {
-          pathName === "/"?<BussinessLogin />: <Navbar/>
-        }
-
-     
-      </Wrapper>
+        <Wrapper>
+          {/* {pathName === "/signup" ? <BussinessLogin /> : <Navbar />} */}
+        </Wrapper>
         <Routes>
-        {/* <Route path="/"  element={<BussinessLogin />}/> */}
+          <Route path="/" element={<HomePage />} />
 
-          <Route path="/home"  element={<HomePage />}/>
-            <Route path="/pricing" element={<Pricing />} />
-            <Route path="/aboutus" element={<AboutUs />} />
-            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-          
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/how-it-works" element={<HowWorks />} />
+          <Route path="/sign-up" element={<BussinessLogin />} />
+          <Route path="/profile/edit-profile" element={<Profile />} />
+          <Route path="/profile/subscribtion" element={<Subscribtion />} />
+          <Route path="/profile/notification" element={<Notification />} />
+          <Route path="/profile/reset" element={<ResetEmail />} />
+          <Route path="/profile/reset-password" element={<ConfrimPassword/>} />
+          <Route path="/payment" element={<Payment/>} />  
+          <Route path="/individual-payment" element={<IndividualPayment/>} />  
+
+
+
         </Routes>
       </BrowserRouter>
-    
     </>
   );
 }
