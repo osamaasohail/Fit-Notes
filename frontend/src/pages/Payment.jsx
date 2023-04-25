@@ -9,6 +9,8 @@ import { Button } from "../components/Button";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 const Wrapper = styled.div`
   // height:100vh;
@@ -486,12 +488,14 @@ export default function Payment() {
                         <Col className="mb-2" lg={3} md={6} sm={6}>
                           <div className="d-flex">
                             <Input
+                              
                               value={item.id}
                               onChange={(e) => handleChange(e)}
                               style={{
                                 fontSize: "14px",
                                 //   background: "#FCFCFC",
-                                width: "50px",
+                                width: "20px",
+                                marginRight:"5px"
                               }}
                               type="checkbox"
                               placeholder="Liquor Browdy"
@@ -534,6 +538,11 @@ export default function Payment() {
                     Conditions and Privacy Policy
                   </P>
                 </div>
+                <Spacer />
+                <ReCAPTCHA
+                    sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
+                    // onChange={onChange}
+                  />
                 <Spacer />
                 <Button
                   background="black"

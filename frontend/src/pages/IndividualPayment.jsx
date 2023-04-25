@@ -9,6 +9,8 @@ import { Button } from "../components/Button";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -272,7 +274,8 @@ export default function IndividualPayment() {
                               style={{
                                 fontSize: "14px",
                                 //   background: "#FCFCFC",
-                                width: "50px",
+                                width: "20px",
+                                marginRight:"5px"
                               }}
                               type="checkbox"
                               placeholder="Liquor Browdy"
@@ -316,12 +319,18 @@ export default function IndividualPayment() {
                   </P>
                 </div>
                 <Spacer />
+                <ReCAPTCHA
+                    sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
+                    // onChange={onChange}
+                  />
+                <Spacer />
                 <Button
                   background="black"
                   style={{ color: "white", width: "100%" }}
                 >
                   Proceed to Payment
                 </Button>
+                <Spacer />
               </div>
             </div>
           </Col>
