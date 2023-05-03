@@ -18,12 +18,14 @@ module.exports = {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
             // Create a new user
+            let isActive = true;
             const user = new User({
                 name,
                 email,
                 password: hashedPassword,
                 verificationToken,
-                accountType
+                accountType,
+                isActive
             });
             // Save the user to the database
             let myNewUser = await user.save();
@@ -55,7 +57,7 @@ module.exports = {
         }
     },
     getUsers: async(req,res) => {
-        User.find({})
+        User.find({isActive: true})
         .then(docs => {
             res.status(201).json({users: docs});
         })
