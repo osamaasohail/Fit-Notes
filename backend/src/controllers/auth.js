@@ -87,6 +87,15 @@ module.exports = {
             res.status(500).json({ message: 'Server error' });
         }
     },
+    updateUser: async(req, res) => {
+        try {
+            const { name } = req.body;
+            await User.updateOne({ _id: req.params.id }, { $set: { name: name } });
+            res.status(201).json({ message: "Successfully Updated User" });
+        } catch (error) {
+            res.status(500).json({ error: "Internal server error" });
+        }
+    },
     verifyEmail: async (req, res) => {    
         try {
             const { token } = req.query;
@@ -97,11 +106,10 @@ module.exports = {
                     _id: req.params.id,
                     verificationToken: token
                 });
-                console.log(myUser);
                 if (myUser.isVerified) return res.status(201).json({ error: "Email Already Verified" });
                 if (!myUser) return res.status(400).json({ error: "Email Not Verified" });
                 else {
-                    await User.updateOne({_id: req.params.id, isVerified: true});
+                    await User.updateOne({ _id: req.params.id }, { $set: { isVerified: true }});
                     res.status(201).json({ message: "Successfully Verified User" });
                 } 
             }
@@ -119,7 +127,7 @@ const comparePassword = async (password, hash) => {
     }
 };
 User.prototype.generateAuthToken = function() {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ _id: this._id, name: this.name }, process.env.JWT_SECRET, { expiresIn: '2h' });
     return token;
 };  
 

@@ -1,11 +1,11 @@
-const Certificate = require('../models/Certificate');
+const BusinessLicense = require('../models/BusinessLicense');
 const DutyManagers = require('../models/DutyManagers');
 const mongoose = require('mongoose');
 module.exports = {
     add: async(req, res) => {
         try {
             const objectId = new mongoose.Types.ObjectId();
-            const certificate = {
+            const businessLicense = {
                 _id: objectId,
                 refUser: req.user._id,
                 name: req.body.name,
@@ -26,13 +26,13 @@ module.exports = {
                 accumulator.push(currentValue._id);
                 return accumulator;
             }, []);
-            certificate.dutyManagers = dutyManagerIds;
-            const doc = new Certificate(certificate);
+            businessLicense.dutyManagers = dutyManagerIds;
+            const doc = new BusinessLicense(businessLicense);
             await DutyManagers.insertMany(dutyManagers)
             .then(docs => {
                 return doc.save()
             }).then(d => {
-                res.status(201).json({message: 'Certificate Added Succesfully'});
+                res.status(201).json({message: 'Business License Added Succesfully'});
             })
             .catch(err => {
                 res.status(500).json({ error: "Internal server error" });
@@ -43,20 +43,20 @@ module.exports = {
         }
     },
     get: async(req, res) => {
-        Certificate.find({ refUser: req.user._id, isActive: true })
+        BusinessLicense.find({ refUser: req.user._id, isActive: true })
         .populate({
             path: 'dutyManagers',
             match: { isActive: true }
         })
         .then(docs => {
-            res.status(201).json({ certs: docs});
+            res.status(201).json({ licenses: docs});
         }).catch(err => {
             console.log(err);
             res.status(500).json({ error: err, message: "Internal server error" });
         });
     },
     update: async(req, res) => {
-        Certificate.updateOne({ refUser: req.params.id },{ $set: req.body }, { new: true })
+        BusinessLicense.updateOne({ refUser: req.params.id },{ $set: req.body }, { new: true })
         .then(updatedDocument => {
             res.status(201).json({doc: updatedDocument});
         })
@@ -66,10 +66,10 @@ module.exports = {
         });
     },
     delete: async(req, res) => {
-        await Certificate.updateOne({ _id: req.params.id }, { $set: { isActive: false } }, { new: true }).then(docs => {
+        await BusinessLicense.updateOne({ _id: req.params.id }, { $set: { isActive: false } }, { new: true }).then(docs => {
             return DutyManagers.updateMany({ certId: req.params.id }, { $set: { isActive: false } }, { new: true })
         }).then(d => {
-            res.status(201).json({message: 'Certificate Deleted Succesfully'});
+            res.status(201).json({message: 'Business License Deleted Succesfully'});
         }).catch(err => {
             res.status(500).json({ error: "Internal server error" });
         });
