@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
 require("dotenv").config();
+const handlebars = require('handlebars');
+const fs = require('fs');
 module.exports = {
     register: async(req, res) => {
         try {
@@ -37,11 +39,19 @@ module.exports = {
                 pass: process.env.PASSWORD,
             },
             });
+            const source = fs.readFileSync('src/templates/email-template-verification.html', 'utf8');
+            const template = handlebars.compile(source);
+            let link = `${process.env.BASE_URL}/verify-email/${myNewUser._id.toString()}?token=${verificationToken}`;
             const mailOptions = {
                 from: 'hamza@infosun.co.uk',
                 to: email,
                 subject: "Email Verification",
-                text: `Click on the following link to verify your email: ${process.env.BASE_URL}/verify-email/${myNewUser._id.toString()}?token=${verificationToken}`,
+                html: template({name: name, link: link}),
+                attachments: [{
+                    filename: 'logo.png',
+                    path: 'src/templates/Email-Template.png',
+                    cid: 'unique@logo.png'
+                }]
             };
             transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
