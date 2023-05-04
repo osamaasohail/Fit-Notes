@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 var configDB = require('./src/config/db');
 app.use(logger('dev'));
 app.use(express.json());
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '4000';
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 mongoose.connect(configDB);

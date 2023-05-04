@@ -8,8 +8,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { postSignUp } from "../service/redux/middleware/postSignUp";
+import { signin } from "../service/redux/middleware/signin";
+import { getUser } from "../service/redux/middleware/getUser";
+import { useEffect } from "react";
 
 const Wrapper = styled.div`
   background: white;
@@ -29,26 +32,68 @@ const Scrool = styled.div`
   // padding: 0px 20px 10px 20px;
   ::-webkit-scrollbar {
     display: none;
-}
+  }
 `;
 export default function Blogin() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isResponsive = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
+
   const [signup, setSignUp] = useState(true);
-  const [bussinessType, setBussinessType] = useState("");
-  const [bussinessName, setBussinessName] = useState("");
-  const [bussinessEmail, setBussinessEmail] = useState("");
+  const [businessName, setBusinessName] = useState("");
+  const [businessEmail, setBussinessEmail] = useState("");
   const [password, setPassword] = useState("");
   const [terms, setTerms] = useState(false);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginTerms, setLoginTerms] = useState(false);
-  const count = useSelector((state) => state.singup)
-  console.log("i am the redux value",count)
-  const dispatch = useDispatch()
-  const [accountType, setAccountType] = useState("Bussiness");
-  const navigate = useNavigate();
-  const isResponsive = useMediaQuery({
-    query: "(max-width: 768px)",
-  });
+  const [accountType, setAccountType] = useState(2);
+  // const count = useSelector((state) => state.singup)
+  // const count = useSelector((state) => state.singin)
+  const count = useSelector((state) => state)
+  // dispatch(getUser())
+
+  // const count = useSelector((state) => state.user)
+  // console.log("i am the redux value",count)
+
+  useEffect(() => {
+    console.log("Count is :", count)
+  }, [count])
+  
+  const handleSignup = async () => {
+    const data = {
+      accountType: accountType,
+      name: businessName,
+      email: businessEmail,
+      password: password,
+    };
+    dispatch(postSignUp(data)).then((res) => {
+      if(res.payload.status === 201){
+        setSignUp(false)
+      }
+    });
+  };
+  const handleLogin = () => {
+    const data = {
+      email: loginEmail,
+      password: loginPassword,
+    };
+    dispatch(signin(data)).then((res) => {
+      if(res.payload.status === 201){
+        if(res.payload.data.user.accountType === 1){
+          if(res.payload.data.user.isProfileCompleted === false){
+            navigate("/individual-payment")
+          }
+        } else if(res.payload.data.user.accountType === 2){
+          if(res.payload.data.user.isProfileCompleted === false){
+            navigate("/payment")
+          }
+        }
+      }
+    });
+  };
 
   return (
     <>
@@ -67,7 +112,6 @@ export default function Blogin() {
                 <select
                   onChange={(e) => {
                     setAccountType(e.target.value);
-                    setBussinessType(e.target.value);
                   }}
                   style={{
                     width: "100%",
@@ -77,16 +121,19 @@ export default function Blogin() {
                     color: "#222427",
                   }}
                 >
-                  <option value={"Bussiness"}>Business</option>
-                  <option value={"Individual"}>Individual</option>
+                  <option value={2}>Business</option>
+                  <option value={1}>Individual</option>
                 </select>
                 <Spacer height="21px" />
                 <P color="#161616" fontSize="14px" weight="400">
-                  Business Name <span style={{ color: "red" }}>*</span>
+                  {accountType === 2
+                    ? "Business Name"
+                    : "Individual Name"}{" "}
+                  <span style={{ color: "red" }}>*</span>
                 </P>
                 <Input
                   onChange={(e) => {
-                    setBussinessName(e.target.value);
+                    setBusinessName(e.target.value);
                   }}
                 />
                 <Spacer height="21px" />
@@ -137,9 +184,7 @@ export default function Blogin() {
                 </Row>
                 <Spacer height="21px" />
 
-                <div
-                  style={{ width:"100%" }}
-                >
+                <div style={{ width: "100%" }}>
                   <ReCAPTCHA
                     sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
                     // onChange={onChange}
@@ -148,12 +193,12 @@ export default function Blogin() {
                 <Spacer height="21px" />
                 <Button
                   onClick={() => {
-                    if (accountType === "Bussiness") {
-                      navigate("/payment");
-                      // dispatch(postSignUp())
-                    } else if (accountType === "Individual") {
-                      navigate("/individual-payment");
-                    }
+                    handleSignup();
+                    // if (accountType === "Business") {
+                    //   handleSignup();
+                    // } else if (accountType === "Individual") {
+                    //   navigate("/individual-payment");
+                    // }
                   }}
                   background="black"
                   style={{ color: "white", width: "100%" }}
@@ -235,7 +280,8 @@ export default function Blogin() {
 
               <Button
                 onClick={() => {
-                  navigate("/");
+                  // navigate("/");
+                  handleLogin();
                 }}
                 background="black"
                 style={{ color: "white", width: "100%" }}

@@ -3,16 +3,16 @@ import { H1, P } from "./Typography";
 import { Spacer } from "./Spacer";
 import LeftTriangle from "../images/lefttrinangle.svg";
 import RightTopCross from "../images/topCross.svg";
-import BottomRightCross from "../images/BottomCross.svg"
+import BottomRightCross from "../images/BottomCross.svg";
 import { useMediaQuery } from "react-responsive";
 
 const Wrapper = styled.div`
   background: black;
   height: 90vh;
   position: relative;
-  @media(max-width:768px){
-    height:100%;
-    padding:50px;
+  @media (max-width: 768px) {
+    height: 100%;
+    padding: 50px;
   }
 `;
 const TextContainer = styled.div`
@@ -32,25 +32,23 @@ const RightCross = styled.div`
   top: 5%;
   right: 7%;
 `;
-const BottomTriangle=styled.div`
-position: absolute;
+const BottomTriangle = styled.div`
+  position: absolute;
   bottom: 6%;
   left: 5%;
-`
-const BottomCross=styled.div`
-position: absolute;
+`;
+const BottomCross = styled.div`
+  position: absolute;
   bottom: 5%;
   right: 7%;
-
-`
+`;
 export default function LoginInfo() {
-    const isResponsive = useMediaQuery({
-        query: "(max-width: 768px)",
-      });
+  const isResponsive = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
   return (
     <>
       <Wrapper>
-     
         <TextContainer>
           <TopTriangle>
             <img src={LeftTriangle} />
@@ -79,7 +77,6 @@ export default function LoginInfo() {
             <img src={BottomRightCross} />
           </BottomCross>
         </TextContainer>
-    
       </Wrapper>
     </>
   );

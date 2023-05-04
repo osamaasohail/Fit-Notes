@@ -1,26 +1,30 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { postSignUp } from '../middleware/postSignUp';
+import { getUser } from '../middleware/getUser';
 const initialState = {
     loading: false,
     error: '',
-    signUpData: [],
+    userData: [],
   };
 const singUpSlice=createSlice({
-    name:"postSignUp",
+    name:"getUser",
     initialState,
     reducers:{},
     extraReducers:(builder)=>{
-        builder.addCase(postSignUp.pending, (state) => {
+        builder.addCase(getUser.pending, (state) => {
             state.loading = true;
         })
         builder.addCase(
-            postSignUp.fulfilled,
+          getUser.fulfilled,
             (state, action) => {
               state.loading = false;
       
-              state.signUpData = action.payload;
+              state.userData = action.payload;
             }
           );
+          builder.addCase(getUser.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error || "something wrong";
+          });
     }
 
 

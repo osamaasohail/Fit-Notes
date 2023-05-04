@@ -8,6 +8,7 @@ require("dotenv").config();
 module.exports = {
     register: async(req, res) => {
         try {
+            console.log(req.body)
             const { name, email, password, accountType } = req.body;
             // Check if the user already exists
             const userExists = await User.findOne({ email });
@@ -23,7 +24,7 @@ module.exports = {
                 email,
                 password: hashedPassword,
                 verificationToken,
-                accountType
+                accountType,
             });
             // Save the user to the database
             let myNewUser = await user.save();
@@ -79,7 +80,7 @@ module.exports = {
 
             const token = user.generateAuthToken();
 
-            res.status(201).json({ message: 'User Logged In Succesfully', token: token });
+            res.status(201).json({ message: 'User Logged In Succesfully', token: token, user: user });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Server error' });
