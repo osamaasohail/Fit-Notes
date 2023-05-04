@@ -22,6 +22,7 @@ app.get('/', function (req,res) {
 });
 require('./src/routes/auth')(app);
 require('./src/routes/certs')(app);
+require('./src/routes/dutyManager')(app);
 app.use((req, res, next) => {
     next(createError(404));
 });

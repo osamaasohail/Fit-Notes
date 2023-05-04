@@ -9,6 +9,7 @@ const userSchema = new Schema({
   verificationToken: { type: String },
   accountType: { type: Number }, // type: 1 for individual, type: 2 for business
   isProfileCompleted: {type: Boolean, default: false},
+  isActive: {type: Boolean}
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
