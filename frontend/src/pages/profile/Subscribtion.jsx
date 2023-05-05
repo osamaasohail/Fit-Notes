@@ -29,15 +29,17 @@ export default function Subscribtion() {
           <SideNavbar />
         </Col>
         <Col
-          className="d-flex align-items-center justify-content-center"
+         className={isResponsive?"d-flex align-items-center justify-content-center px-3 vh-100":"d-flex align-items-center justify-content-center"}
+          
           style={{ padding: "0px", flexDirection: "column" }}
           lg={10}
           md={9}
         >
-          <Scrool>
+       
             {/* <SideNavbar /> */}
             <Box
-              className="text-center"
+
+              className={isResponsive?"text-center mx-3":"text-center"}
               width={isResponsive?"100%":"55vw"}
               padding={isResponsive?"41px 30px 20px 30px":"41px 20px 52px 64px"}
             >
@@ -60,37 +62,8 @@ export default function Subscribtion() {
             </Box>
 
             <Spacer height="48px" />
-            <div className="text-center">
-              <H1 fontSize="24px" weight="500" color="black">
-                Plans Info
-              </H1>
-            </div>
-            <Spacer height="32px" />
-
-            <Box
-              className="text-center"
-              width={isResponsive?"100%":"55vw"}
-              padding={isResponsive?"41px 30px 20px 30px":"41px 20px 52px 64px"}
-            >
-              <P weight="400" color="black">
-                Just one plan and plan pricing increases with number of license{" "}
-              </P>
-              <Spacer height="32px" />
-              <Button
-                style={{
-                  width: "210px",
-                  padding: "9px 14px",
-                  background: "black",
-                  color: "white",
-                  fontSize: "14px",
-                  borderRadius: "3px",
-                }}
-              >
-                View Plans
-              </Button>
-            </Box>
+         
             {/* <Spacer height="60px" /> */}
-          </Scrool>
             <P weight="400" className="text-center" color="black">
               If you have any questions or need help choosing a plan, please{" "}
               <br /> contact our customer support team at <br />{" "}
@@ -99,6 +72,7 @@ export default function Subscribtion() {
                 support@liquormanagement.com.
               </span>
             </P>
+       
         </Col>
       </Row>
     </>

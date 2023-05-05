@@ -53,7 +53,7 @@ export default function HowWorks() {
                 date you are being prompted about.
               </P>
               <Spacer height="30px" />
-              <Button style={{fontWeight:"700"}}>Get Started</Button>
+              <Button style={{ fontWeight: "700" }}>Get Started</Button>
               {isResponsive && <Spacer height="30px" />}
             </Col>
 
@@ -98,7 +98,7 @@ export default function HowWorks() {
                 hassle of remembering expiry dates.
               </P>
               <Spacer height="30px" />
-              <Button style={{fontWeight:"700"}}>Registartion</Button>
+              <Button style={{ fontWeight: "700" }}>Registartion</Button>
             </Col>
           </Row>
           {isResponsive ? <Spacer height="50px" /> : <Spacer height="200px" />}
@@ -130,7 +130,7 @@ export default function HowWorks() {
                 contact your business in when your next renewal is coming up.
               </P>
               <Spacer height="30px" />
-              <Button style={{fontWeight:"700"}}>Get Started</Button>
+              <Button style={{ fontWeight: "700" }}>Get Started</Button>
               {isResponsive && <Spacer height="30px" />}
             </Col>
             <Col lg={6}>
@@ -169,7 +169,7 @@ export default function HowWorks() {
                 the button below to be sent to our cancellation page.
               </P>
               <Spacer height="30px" />
-              <Button style={{fontWeight:"700"}}>Cancel Account</Button>
+              <Button style={{ fontWeight: "700" }}>Cancel Account</Button>
             </Col>
           </Row>
         </Margin>

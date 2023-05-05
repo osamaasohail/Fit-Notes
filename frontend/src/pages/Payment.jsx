@@ -8,7 +8,10 @@ import Check from "../images/check.svg";
 import { Button } from "../components/Button";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useDispatch, useSelector } from "react-redux";
+import { businessLicense } from "../service/redux/middleware/licenses";
 
 const Wrapper = styled.div`
   // height:100vh;
@@ -30,55 +33,94 @@ const Logo = styled(H1)`
 `;
 export default function Payment() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [businessName, setBusinessName] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(null);
   const [bussinerOwnerEmail, setBussinerOwnerEmail] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
   const [liquorLicenseExpiry, setLiquorLicenseExpiry] = useState("");
-  // const [dutyManagerName, setDutyManagerName] = useState("");
-  const [gammingLicense, setGammingLicense] = useState("");
-  const [licenseExpiry, setLicenseExpiry] = useState("");
+  const [gamingLicense, setGamingLicense] = useState("");
+  const [gamingLicenseExpiry, setGamingLicenseExpiry] = useState("");
+  const [totalPayment, setTotalPayment] = useState(0);
   const [term, setTerm] = useState(false);
 
-  const [serviceList, setServiceList] = useState([
-    { service: "", date: "", email: "" },
+  const [userData, token] = useSelector((state) => {
+    return [state.signin.signInData.data.user, state.signin.signInData.data.token];
+  });
+  useEffect(() => {
+    setBusinessName(userData.name);
+    setBussinerOwnerEmail(userData.email);
+  }, [userData]);
+
+  const [dutyManagers, setDutyManagers] = useState([
+    { name: "", email: "", licenseNumber: "", expiryDate: "" },
   ]);
-  const checkData = [
-    { id: 1, name: "60", isChecked: false },
-    { id: 2, name: "50", isChecked: false },
-    { id: 3, name: "40", isChecked: false },
-    { id: 4, name: "30", isChecked: false },
-  ];
-  const [data, setData] = useState(checkData);
-  console.log(data);
+
+  const [data, setData] = useState([
+    { id: 60, isChecked: false },
+    { id: 50, isChecked: false },
+    { id: 40, isChecked: false },
+    { id: 30, isChecked: false },
+  ]);
 
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
 
-  const handleServiceAdd = () => {
-    setServiceList([...serviceList, { service: "", date: "", email: "" }]);
+  const onDutyManagerAdd = () => {
+    setDutyManagers([
+      ...dutyManagers,
+      { name: "", email: "", licenseNumber: "", expiryDate: "" },
+    ]);
   };
-  const handleServiceRemove = (index) => {
-    const list = [...serviceList];
+
+  const onDutyManagerRemove = (index) => {
+    const list = [...dutyManagers];
     list.splice(index, 1);
-    setServiceList(list);
+    setDutyManagers(list);
   };
-  const handleServiceChange = (e, index) => {
+
+  const handleDutyManagerChange = (e, index) => {
     const { name, value } = e.target;
-    const list = [...serviceList];
+    const list = [...dutyManagers];
     list[index][name] = value;
-    setServiceList(list);
+    setDutyManagers(list);
   };
-  function handleChange(e) {
+
+  function handleReminderChange(e) {
     const value = e.target.value;
-    const modifiedData = [...data];
-    modifiedData.map((item) => {
-      item.isChecked = item.id === +value;
-      return item;
-    });
-    setData(modifiedData);
+    const newArray = [...data];
+    const index = newArray.findIndex((obj) => obj.id == value);
+    const updatedObject = {
+      ...newArray[index],
+      isChecked: !newArray[index].isChecked,
+    };
+    newArray[index] = updatedObject;
+    setData(newArray);
   }
+
+  const handlePaymentAndSubmit = () => {
+    var userData = {
+      name: businessName,
+      role: parseInt(role),
+      licenseNumber: licenseNumber,
+      expiryDate: liquorLicenseExpiry,
+      dutyManagers: dutyManagers,
+      gamingLicense: gamingLicense,
+      gamingLicenseExpiry: gamingLicenseExpiry,
+      sendNotiBeforeExpiry: data
+        .map((obj) => obj.id)
+        .filter((obj) => obj.isChecked),
+    };
+    var calculateQuantity = dutyManagers?.length;
+    if ((gamingLicense && gamingLicenseExpiry) !== "") {
+      calculateQuantity += 1;
+    }
+    userData.quantity = calculateQuantity;
+    dispatch(businessLicense(userData, token)).then((res) => {
+      window.location.href = res.payload.data.url;
+    });
+  };
   return (
     <>
       {/* style={{padding:"3vw 10vw 0vw 10vw"}} */}
@@ -131,6 +173,7 @@ export default function Payment() {
                     onChange={(e) => {
                       setBusinessName(e.target.value);
                     }}
+                    value={businessName}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -159,20 +202,18 @@ export default function Payment() {
                     <div className="d-flex align-items-center ">
                       <Input
                         onChange={(e) => {
-                          console.log(e.target.value);
+                          console.log("Value", e.target.value);
                           setRole(e.target.value);
                         }}
-                        value={"owner"}
+                        value={1}
                         name="a"
                         style={{
                           fontSize: "14px",
-                          //   background: "#FCFCFC",
                           width: "20px",
                           height: "20px",
                           marginRight: "10px",
                         }}
                         type="radio"
-                        placeholder="Liquor Browdy"
                       />
                       <P color="#161616" fontSize="14px" weight="500">
                         Business Owner
@@ -184,20 +225,19 @@ export default function Payment() {
                   <Col md={6}>
                     <div className="d-flex  align-items-center">
                       <Input
-                        onCanPlay={(e) => {
+                        onChange={(e) => {
+                          console.log("Value", e.target.value);
                           setRole(e.target.value);
                         }}
-                        value={"Manager"}
+                        value={2}
                         name="a"
                         style={{
                           fontSize: "14px",
-                          //   background: "#FCFCFC",
                           width: "20px",
                           height: "20px",
                           marginRight: "10px",
                         }}
                         type="radio"
-                        placeholder="Liquor Browdy"
                       />
                       <P color="#161616" fontSize="14px" weight="500">
                         Manager
@@ -217,9 +257,11 @@ export default function Payment() {
                 <Spacer height="2px" />
                 <div style={{ position: "relative" }}>
                   <Input
+                    value={bussinerOwnerEmail}
                     onChange={(e) => {
                       setBussinerOwnerEmail(e.target.value);
                     }}
+                    disabled={true}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -243,6 +285,7 @@ export default function Payment() {
                       onChange={(e) => {
                         setLicenseNumber(e.target.value);
                       }}
+                      value={licenseNumber}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -267,7 +310,10 @@ export default function Payment() {
                   <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
-                    onChange={(e) => {setLiquorLicenseExpiry(e.target.value)}}
+                      value={liquorLicenseExpiry}
+                      onChange={(e) => {
+                        setLiquorLicenseExpiry(e.target.value);
+                      }}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -282,7 +328,7 @@ export default function Payment() {
                 </P>
               </div>
               <Spacer height="24px" />
-              {serviceList.map((item, index) => {
+              {dutyManagers.map((item, index) => {
                 return (
                   <>
                     <Row key={index} className="align-items-center">
@@ -293,9 +339,11 @@ export default function Payment() {
                             <span style={{ color: "red" }}>*</span>
                             <div style={{ position: "relative" }}>
                               <Input
-                                onChange={(e) => handleServiceChange(e, index)}
-                                name="service"
-                                value={item.service}
+                                onChange={(e) =>
+                                  handleDutyManagerChange(e, index)
+                                }
+                                name="name"
+                                value={item.name}
                                 style={{
                                   fontSize: "14px",
                                   //   background: "#FCFCFC",
@@ -324,8 +372,10 @@ export default function Payment() {
                             <span style={{ color: "red" }}>*</span>
                             <div style={{ position: "relative" }}>
                               <Input
-                                onChange={(e) => handleServiceChange(e, index)}
-                                name="date"
+                                onChange={(e) =>
+                                  handleDutyManagerChange(e, index)
+                                }
+                                name="expiryDate"
                                 value={item.date}
                                 style={{
                                   fontSize: "14px",
@@ -344,18 +394,19 @@ export default function Payment() {
                       <Col md={6}>
                         <div>
                           <P color="#161616" fontSize="14px" weight="600">
-                            Add Duty Manager Mail
+                            Add Duty Manager Email
                             <span style={{ color: "red" }}>*</span>
                           </P>
                           <Spacer height="2px" />
                           <div style={{ position: "relative" }}>
                             <Input
-                              onChange={(e) => handleServiceChange(e, index)}
-                              name="service"
+                              onChange={(e) =>
+                                handleDutyManagerChange(e, index)
+                              }
+                              name="email"
                               value={item.email}
                               style={{
                                 fontSize: "14px",
-                                //   background: "#FCFCFC",
                                 width: "100%",
                               }}
                               placeholder="Email"
@@ -373,12 +424,45 @@ export default function Payment() {
                           </div>
                         </div>
                       </Col>
+                      <Col md={6}>
+                        <div>
+                          <P color="#161616" fontSize="14px" weight="600">
+                            License Number
+                            <span style={{ color: "red" }}>*</span>
+                          </P>
+                          <Spacer height="2px" />
+                          <div style={{ position: "relative" }}>
+                            <Input
+                              onChange={(e) =>
+                                handleDutyManagerChange(e, index)
+                              }
+                              name="licenseNumber"
+                              value={item.licenseNumber}
+                              style={{
+                                fontSize: "14px",
+                                width: "100%",
+                              }}
+                              placeholder="License Number"
+                            />
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "15%",
+                                right: "2%",
+                              }}
+                            >
+                              <img src={Check} />
+                            </div>
+                            <Spacer height="24px" />
+                          </div>
+                        </div>
+                      </Col>
                       <Col className="mt-2" md={4}>
-                        {serviceList.length - 1 === index && (
+                        {dutyManagers.length - 1 === index && (
                           <>
                             <Button
                               onClick={() => {
-                                handleServiceAdd();
+                                onDutyManagerAdd();
                               }}
                               style={{
                                 padding: "0px 8px 0px 8px",
@@ -390,9 +474,9 @@ export default function Payment() {
                             >
                               +
                             </Button>
-                            {serviceList.length !== 1 && (
+                            {dutyManagers.length !== 1 && (
                               <Button
-                                onClick={() => handleServiceRemove(index)}
+                                onClick={() => onDutyManagerRemove(index)}
                                 style={{
                                   padding: "0px 8px 0px 8px",
                                   color: "white",
@@ -424,7 +508,9 @@ export default function Payment() {
                       <span style={{ color: "red" }}>*</span>
                       <div style={{ position: "relative" }}>
                         <Input
-                        onChange={(e)=>{setGammingLicense(e.target.value)}}
+                          onChange={(e) => {
+                            setGamingLicense(e.target.value);
+                          }}
                           style={{
                             fontSize: "14px",
                             //   background: "#FCFCFC",
@@ -452,7 +538,9 @@ export default function Payment() {
                       License Expiry Date<span style={{ color: "red" }}>*</span>
                       <div style={{ position: "relative" }}>
                         <Input
-                        onChange={(e)=>{setLicenseExpiry(e.target.value)}}
+                          onChange={(e) => {
+                            setGamingLicenseExpiry(e.target.value);
+                          }}
                           style={{
                             fontSize: "14px",
                             //   background: "#FCFCFC",
@@ -487,18 +575,20 @@ export default function Payment() {
                           <div className="d-flex">
                             <Input
                               value={item.id}
-                              onChange={(e) => handleChange(e)}
+                              onChange={(e) => handleReminderChange(e)}
+                              id={item.id}
                               style={{
                                 fontSize: "14px",
                                 //   background: "#FCFCFC",
-                                width: "50px",
+                                width: "20px",
+                                marginRight: "5px",
                               }}
                               type="checkbox"
                               placeholder="Liquor Browdy"
                               checked={item.isChecked}
                             />
                             <P color="#161616" fontSize="14px" weight="500">
-                              {item.name} days
+                              {item.id} days
                             </P>
 
                             {/* <Spacer height="16px" /> */}
@@ -510,12 +600,14 @@ export default function Payment() {
                 </Row>
 
                 {/* </div> */}
-                <Spacer height="12px" />
+                {/* <Spacer height="12px" /> */}
 
-                <Spacer height="16px" />
-                <div className="d-flex">
+                {/* <Spacer height="16px" /> */}
+                {/* <div className="d-flex">
                   <Input
-                  onChange={(e)=>{setTerm(!term)}}
+                    onChange={(e) => {
+                      setTerm(!term);
+                    }}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -533,11 +625,16 @@ export default function Payment() {
                     By creating an account you are agreeing to our Terms and
                     Conditions and Privacy Policy
                   </P>
-                </div>
+                </div> */}
+                <Spacer />
+                {/* <ReCAPTCHA
+                  sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
+                /> */}
                 <Spacer />
                 <Button
                   background="black"
                   style={{ color: "white", width: "100%" }}
+                  onClick={() => handlePaymentAndSubmit()}
                 >
                   Proceed to Payment
                 </Button>

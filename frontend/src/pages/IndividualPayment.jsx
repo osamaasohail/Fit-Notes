@@ -8,7 +8,9 @@ import Check from "../images/check.svg";
 import { Button } from "../components/Button";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -29,37 +31,60 @@ const Logo = styled(H1)`
 `;
 
 export default function IndividualPayment() {
-  const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
-  const [role, setRole] = useState("");
-  const [addduttyManagerEmail, setAddDuttyManagerEmail] = useState("");
-  const [duttyManagerName, setDuttyManagerName] = useState("");
-
-  
-  const [managerLicenseExpiry, setManagerLicenseExpiry] = useState("");
-  // const [dutyManagerName, setDutyManagerName] = useState("");
-
-  const [term, setTerm] = useState(false);
-  const checkData = [
-    { id: 1, name: "60", isChecked: false },
-    { id: 2, name: "50", isChecked: false },
-    { id: 3, name: "40", isChecked: false },
-    { id: 4, name: "30", isChecked: false },
-  ];
-  const [data, setData] = useState(checkData);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
 
-  function handleChange(e) {
+  const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [role, setRole] = useState("");
+  const [dutyManagerEmail, setDutyManagerEmail] = useState("");
+  const [dutyManagerName, setDutyManagerName] = useState("");
+
+  const [dutyManagerLicenseExpiry, setDutyManagerLicenseExpiry] = useState("");
+  const userData = useSelector((state) => state.signin.signInData.data.user);
+  // const [dutyManagerName, setDutyManagerName] = useState("");
+
+  useEffect(() => {
+    setFullName(userData.name);
+  }, [userData]);
+
+  // const [term, setTerm] = useState(false);
+  const [data, setData] = useState([
+    { id: 60, isChecked: false },
+    { id: 50, isChecked: false },
+    { id: 40, isChecked: false },
+    { id: 30, isChecked: false },
+  ]);
+
+  function handleReminderChange(e) {
     const value = e.target.value;
-    const modifiedData = [...data];
-    modifiedData.map((item) => {
-      item.isChecked = item.id === +value;
-      return item;
-    });
-    setData(modifiedData);
+    const newArray = [...data];
+    const index = newArray.findIndex((obj) => obj.id == value);
+    const updatedObject = {
+      ...newArray[index],
+      isChecked: !newArray[index].isChecked,
+    };
+    newArray[index] = updatedObject;
+    setData(newArray);
+    console.log("New data is ", newArray);
   }
+
+  const handleSubmit = () => {
+    const userData = {
+      name: fullName,
+      dutyManager: {
+        name: dutyManagerName,
+        email: dutyManagerEmail,
+        licenseNumber: "123123123",
+        expiryDate: dutyManagerLicenseExpiry,
+      },
+      sendNotiBeforeExpiry: data
+        .map((obj) => obj.id)
+        .filter((obj) => obj.isChecked),
+    };
+  };
+
   return (
     <>
       <Wrapper>
@@ -108,7 +133,10 @@ export default function IndividualPayment() {
                 <Spacer height="2px" />
                 <div style={{ position: "relative" }}>
                   <Input
-                  onChange={(e) => {setFullName(e.target.value)}}
+                    value={fullName}
+                    onChange={(e) => {
+                      setFullName(e.target.value);
+                    }}
                     style={{
                       fontSize: "14px",
                       //   background: "#FCFCFC",
@@ -124,28 +152,27 @@ export default function IndividualPayment() {
                   <Spacer height="24px" />
                 </div>
               </div>
-              <div>
+              {/* <div>
                 <P color="#161616" fontSize="14px" weight="600">
                   Select your Role<span style={{ color: "red" }}>*</span>
                 </P>
                 <Spacer height="10px" />
-                {/* <div className="d-flex"> */}
                 <Row>
                   <Col md={6}>
                     <div className="d-flex align-items-center ">
                       <Input
-                      onChange={(e) => {setRole(e.target.value)}}
-                      value="bussiness-owner"
-                      name="a"
+                        onChange={(e) => {
+                          setRole(e.target.value);
+                        }}
+                        value="bussiness-owner"
+                        name="a"
                         style={{
                           fontSize: "14px",
-                          //   background: "#FCFCFC",
                           width: "20px",
                           height: "20px",
                           marginRight: "10px",
                         }}
                         type="radio"
-                        // placeholder="Liquor Browdy"
                       />
                       <P color="#161616" fontSize="14px" weight="500">
                         Business Owner
@@ -157,12 +184,13 @@ export default function IndividualPayment() {
                   <Col md={6}>
                     <div className="d-flex  align-items-center">
                       <Input
-                       onChange={(e) => {setRole(e.target.value)}}
-                       value="individual"
-                      name="a"
+                        onChange={(e) => {
+                          setRole(e.target.value);
+                        }}
+                        value="individual"
+                        name="a"
                         style={{
                           fontSize: "14px",
-                          //   background: "#FCFCFC",
                           width: "20px",
                           height: "20px",
                           marginRight: "10px",
@@ -178,7 +206,7 @@ export default function IndividualPayment() {
                     </div>
                   </Col>
                 </Row>
-              </div>
+              </div> */}
               {/* </div> */}
               <Spacer height="32px" />
 
@@ -187,7 +215,10 @@ export default function IndividualPayment() {
                   Add Duty Manager<span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
-                    onChange={(e) => {setDuttyManagerName(e.target.value)}}
+                      onChange={(e) => {
+                        setDutyManagerName(e.target.value);
+                      }}
+                      value={dutyManagerName}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -210,7 +241,10 @@ export default function IndividualPayment() {
                   Add Duty Manager Email<span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
-                    onChange={(e) => {setAddDuttyManagerEmail(e.target.value)}}
+                      value={dutyManagerEmail}
+                      onChange={(e) => {
+                        setDutyManagerEmail(e.target.value);
+                      }}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
@@ -235,14 +269,16 @@ export default function IndividualPayment() {
                   <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
-                    onChange={(e) => {setManagerLicenseExpiry(e.target.value)}} 
+                      value={dutyManagerLicenseExpiry}
+                      onChange={(e) => {
+                        setDutyManagerLicenseExpiry(e.target.value);
+                      }}
                       style={{
                         fontSize: "14px",
                         //   background: "#FCFCFC",
                         width: "100%",
                       }}
                       type="date"
-                      
                     />
 
                     <Spacer height="16px" />
@@ -266,23 +302,21 @@ export default function IndividualPayment() {
                         <Col className="mb-2" lg={3} md={6} sm={6}>
                           <div className="d-flex">
                             <Input
-                            value={item.id}
-                            onChange={(e) => handleChange(e)}
-                              
+                              value={item.id}
+                              onChange={(e) => handleReminderChange(e)}
+                              id={item.id}
                               style={{
                                 fontSize: "14px",
-                                //   background: "#FCFCFC",
-                                width: "50px",
+                                width: "20px",
+                                marginRight: "5px",
                               }}
                               type="checkbox"
                               placeholder="Liquor Browdy"
                               checked={item.isChecked}
                             />
                             <P color="#161616" fontSize="14px" weight="500">
-                              {item.name} days
+                              {item.id} days
                             </P>
-
-                            {/* <Spacer height="16px" /> */}
                           </div>
                         </Col>
                       </>
@@ -290,7 +324,7 @@ export default function IndividualPayment() {
                   })}
                 </Row>
                 {/* </div> */}
-                <Spacer height="12px" />
+                {/* <Spacer height="12px" />
 
                 <Spacer height="16px" />
                 <div className="d-flex">
@@ -299,7 +333,6 @@ export default function IndividualPayment() {
                     className="inputGreen"
                     style={{
                       fontSize: "14px",
-                      //   background: "#FCFCFC",
                       width: "20px",
                     }}
                     type="checkbox"
@@ -314,14 +347,20 @@ export default function IndividualPayment() {
                     By creating an account you are agreeing to our Terms and
                     Conditions and Privacy Policy
                   </P>
-                </div>
+                </div> */}
+                {/* <Spacer />
+                <ReCAPTCHA
+                  sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
+                /> */}
                 <Spacer />
                 <Button
                   background="black"
                   style={{ color: "white", width: "100%" }}
+                  onClick={() => handleSubmit()}
                 >
                   Proceed to Payment
                 </Button>
+                <Spacer />
               </div>
             </div>
           </Col>

@@ -8,7 +8,6 @@ import HomeImage from "../images/Homeimage.svg";
 import Startted from "../components/Startted";
 import { useMediaQuery } from "react-responsive";
 
-
 export default function HomePage() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
@@ -20,9 +19,9 @@ export default function HomePage() {
         <Margin>
           <HeroSection image={HomeImage} />
         </Margin>
-        <Spacer height={isResponsive?"70px":"127px"} />
+        <Spacer height={isResponsive ? "70px" : "127px"} />
         <Card />
-        <Spacer height={isResponsive?"70px":"179px"} />
+        <Spacer height={isResponsive ? "70px" : "179px"} />
         <Startted />
       </Wrapper>
     </>
