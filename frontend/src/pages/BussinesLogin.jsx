@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
 
-
 const WrapperIn = styled.div`
   height: 100vh;
   padding: 20px 40px;
@@ -26,11 +25,8 @@ const Logo = styled(H1)`
   :hover {
     color: #caca0f;
   }
-  
 `;
 export default function BussinessLogin() {
-  
-
   const navigate = useNavigate();
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
@@ -50,18 +46,15 @@ export default function BussinessLogin() {
                 The Hospitality Guardian
               </Logo>
             </Col>
-            {
-              isResponsive?"": 
-               <Col  md={6}>
-              <H1 fontSize="20px" weight="700" style={{textAlign:"right"}}
-               
-              >
-                info@hospitalityguardian.co.nz
-              </H1>
-            </Col>
-            }
-            
-           
+            {isResponsive ? (
+              ""
+            ) : (
+              <Col md={6}>
+                <H1 fontSize="20px" weight="700" style={{ textAlign: "right" }}>
+                  info@hospitalityguardian.co.nz
+                </H1>
+              </Col>
+            )}
           </Row>
           <Spacer height="18px" />
           <Row>

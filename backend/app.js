@@ -24,6 +24,7 @@ require('./src/routes/auth')(app);
 require('./src/routes/business-licenses')(app);
 require('./src/routes/dutyManager')(app);
 require('./src/routes/individual-licenses')(app);
+require('./src/routes/stripe')(app);
 app.use((req, res, next) => {
     next(createError(404));
 });

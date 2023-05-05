@@ -17,7 +17,6 @@ const singUpSlice=createSlice({
           getUser.fulfilled,
             (state, action) => {
               state.loading = false;
-      
               state.userData = action.payload;
             }
           );

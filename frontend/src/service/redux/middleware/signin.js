@@ -5,6 +5,7 @@ export const signin = createAsyncThunk(
   async (data) => {
     try {
       const res = await client.post("login", data);
+      localStorage.setItem("token", res.data.token)
       return { status: res.status, data: res.data };
     } catch (error) {
       console.log(error);
