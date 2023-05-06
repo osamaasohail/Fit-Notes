@@ -7,6 +7,7 @@ const User = require("../models/User");
 require("dotenv").config();
 const handlebars = require('handlebars');
 const fs = require('fs');
+const crypto = require('crypto');
 module.exports = {
     register: async(req, res) => {
         try {
@@ -34,17 +35,17 @@ module.exports = {
             let myNewUser = await user.save();
             // Send a verification email to the user
             const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD,
-            },
+                service: "gmail",
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
+                },
             });
             const source = fs.readFileSync('src/templates/email-template-verification.html', 'utf8');
             const template = handlebars.compile(source);
             let link = `${process.env.BASE_URL}/verify-email/${myNewUser._id.toString()}?token=${verificationToken}`;
             const mailOptions = {
-                from: 'hamza@infosun.co.uk',
+                from: process.env.EMAIL,
                 to: email,
                 subject: "Email Verification",
                 html: template({name: name, link: link}),
@@ -83,7 +84,6 @@ module.exports = {
             if (!user) {
             return res.status(401).json({ message: 'Invalid credentials' });
             }
-            console.log(user);
             const isMatch = await comparePassword(password, user.password);
 
             if (!isMatch) {
@@ -126,6 +126,77 @@ module.exports = {
             }
         } catch (error) {
             res.status(500).json({ error: "Internal server error" });
+        }
+    },
+    sendPasswordRequest: async (req, res) => {
+        try {
+            const { email } = req.body;
+        
+            // Find the user by email
+            const user = await User.findOne({ email });
+            if (!user) {
+              return res.status(404).json({ error: 'User not found' });
+            }
+            // Generate a reset token
+            const resetToken = crypto.randomBytes(32).toString('hex');
+        
+            // Set the reset token and expiration date in the user document
+            user.resetPasswordToken = resetToken;
+            user.resetPasswordExpires = Date.now() + 3600000; // 1 hour from now
+        
+            // Save the user document
+            await user.save();
+            const link = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+            const transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
+                },
+            });
+            const source = fs.readFileSync('src/templates/email-template-requestPassword.html', 'utf8');
+            const template = handlebars.compile(source);
+            const mailOptions = {
+                from: process.env.EMAIL,
+                to: email,
+                subject: "Email Verification",
+                html: template({link: link}),
+                attachments: [{
+                    filename: 'logo.png',
+                    path: 'src/templates/Email-Template.png',
+                    cid: 'unique@logo.png'
+                }]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Email sent: " + info.response);
+                }
+            });
+            res.json({ message: 'Password reset email sent' });
+          } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+          }
+    },
+    resetPassword: async (req, res) => {
+        try {
+            const { token } = req.query;
+        
+            // Find the user by reset token and check if it is valid and not expired
+            const user = await User.findOne({
+                resetPasswordToken: token,
+                resetPasswordExpires: { $gt: Date.now() },
+            });
+            if (!user) {
+            return res.status(400).send('Invalid or expired reset token');
+            }
+            // Render a form to enter a new password
+            res.render('reset-password', { token });
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal server error');
         }
     }
 }

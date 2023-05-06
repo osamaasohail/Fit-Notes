@@ -5,6 +5,8 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  resetPasswordToken: {type: String},
+  resetPasswordExpires: {type: Date},
   isVerified: { type: Boolean, default: false },
   verificationToken: { type: String },
   accountType: { type: Number }, // type: 1 for individual, type: 2 for business
