@@ -7,7 +7,9 @@ import Edit from "../../images/profiledit.svg";
 import { Button } from "../../components/Button";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-import Delete from "../../images/delete.png"
+import Delete from "../../images/delete.png";
+import Plus from "../../images/plus.png";
+
 import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../components/Style";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +30,7 @@ const Scrool = styled.div`
 
 export default function Profile() {
   const [edit, setEdit] = useState(false);
+  const [addDutyManager, setAddDutyManager] = useState(false);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -148,8 +151,12 @@ export default function Profile() {
                         </Col>
                         <Col className="mt-4" md={6} sm={6} xs={6}>
                           <Input
-                            style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                            disabled={edit?false:true}
+                            style={
+                              edit
+                                ? { background: "none", color: "black" }
+                                : { background: "none", color: "black" }
+                            }
+                            disabled={edit ? false : true}
                             placeholder={profile?.name}
                           />
                           {/* <P color="black" weight="300">
@@ -237,8 +244,12 @@ export default function Profile() {
                       >
                         <Col className="mt-4" md={6} sm={6} xs={6}>
                           <Input
-                            style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                            disabled={edit?false:true}
+                            style={
+                              edit
+                                ? { background: "none", color: "black" }
+                                : { background: "none", color: "black" }
+                            }
+                            disabled={edit ? false : true}
                             // value={"helllo"}
                             placeholder={profile?.licenseNumber}
                           />
@@ -251,10 +262,13 @@ export default function Profile() {
                         <Col className="mt-4" md={4} sm={4} xs={4}>
                           <P color="#EF3061" weight="300">
                             <Input
-                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                               disabled={edit?false:true}
+                              style={
+                                edit
+                                  ? { background: "none", color: "black" }
+                                  : { background: "none", color: "black" }
+                              }
+                              disabled={edit ? false : true}
                               type="date"
-                            
                               placeholder={profile?.expiryDate}
                             />
 
@@ -347,8 +361,12 @@ export default function Profile() {
                         >
                           <Col className="mt-4" md={6} sm={6} xs={6}>
                             <Input
-                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                               disabled={edit?false:true}
+                              style={
+                                edit
+                                  ? { background: "none", color: "black" }
+                                  : { background: "none", color: "black" }
+                              }
+                              disabled={edit ? false : true}
                               placeholder={profile?.gamingLicense}
                             />
                             {/*                             
@@ -359,10 +377,13 @@ export default function Profile() {
                           </Col>
                           <Col className="mt-4" md={4} sm={4} xs={4}>
                             <Input
-                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                               disabled={edit?false:true}
+                              style={
+                                edit
+                                  ? { background: "none", color: "black" }
+                                  : { background: "none", color: "black" }
+                              }
+                              disabled={edit ? false : true}
                               type="date"
-                          
                               placeholder={profile?.gamingLicenseExpiry}
                             />
 
@@ -379,7 +400,7 @@ export default function Profile() {
                 </Col>
               </Row>
             </>
-             ) : null} 
+             ) : null}
 
             <Spacer height="10px" />
             <Row
@@ -406,7 +427,7 @@ export default function Profile() {
                     Manager Info
                   </H1>
                 </Col> */}
-                    <Col  md={12}>
+                    <Col md={12}>
                       <div>
                         <Row
                           style={
@@ -416,16 +437,14 @@ export default function Profile() {
                                   padding: "12px 2px 12px 2px",
                                   margin: "0px 20px 0px 0px",
                                   borderRadius: "8px",
-                                  overflow:"auto"
-                                
+                                  overflow: "auto",
                                 }
                               : {
                                   background: "#F2F2F2",
                                   padding: "12px 30px 12px 20px",
                                   margin: "0px 20px 0px 0px",
                                   borderRadius: "8px",
-                                  overflow:"auto"
-                                  
+                                  overflow: "auto",
                                 }
                           }
                         >
@@ -452,7 +471,7 @@ export default function Profile() {
                         </Row>
                       </div>
                       {profile?.dutyManagers?.map((manager) => {
-                       return ( 
+                       return (
                       <Row
                         style={
                           isResponsive
@@ -467,52 +486,178 @@ export default function Profile() {
                         }
                       >
                         <Col md={3} sm={3} xs={3}>
-                        <Input
-                             style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                             disabled={edit?false:true}
-                             
-                              placeholder={manager?.name}
-                            />
+                          <Input
+                            style={
+                              edit
+                                ? { background: "none", color: "black" }
+                                : { background: "none", color: "black" }
+                            }
+                            disabled={edit ? false : true}
+
+                            placeholder={manager?.name}
+                          />
                           {/* <P color="black" weight="400">
                             {manager?.name}
                             asad
                           </P> */}
                         </Col>
                         <Col md={3} sm={3} xs={3}>
-                        <Input
-                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                               disabled={edit?false:true}
-                             
-                              placeholder= {manager?.email}
-                            />
-                          
+                          <Input
+                            style={
+                              edit
+                                ? { background: "none", color: "black" }
+                                : { background: "none", color: "black" }
+                            }
+                            disabled={edit ? false : true}
+
+                            placeholder= {manager?.email}
+                          />
                         </Col>
                         <Col md={3} sm={3} xs={3}>
-                        <Input
-                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                               disabled={edit?false:true}
-                             
-                              placeholder={manager?.licenseNumber}
-                            />
+                          <Input
+                            style={
+                              edit
+                                ? { background: "none", color: "black" }
+                                : { background: "none", color: "black" }
+                            }
+                            disabled={edit ? false : true}
+
+                            placeholder={manager?.licenseNumber}
+                          />
                           {/* <P color="black" weight="400">
                             {manager?.licenseNumber}
                           </P> */}
                         </Col>
-                        <Col className="d-flex align-items-center" md={3} sm={3} xs={3}>
-                        <Input className="textPlaceholder"
-                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
-                               disabled={edit?false:true}
-                              type="date"
-                             
-                              // placeholder= {manager?.expiryDate}
-                            />
-                            <img style={{marginLeft:"10px"}} width={20} height={20} src={Delete}/>
-                         
+                        <Col
+                          className="d-flex align-items-center"
+                          md={3}
+                          sm={3}
+                          xs={3}
+                        >
+                          <Input
+                            className="textPlaceholder"
+                            style={
+                              edit
+                                ? { background: "none", color: "black" }
+                                : { background: "none", color: "black" }
+                            }
+                            disabled={edit ? false : true}
+                            type="date"
+
+                            placeholder= {manager?.expiryDate}
+                          />
+                          <img
+                            style={{ marginLeft: "10px" }}
+                            width={20}
+                            height={20}
+                            src={Delete}
+                          />
                         </Col>
                       </Row>
-                       ); 
-                       })} 
+                      ); 
+                       })}
+                      {addDutyManager ? (
+                        <>
+                          <Row
+                            style={
+                              isResponsive
+                                ? {
+                                    padding: "16px 2px 12px 2px",
+                                    margin: "0px 20px 0px 0px",
+                                  }
+                                : {
+                                    padding: "16px 30px 12px 20px",
+                                    margin: "0px 20px 0px 0px",
+                                  }
+                            }
+                          >
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                placeholder={"Enter Name"}
+                              />
+                              {/* <P color="black" weight="400">
+                            {manager?.name}
+                            asad
+                          </P> */}
+                            </Col>
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                placeholder={"Enter  Email"}
+                              />
+                            </Col>
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                               
+                                placeholder={"Enter Licence"}
+                              />
+                              {/* <P color="black" weight="400">
+                            {manager?.licenseNumber}
+                          </P> */}
+                            </Col>
+                            <Col
+                              className="d-flex align-items-center"
+                              md={3}
+                              sm={3}
+                              xs={3}
+                            >
+                              <Input
+                                className="textPlaceholder"
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                type="date"
+
+                                // placeholder= {manager?.expiryDate}
+                              />
+                              <img
+                                style={{
+                                  marginLeft: "10px",
+                                  cursor: "pointer",
+                                }}
+                                width={20}
+                                height={20}
+                                src={Plus}
+                              />
+                            </Col>
+                          </Row>
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </Col>
+
+                    <Button
+                      style={{
+                        width: "100%",
+                        padding: "9px 14px",
+                        background: "black",
+                        color: "white",
+                        fontSize: "14px",
+                        borderRadius: "3px",
+                      }}
+                      disabled={addDutyManager ? true : false}
+                      onClick={() => setAddDutyManager(true)}
+                    >
+                      {" "}
+                      Add duttyy manager
+                    </Button>
                   </Row>
                 </Box>
               </Col>
