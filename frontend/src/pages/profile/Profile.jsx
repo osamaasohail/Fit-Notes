@@ -7,6 +7,7 @@ import Edit from "../../images/profiledit.svg";
 import { Button } from "../../components/Button";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+import Delete from "../../images/delete.png"
 import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../components/Style";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,7 @@ import { useEffect } from "react";
 import { getBusinessLicense } from "../../service/redux/middleware/licenses";
 import { useState } from "react";
 import Moment from "react-moment";
+import { Input } from "../../components/Input";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -25,6 +27,7 @@ const Scrool = styled.div`
 `;
 
 export default function Profile() {
+  const [edit, setEdit] = useState(false);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -143,14 +146,20 @@ export default function Profile() {
                               : "Duty Manager"}
                           </P>
                         </Col>
-                        <Col className="mt-4" md={4} sm={4} xs={4}>
-                          <P color="black" weight="300">
+                        <Col className="mt-4" md={6} sm={6} xs={6}>
+                          <Input
+                            style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                            disabled={edit?false:true}
+                            placeholder={profile?.name}
+                          />
+                          {/* <P color="black" weight="300">
                             {profile?.name}
-                          </P>
+                            sdsds
+                          </P> */}
                         </Col>
-                        <Col className="mt-4" md={1} sm={1} xs={1}>
+                        {/* <Col className="mt-4" md={1} sm={1} xs={1}>
                           <img src={Edit} />
-                        </Col>
+                        </Col> */}
                       </Row>
                     </Col>
                   </Row>
@@ -227,15 +236,32 @@ export default function Profile() {
                         }
                       >
                         <Col className="mt-4" md={6} sm={6} xs={6}>
-                          <P color="black" weight="400">
+                          <Input
+                            style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                            disabled={edit?false:true}
+                            // value={"helllo"}
+                            placeholder={profile?.licenseNumber}
+                          />
+
+                          {/* <P color="black" weight="400">
                             {profile?.licenseNumber}
-                          </P>
+                            23344
+                          </P> */}
                         </Col>
                         <Col className="mt-4" md={4} sm={4} xs={4}>
                           <P color="#EF3061" weight="300">
-                            <Moment format="DD/MM/YYYY">
+                            <Input
+                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                               disabled={edit?false:true}
+                              type="date"
+                            
+                              placeholder={profile?.expiryDate}
+                            />
+
+                            {/* <Moment format="DD/MM/YYYY">
                               {profile?.expiryDate}
-                            </Moment>
+                              dfdsfdss
+                            </Moment> */}
                           </P>
                         </Col>
                       </Row>
@@ -245,100 +271,115 @@ export default function Profile() {
               </Col>
             </Row>
             {userData?.accountType == 2 && profile?.gamingLicense !== "" ? (
-              <>
-                <Spacer height="10px" />
-                <Row
-                  style={{
-                    padding: isResponsive
-                      ? "0vw 0vw 0vw 1vw"
-                      : "0vw 10vw 0vw 1vw",
-                  }}
-                  className=" align-items-center "
-                >
-                  <Col md={2}>
-                    <H1 color="black" fontSize="24px" weight="500">
-                      Gaming Info
-                    </H1>
-                  </Col>
-                  <Col md={7}>
-                    <Box
-                      width={isResponsive ? "100%" : "55vw"}
-                      padding={
-                        isResponsive
-                          ? "41px 20px 20px 20px"
-                          : "41px 20px 52px 64px"
-                      }
-                    >
-                      <Row className="align-items-center">
-                        {/* <Col md={5}>
+            <>
+              <Spacer height="10px" />
+              <Row
+                style={{
+                  padding: isResponsive
+                    ? "0vw 0vw 0vw 1vw"
+                    : "0vw 10vw 0vw 1vw",
+                }}
+                className=" align-items-center "
+              >
+                <Col md={2}>
+                  <H1 color="black" fontSize="24px" weight="500">
+                    Gaming Info
+                  </H1>
+                </Col>
+                <Col md={7}>
+                  <Box
+                    width={isResponsive ? "100%" : "55vw"}
+                    padding={
+                      isResponsive
+                        ? "41px 20px 20px 20px"
+                        : "41px 20px 52px 64px"
+                    }
+                  >
+                    <Row className="align-items-center">
+                      {/* <Col md={5}>
                   <H1 color="black" fontSize="24px" weight="500">
                     Liquor Info
                   </H1>
                 </Col> */}
-                        <Col md={12}>
-                          <div>
-                            <Row
-                              style={
-                                isResponsive
-                                  ? {
-                                      background: "#F2F2F2",
-                                      padding: "12px 2px 12px 2px",
-                                      margin: "0px 20px 0px 0px",
-                                      borderRadius: "8px",
-                                    }
-                                  : {
-                                      background: "#F2F2F2",
-                                      padding: "12px 30px 12px 20px",
-                                      margin: "0px 20px 0px 0px",
-                                      borderRadius: "8px",
-                                    }
-                              }
-                            >
-                              <Col md={6} sm={6} xs={6}>
-                                <P color="black" weight="400">
-                                  License Number
-                                </P>
-                              </Col>
-                              <Col md={6} sm={6} xs={6}>
-                                <P color="black" weight="400">
-                                  Expiry Date
-                                </P>
-                              </Col>
-                            </Row>
-                          </div>
+                      <Col md={12}>
+                        <div>
                           <Row
                             style={
                               isResponsive
                                 ? {
-                                    padding: "2px 2px 12px 2px",
+                                    background: "#F2F2F2",
+                                    padding: "12px 2px 12px 2px",
                                     margin: "0px 20px 0px 0px",
+                                    borderRadius: "8px",
                                   }
                                 : {
+                                    background: "#F2F2F2",
                                     padding: "12px 30px 12px 20px",
                                     margin: "0px 20px 0px 0px",
+                                    borderRadius: "8px",
                                   }
                             }
                           >
-                            <Col className="mt-4" md={6} sm={6} xs={6}>
+                            <Col md={6} sm={6} xs={6}>
                               <P color="black" weight="400">
-                                {profile?.gamingLicense}
+                                License Number
                               </P>
                             </Col>
-                            <Col className="mt-4" md={4} sm={4} xs={4}>
-                              <P color="#EF3061" weight="300">
-                                <Moment format="DD/MM/YYYY">
-                                  {profile?.gamingLicenseExpiry}
-                                </Moment>
+                            <Col md={6} sm={6} xs={6}>
+                              <P color="black" weight="400">
+                                Expiry Date
                               </P>
                             </Col>
                           </Row>
-                        </Col>
-                      </Row>
-                    </Box>
-                  </Col>
-                </Row>
-              </>
-            ) : null}
+                        </div>
+                        <Row
+                          style={
+                            isResponsive
+                              ? {
+                                  padding: "2px 2px 12px 2px",
+                                  margin: "0px 20px 0px 0px",
+                                }
+                              : {
+                                  padding: "12px 30px 12px 20px",
+                                  margin: "0px 20px 0px 0px",
+                                }
+                          }
+                        >
+                          <Col className="mt-4" md={6} sm={6} xs={6}>
+                            <Input
+                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                               disabled={edit?false:true}
+                              placeholder={profile?.gamingLicense}
+                            />
+                            {/*                             
+                              <P color="black" weight="400">
+                                {profile?.gamingLicense}
+                                hello
+                              </P> */}
+                          </Col>
+                          <Col className="mt-4" md={4} sm={4} xs={4}>
+                            <Input
+                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                               disabled={edit?false:true}
+                              type="date"
+                          
+                              placeholder={profile?.gamingLicenseExpiry}
+                            />
+
+                            {/* <P color="#EF3061" weight="300">
+                                <Moment format="DD/MM/YYYY">
+                                  {profile?.gamingLicenseExpiry}
+                                </Moment>
+                              </P> */}
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Box>
+                </Col>
+              </Row>
+            </>
+             ) : null} 
 
             <Spacer height="10px" />
             <Row
@@ -365,7 +406,7 @@ export default function Profile() {
                     Manager Info
                   </H1>
                 </Col> */}
-                    <Col md={12}>
+                    <Col  md={12}>
                       <div>
                         <Row
                           style={
@@ -375,12 +416,16 @@ export default function Profile() {
                                   padding: "12px 2px 12px 2px",
                                   margin: "0px 20px 0px 0px",
                                   borderRadius: "8px",
+                                  overflow:"auto"
+                                
                                 }
                               : {
                                   background: "#F2F2F2",
                                   padding: "12px 30px 12px 20px",
                                   margin: "0px 20px 0px 0px",
                                   borderRadius: "8px",
+                                  overflow:"auto"
+                                  
                                 }
                           }
                         >
@@ -407,45 +452,66 @@ export default function Profile() {
                         </Row>
                       </div>
                       {profile?.dutyManagers?.map((manager) => {
-                        return (
-                          <Row
-                            style={
-                              isResponsive
-                                ? {
-                                    padding: "16px 2px 12px 2px",
-                                    margin: "0px 20px 0px 0px",
-                                  }
-                                : {
-                                    padding: "16px 30px 12px 20px",
-                                    margin: "0px 20px 0px 0px",
-                                  }
-                            }
-                          >
-                            <Col md={3} sm={3} xs={3}>
-                              <P color="black" weight="400">
-                                {manager?.name}
-                              </P>
-                            </Col>
-                            <Col md={3} sm={3} xs={3}>
-                              <P color="black" weight="400">
-                                {manager?.email}
-                              </P>
-                            </Col>
-                            <Col md={3} sm={3} xs={3}>
-                              <P color="black" weight="400">
-                                {manager?.licenseNumber}
-                              </P>
-                            </Col>
-                            <Col md={3} sm={3} xs={3}>
-                              <P color="black" weight="300">
-                                <Moment format="DD/MM/YYYY">
-                                  {manager?.expiryDate}
-                                </Moment>
-                              </P>
-                            </Col>
-                          </Row>
-                        );
-                      })}
+                       return ( 
+                      <Row
+                        style={
+                          isResponsive
+                            ? {
+                                padding: "16px 2px 12px 2px",
+                                margin: "0px 20px 0px 0px",
+                              }
+                            : {
+                                padding: "16px 30px 12px 20px",
+                                margin: "0px 20px 0px 0px",
+                              }
+                        }
+                      >
+                        <Col md={3} sm={3} xs={3}>
+                        <Input
+                             style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                             disabled={edit?false:true}
+                             
+                              placeholder={manager?.name}
+                            />
+                          {/* <P color="black" weight="400">
+                            {manager?.name}
+                            asad
+                          </P> */}
+                        </Col>
+                        <Col md={3} sm={3} xs={3}>
+                        <Input
+                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                               disabled={edit?false:true}
+                             
+                              placeholder= {manager?.email}
+                            />
+                          
+                        </Col>
+                        <Col md={3} sm={3} xs={3}>
+                        <Input
+                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                               disabled={edit?false:true}
+                             
+                              placeholder={manager?.licenseNumber}
+                            />
+                          {/* <P color="black" weight="400">
+                            {manager?.licenseNumber}
+                          </P> */}
+                        </Col>
+                        <Col className="d-flex align-items-center" md={3} sm={3} xs={3}>
+                        <Input className="textPlaceholder"
+                               style={edit?{ background: "none", color: "black" }:{ background: "none", color: "black" }}
+                               disabled={edit?false:true}
+                              type="date"
+                             
+                              // placeholder= {manager?.expiryDate}
+                            />
+                            <img style={{marginLeft:"10px"}} width={20} height={20} src={Delete}/>
+                         
+                        </Col>
+                      </Row>
+                       ); 
+                       })} 
                     </Col>
                   </Row>
                 </Box>
@@ -462,6 +528,13 @@ export default function Profile() {
           >
             <Col md={12}>
               <Button
+                onClick={() => {
+                  if (edit) {
+                    // caallbackendfunction here
+                  } else {
+                    setEdit(true);
+                  }
+                }}
                 style={{
                   width: "100%",
                   padding: "9px 14px",
@@ -471,7 +544,7 @@ export default function Profile() {
                   borderRadius: "3px",
                 }}
               >
-                Update
+                {edit ? "Update" : "Edit"}
               </Button>
             </Col>
           </Row>
