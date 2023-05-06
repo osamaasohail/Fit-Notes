@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const stripe = require("stripe")(
   "sk_test_51K6TTUFJlvwC7pufNo15hNsO02Wa5VrTCaTSi7trrXHw2ju5T8RGLCrQUQI4RQ3sewOMTN4ENyizBeRDkafCVEe700RCDvZkzj"
 );
+
 module.exports = {
   add: async (req, res) => {
     try {
@@ -21,8 +22,6 @@ module.exports = {
         dutyManagers: [],
         isActive: true,
       };
-
-      console.log("Business license ", businessLicense)
       let dutyManagers = req.body.dutyManagers;
       dutyManagers = dutyManagers.map((doc) => {
         return {
@@ -32,7 +31,6 @@ module.exports = {
           certId: objectId,
         };
       });
-
       const dutyManagerIds = dutyManagers.reduce(
         (accumulator, currentValue) => {
           accumulator.push(currentValue._id);

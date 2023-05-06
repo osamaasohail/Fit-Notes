@@ -11,4 +11,8 @@ module.exports = (app) => {
         .post(authController.login);
     app.route('/verify-email/:id')
         .get(authController.verifyEmail)
+    app.route('/forgot-password')
+        .post(authController.sendPasswordRequest)
+    app.route('/reset-password')
+        .get(authController.resetPassword)
 }
