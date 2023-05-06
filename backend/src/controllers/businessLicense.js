@@ -22,6 +22,7 @@ module.exports = {
         isActive: true,
       };
 
+      console.log("Business license ", businessLicense)
       let dutyManagers = req.body.dutyManagers;
       dutyManagers = dutyManagers.map((doc) => {
         return {
@@ -48,7 +49,7 @@ module.exports = {
         })
         .then(async (d) => {
           const session = await stripe.checkout.sessions.create({
-            success_url: "http://localhost:3000/profile",
+            success_url: "http://localhost:3000/profile/edit-profile",
             line_items: [
               {
                 price: "price_1N4HsVFJlvwC7pufAWMaVGCL",

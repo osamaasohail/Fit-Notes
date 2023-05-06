@@ -10,7 +10,8 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { individualLicense } from "../service/redux/middleware/licenses";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -34,13 +35,13 @@ export default function IndividualPayment() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [fullName, setFullName] = useState("");
   const [role, setRole] = useState("");
   const [dutyManagerEmail, setDutyManagerEmail] = useState("");
   const [dutyManagerName, setDutyManagerName] = useState("");
-
+  const [dutyManagerLicenseNumber, setDutyManagerLicenseNumber] = useState("");
   const [dutyManagerLicenseExpiry, setDutyManagerLicenseExpiry] = useState("");
   const userData = useSelector((state) => state.signin.signInData.data.user);
   // const [dutyManagerName, setDutyManagerName] = useState("");
@@ -67,7 +68,6 @@ export default function IndividualPayment() {
     };
     newArray[index] = updatedObject;
     setData(newArray);
-    console.log("New data is ", newArray);
   }
 
   const handleSubmit = () => {
@@ -76,13 +76,17 @@ export default function IndividualPayment() {
       dutyManager: {
         name: dutyManagerName,
         email: dutyManagerEmail,
-        licenseNumber: "123123123",
+        licenseNumber: dutyManagerLicenseNumber,
         expiryDate: dutyManagerLicenseExpiry,
       },
       sendNotiBeforeExpiry: data
         .map((obj) => obj.id)
         .filter((obj) => obj.isChecked),
     };
+    dispatch(individualLicense(userData)).then((res) => {
+      window.location.href = res.payload.data.url;
+    });
+    
   };
 
   return (
@@ -251,6 +255,33 @@ export default function IndividualPayment() {
                         width: "100%",
                       }}
                       placeholder="Email"
+                    />
+                    <div
+                      style={{ position: "absolute", top: "15%", right: "2%" }}
+                    >
+                      <img src={Check} />
+                    </div>
+                    <Spacer height="16px" />
+                  </div>
+                </P>
+              </div>
+              <Spacer height="24px" />
+              <div>
+                <P color="#161616" fontSize="14px" weight="600">
+                  Add Duty Manager License Number<span style={{ color: "red" }}>*</span>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      value={dutyManagerLicenseNumber}
+                      onChange={(e) => {
+                        setDutyManagerLicenseNumber(e.target.value);
+                      }}
+                      style={{
+                        fontSize: "14px",
+                        //   background: "#FCFCFC",
+                        width: "100%",
+                      }}
+                      placeholder="12345"
+                      name="licenseNumber"
                     />
                     <div
                       style={{ position: "absolute", top: "15%", right: "2%" }}
