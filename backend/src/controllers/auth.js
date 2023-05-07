@@ -131,9 +131,10 @@ module.exports = {
     sendPasswordRequest: async (req, res) => {
         try {
             const { email } = req.body;
-        
+            console.log("Email is ", email)
             // Find the user by email
             const user = await User.findOne({ email });
+            console.log("User is ", req.body)
             if (!user) {
               return res.status(404).json({ error: 'User not found' });
             }
@@ -147,6 +148,7 @@ module.exports = {
             // Save the user document
             await user.save();
             const link = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+            console.log("Link is " + link);
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {

@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
 import { businessLicense } from "../service/redux/middleware/licenses";
+import { ToastContainer, toast } from "react-toastify";
 
 const Wrapper = styled.div`
   // height:100vh;
@@ -100,6 +101,31 @@ export default function Payment() {
   }
 
   const handlePaymentAndSubmit = () => {
+    if(!businessName) {
+      toast.error("Please enter business name");
+      return;
+    } else if(!role) {
+      toast.error("Please select role");
+      return;
+    } else if(!licenseNumber) {
+      toast.error("Please enter license number");
+      return;
+    } else if(!liquorLicenseExpiry) {
+      toast.error("Please enter liquor license expiry");
+      return;
+    } else if(!dutyManagers[0].name) {
+      toast.error("Please enter duty manager name");
+      return;
+    } else if(!dutyManagers[0].email) {
+      toast.error("Please enter duty manager email");
+      return;
+    } else if(!dutyManagers[0].licenseNumber) {
+      toast.error("Please enter duty manager license number");
+      return;
+    } else if(!dutyManagers[0].expiryDate) {
+      toast.error("Please enter duty manager expiry date");
+      return;
+    }
     var userData = {
       name: businessName,
       role: parseInt(role),
@@ -124,6 +150,7 @@ export default function Payment() {
   return (
     <>
       {/* style={{padding:"3vw 10vw 0vw 10vw"}} */}
+      <ToastContainer />
       <Wrapper>
         <Row style={{ height: "100%", margin: "0px" }}>
           <Row className="my-3">

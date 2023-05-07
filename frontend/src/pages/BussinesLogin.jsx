@@ -8,6 +8,8 @@ import { Spacer } from "../components/Spacer";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const WrapperIn = styled.div`
   height: 100vh;
@@ -34,6 +36,7 @@ export default function BussinessLogin() {
 
   return (
     <>
+    <ToastContainer />
       <Wrapper>
         <WrapperIn>
           <Row>

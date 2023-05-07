@@ -15,11 +15,16 @@ import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../components/Style";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getBusinessLicense, getIndividualLicense } from "../../service/redux/middleware/licenses";
+import {
+  getBusinessLicense,
+  getIndividualLicense,
+} from "../../service/redux/middleware/licenses";
 import { useState } from "react";
 import Moment from "react-moment";
 import { Input } from "../../components/Input";
 import { editBasicInfoThunk } from "../../service/redux/middleware/profile";
+import { ToastContainer, toast } from "react-toastify";
+import { addDutyManagerThunk } from "../../service/redux/middleware/dutyManager";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -49,6 +54,7 @@ export default function Profile() {
   const [liquorLicenseExpiry, setLiquorLicenseExpiry] = useState("");
   const [gamingLicenseNumber, setGamingLicenseNumber] = useState("");
   const [gamingLicenseExpiry, setGamingLicenseExpiry] = useState("");
+  const [editableManager, setEditableManager] = useState([]);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -63,11 +69,11 @@ export default function Profile() {
       if (userData?.accountType === 1) {
         dispatch(getIndividualLicense()).then((res) => {
           setBusinessName(res?.payload?.data?.licenses[0]?.name);
-          console.log("Individual profile :", res.payload.data.licenses[0])
           setProfile(res.payload.data.licenses[0]);
         });
       } else {
         dispatch(getBusinessLicense()).then((res) => {
+          console.log("Res for business profile :", res);
           if (res.payload.data.licenses.length > 0) {
             setProfile(res.payload.data.licenses[0]);
             setBusinessName(res?.payload?.data?.licenses[0]?.businessName);
@@ -81,6 +87,11 @@ export default function Profile() {
             setGamingLicenseExpiry(
               res?.payload?.data?.licenses[0]?.gamingLicenseExpiry
             );
+            var temp = [];
+            res?.payload?.data?.licenses[0]?.dutyManagers?.map((item) => {
+              temp.push(false);
+            })
+            setEditableManager(temp);
           }
         });
       }
@@ -88,6 +99,7 @@ export default function Profile() {
   }, [userData]);
   return (
     <>
+      <ToastContainer />
       <Row style={{ margin: "0px" }}>
         <Col
           style={
@@ -209,17 +221,23 @@ export default function Profile() {
                               src={Tick}
                               alt="add"
                               onClick={() => {
-                                if (businessName !== "") {
-                                  dispatch(
-                                    editBasicInfoThunk({
-                                      name: businessName,
-                                      userId: profile?.refUser,
-                                    })
-                                  ).then((res) => {
-                                    dispatch(getBusinessLicense())
-                                  });
-                                  setEditBasicInfo(false);
+                                if (!businessName) {
+                                  toast.error("Please enter business name");
+                                  return;
                                 }
+                                dispatch(
+                                  editBasicInfoThunk({
+                                    name: businessName,
+                                    userId: profile?.refUser,
+                                  })
+                                ).then((res) => {
+                                  dispatch(getBusinessLicense());
+                                  setEditBasicInfo(false);
+                                  toast.success(
+                                    "Basic info updated successfully"
+                                  );
+                                  return;
+                                });
                               }}
                             />
                           ) : (
@@ -244,161 +262,172 @@ export default function Profile() {
             </Row>
             <Spacer height="10px" />
             {userData?.accountType == 2 && (
-            <Row
-              style={{
-                padding: isResponsive ? "0vw 0vw 0vw 1vw" : "0vw 10vw 0vw 1vw",
-              }}
-              className=" align-items-center "
-            >
-              <Col md={2}>
-                <H1 color="black" fontSize="24px" weight="500">
-                  Liquor Info
-                </H1>
-              </Col>
-              <Col md={7}>
-                <Box
-                  width={isResponsive ? "100%" : "55vw"}
-                  padding={
-                    isResponsive ? "41px 20px 20px 20px" : "41px 20px 52px 64px"
-                  }
-                >
-                  <Row className="align-items-center">
-                    {/* <Col md={5}>
+              <Row
+                style={{
+                  padding: isResponsive
+                    ? "0vw 0vw 0vw 1vw"
+                    : "0vw 10vw 0vw 1vw",
+                }}
+                className=" align-items-center "
+              >
+                <Col md={2}>
+                  <H1 color="black" fontSize="24px" weight="500">
+                    Liquor Info
+                  </H1>
+                </Col>
+                <Col md={7}>
+                  <Box
+                    width={isResponsive ? "100%" : "55vw"}
+                    padding={
+                      isResponsive
+                        ? "41px 20px 20px 20px"
+                        : "41px 20px 52px 64px"
+                    }
+                  >
+                    <Row className="align-items-center">
+                      {/* <Col md={5}>
                   <H1 color="black" fontSize="24px" weight="500">
                     Liquor Info
                   </H1>
                 </Col> */}
-                    <Col md={12}>
-                      <div>
+                      <Col md={12}>
+                        <div>
+                          <Row
+                            style={
+                              isResponsive
+                                ? {
+                                    background: "#F2F2F2",
+                                    padding: "12px 2px 12px 2px",
+                                    margin: "0px 20px 0px 0px",
+                                    borderRadius: "8px",
+                                  }
+                                : {
+                                    background: "#F2F2F2",
+                                    padding: "12px 30px 12px 20px",
+                                    margin: "0px 20px 0px 0px",
+                                    borderRadius: "8px",
+                                  }
+                            }
+                          >
+                            <Col md={5} sm={5} xs={5}>
+                              <P color="black" weight="400">
+                                License Number
+                              </P>
+                            </Col>
+                            <Col md={5} sm={5} xs={5}>
+                              <P color="black" weight="400">
+                                Expiry Date
+                              </P>
+                            </Col>
+                            <Col md={2} sm={2} xs={2}>
+                              <P color="black" weight="300">
+                                Action
+                              </P>
+                            </Col>
+                          </Row>
+                        </div>
                         <Row
                           style={
                             isResponsive
                               ? {
-                                  background: "#F2F2F2",
-                                  padding: "12px 2px 12px 2px",
+                                  padding: "2px 2px 12px 2px",
                                   margin: "0px 20px 0px 0px",
-                                  borderRadius: "8px",
                                 }
                               : {
-                                  background: "#F2F2F2",
                                   padding: "12px 30px 12px 20px",
                                   margin: "0px 20px 0px 0px",
-                                  borderRadius: "8px",
                                 }
                           }
                         >
-                          <Col md={5} sm={5} xs={5}>
-                            <P color="black" weight="400">
-                              License Number
-                            </P>
-                          </Col>
-                          <Col md={5} sm={5} xs={5}>
-                            <P color="black" weight="400">
-                              Expiry Date
-                            </P>
-                          </Col>
-                          <Col md={2} sm={2} xs={2}>
-                            <P color="black" weight="300">
-                              Action
-                            </P>
-                          </Col>
-                        </Row>
-                      </div>
-                      <Row
-                        style={
-                          isResponsive
-                            ? {
-                                padding: "2px 2px 12px 2px",
-                                margin: "0px 20px 0px 0px",
+                          <Col className="mt-4" md={5} sm={5} xs={5}>
+                            <Input
+                              style={
+                                editLicenseInfo
+                                  ? { background: "none", color: "black" }
+                                  : { background: "none", color: "black" }
                               }
-                            : {
-                                padding: "12px 30px 12px 20px",
-                                margin: "0px 20px 0px 0px",
-                              }
-                        }
-                      >
-                        <Col className="mt-4" md={5} sm={5} xs={5}>
-                          <Input
-                            style={
-                              editLicenseInfo
-                                ? { background: "none", color: "black" }
-                                : { background: "none", color: "black" }
-                            }
-                            disabled={editLicenseInfo ? false : true}
-                            placeholder={profile?.licenseNumber}
-                            value={liquorLicenseNumber}
-                            onChange={(e) => {
-                              setLiquorLicenseNumber(e.target.value);
-                            }}
-                          />
-                        </Col>
-                        <Col className="mt-4" md={5} sm={5} xs={5}>
-                          <P color="#EF3061" weight="300">
-                            {editLicenseInfo ? (
-                              <Input
-                                style={
-                                  editLicenseInfo
-                                    ? { background: "none", color: "black" }
-                                    : { background: "none", color: "black" }
-                                }
-                                disabled={editLicenseInfo ? false : true}
-                                type="date"
-                                placeholder={profile?.expiryDate}
-                                value={liquorLicenseExpiry}
-                                onChange={(e) => {
-                                  setLiquorLicenseExpiry(e.target.value);
-                                }}
-                              />
-                            ) : (
-                              <Moment format="DD/MM/YYYY">
-                                {profile?.expiryDate}
-                              </Moment>
-                            )}
+                              disabled={editLicenseInfo ? false : true}
+                              placeholder={profile?.licenseNumber}
+                              value={liquorLicenseNumber}
+                              onChange={(e) => {
+                                setLiquorLicenseNumber(e.target.value);
+                              }}
+                            />
+                          </Col>
+                          <Col className="mt-4" md={5} sm={5} xs={5}>
+                            <P color="#EF3061" weight="300">
+                              {editLicenseInfo ? (
+                                <Input
+                                  style={
+                                    editLicenseInfo
+                                      ? { background: "none", color: "black" }
+                                      : { background: "none", color: "black" }
+                                  }
+                                  disabled={editLicenseInfo ? false : true}
+                                  type="date"
+                                  placeholder={profile?.expiryDate}
+                                  value={liquorLicenseExpiry}
+                                  onChange={(e) => {
+                                    setLiquorLicenseExpiry(e.target.value);
+                                  }}
+                                />
+                              ) : (
+                                <Moment format="DD/MM/YYYY">
+                                  {profile?.expiryDate}
+                                </Moment>
+                              )}
 
-                            {/* <Moment format="DD/MM/YYYY">
+                              {/* <Moment format="DD/MM/YYYY">
                               {profile?.expiryDate}
                               dfdsfdss
                             </Moment> */}
-                          </P>
-                        </Col>
-                        <Col className="mt-4" md={2} sm={2} xs={2}>
-                          {editLicenseInfo ? (
-                            <img
-                              src={Tick}
-                              alt="add"
-                              onClick={() => {
-                                if (
-                                  liquorLicenseExpiry !== "" &&
-                                  liquorLicenseNumber !== ""
-                                ) {
+                            </P>
+                          </Col>
+                          <Col className="mt-4" md={2} sm={2} xs={2}>
+                            {editLicenseInfo ? (
+                              <img
+                                src={Tick}
+                                alt="add"
+                                onClick={() => {
+                                  if (!liquorLicenseNumber) {
+                                    toast.error("Please enter license number");
+                                    return;
+                                  } else if (!liquorLicenseExpiry) {
+                                    toast.error("Please enter expiry date");
+                                    return;
+                                  }
                                   dispatch(
                                     editBasicInfoThunk({
                                       licenseNumber: liquorLicenseNumber,
                                       expiryDate: liquorLicenseExpiry,
                                       userId: profile?.refUser,
                                     })
-                                  ).then((res) => {});
-                                  dispatch(getBusinessLicense())
-                                  setEditLicenseInfo(false);
-                                }
-                              }}
-                            />
-                          ) : (
-                            <img
-                              src={Edit}
-                              alt="edit"
-                              onClick={() => {
-                                setEditLicenseInfo(true);
-                              }}
-                            />
-                          )}
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                </Box>
-              </Col>
-            </Row>
+                                  ).then((res) => {
+                                    dispatch(getBusinessLicense());
+                                    setEditLicenseInfo(false);
+                                    toast.success(
+                                      "License info updated successfully"
+                                    );
+                                    return;
+                                  });
+                                }}
+                              />
+                            ) : (
+                              <img
+                                src={Edit}
+                                alt="edit"
+                                onClick={() => {
+                                  setEditLicenseInfo(true);
+                                }}
+                              />
+                            )}
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Box>
+                </Col>
+              </Row>
             )}
             {userData?.accountType == 2 && profile?.gamingLicense !== "" ? (
               <>
@@ -527,23 +556,31 @@ export default function Profile() {
                                   src={Tick}
                                   alt="add"
                                   onClick={() => {
-                                    if (
-                                      gamingLicenseNumber !== "" &&
-                                      gamingLicenseExpiry !== ""
-                                    ) {
-                                      dispatch(
-                                        editBasicInfoThunk({
-                                          gamingLicense: gamingLicenseNumber,
-                                          gamingLicenseExpiry:
-                                            gamingLicenseExpiry,
-                                          userId: profile?.refUser,
-                                        })
-                                      ).then((res) => {
-                                        dispatch(getBusinessLicense())
-                                        setEditGamingLicenseInfo(false);
-                                      });
-                                      
+                                    if (!gamingLicenseNumber) {
+                                      toast.error(
+                                        "Please enter gaming license number"
+                                      );
+                                      return;
+                                    } else if (!gamingLicenseExpiry) {
+                                      toast.error(
+                                        "Please enter gaming license expiry date"
+                                      );
+                                      return;
                                     }
+                                    dispatch(
+                                      editBasicInfoThunk({
+                                        gamingLicense: gamingLicenseNumber,
+                                        gamingLicenseExpiry:
+                                          gamingLicenseExpiry,
+                                        userId: profile?.refUser,
+                                      })
+                                    ).then((res) => {
+                                      dispatch(getBusinessLicense());
+                                      setEditGamingLicenseInfo(false);
+                                      toast.success(
+                                        "Gaming license updated successfully"
+                                      );
+                                    });
                                   }}
                                 />
                               ) : (
@@ -627,14 +664,19 @@ export default function Profile() {
                               License Number
                             </P>
                           </Col>
-                          <Col md={3} sm={3} xs={3}>
+                          <Col md={2} sm={2} xs={2}>
                             <P color="black" weight="400">
                               Expiry
                             </P>
                           </Col>
+                          <Col md={1} sm={1} xs={1}>
+                            <P color="black" weight="400">
+                              Action
+                            </P>
+                          </Col>
                         </Row>
                       </div>
-                      {profile?.dutyManagers?.map((manager) => {
+                      {profile?.dutyManagers?.map((manager, index) => {
                         return (
                           <Row
                             style={
@@ -652,11 +694,11 @@ export default function Profile() {
                             <Col md={3} sm={3} xs={3}>
                               <Input
                                 style={
-                                  edit
+                                  editableManager[index]
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={edit ? false : true}
+                                disabled={editableManager[index] ? false : true}
                                 placeholder={manager?.name}
                               />
                               {/* <P color="black" weight="400">
@@ -671,39 +713,36 @@ export default function Profile() {
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={edit ? false : true}
+                                disabled={editableManager[index] ? false : true}
                                 placeholder={manager?.email}
                               />
                             </Col>
                             <Col md={3} sm={3} xs={3}>
                               <Input
                                 style={
-                                  edit
+                                  editableManager[index]
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={edit ? false : true}
+                                disabled={editableManager[index] ? false : true}
                                 placeholder={manager?.licenseNumber}
                               />
-                              {/* <P color="black" weight="400">
-                            {manager?.licenseNumber}
-                          </P> */}
                             </Col>
                             <Col
                               className="d-flex align-items-center"
-                              md={3}
-                              sm={3}
-                              xs={3}
+                              md={2}
+                              sm={2}
+                              xs={2}
                             >
-                              {edit ? (
+                              {editableManager[index] ? (
                                 <Input
                                   className="textPlaceholder"
                                   style={
-                                    edit
+                                    editableManager[index]
                                       ? { background: "none", color: "black" }
                                       : { background: "none", color: "black" }
                                   }
-                                  disabled={edit ? false : true}
+                                  disabled={editableManager[index] ? false : true}
                                   type="date"
                                   placeholder={manager?.expiryDate}
                                 />
@@ -712,7 +751,19 @@ export default function Profile() {
                                   {profile?.gamingLicenseExpiry}
                                 </Moment>
                               )}
+                            </Col>
+                            <Col md={1} sm={1} xs={1}>
                               <img
+                                src={Edit}
+                                alt="edit"
+                                onClick={() => {
+                                  var temp = [...editableManager];
+                                  temp[index] = !editableManager[index];
+                                  setEditableManager(temp);
+                                }}
+                              />
+                              <img
+                                alt="delete"
                                 style={{ marginLeft: "10px" }}
                                 width={20}
                                 height={20}
@@ -793,9 +844,9 @@ export default function Profile() {
                             </Col>
                             <Col
                               className="d-flex align-items-center"
-                              md={3}
-                              sm={3}
-                              xs={3}
+                              md={2}
+                              sm={2}
+                              xs={2}
                             >
                               <Input
                                 className="textPlaceholder"
@@ -814,6 +865,8 @@ export default function Profile() {
                                 }}
                                 // placeholder= {manager?.expiryDate}
                               />
+                            </Col>
+                            <Col md={1} sm={1} xs={1}>
                               <img
                                 style={{
                                   marginLeft: "10px",
@@ -824,26 +877,56 @@ export default function Profile() {
                                 height={20}
                                 src={Plus}
                                 onClick={() => {
-                                  if (
-                                    newDutyManagerName !== "" &&
-                                    newDutyManagerEmail !== "" &&
-                                    newDutyManagerLicenseNumber !== "" &&
-                                    newDutyManagerLicenseExpiry !== ""
-                                  ) {
-                                    profile?.dutyManagers.push({
-                                      name: newDutyManagerName,
-                                      email: newDutyManagerEmail,
-                                      licenseNumber:
-                                        newDutyManagerLicenseNumber,
-                                      expiryDate: newDutyManagerLicenseExpiry,
-                                    });
-                                    setNewDutyManagerName("");
-                                    setNewDutyManagerEmail("");
-                                    setNewDutyManagerLicenseNumber("");
-                                    setNewDutyManagerLicenseExpiry("");
-                                    setAddDutyManager(false);
-                                    setProfile(profile);
+                                  if(!newDutyManagerName){
+                                    toast.error("Please enter name")
+                                    return;
+                                  } else if(!newDutyManagerEmail){
+                                    toast.error("Please enter email")
+                                    return;
+                                  } else if(!newDutyManagerLicenseNumber){
+                                    toast.error("Please enter license number")
+                                    return;
+                                  } else if(!newDutyManagerLicenseExpiry){
+                                    toast.error("Please enter license expiry")
+                                    return;
                                   }
+                                  dispatch(addDutyManagerThunk({
+                                    name: newDutyManagerName,
+                                    email: newDutyManagerEmail,
+                                    licenseNumber: newDutyManagerLicenseNumber,
+                                    expiryDate: newDutyManagerLicenseExpiry,
+                                    certId: profile?._id,
+                                  })).then((res) => {
+                                    if (res) {
+                                      toast.success("Duty Manager Added");
+                                      setNewDutyManagerName("");
+                                      setNewDutyManagerEmail("");
+                                      setNewDutyManagerLicenseNumber("");
+                                      setNewDutyManagerLicenseExpiry("");
+                                      setAddDutyManager(false);
+                                      setProfile(res);
+                                    }
+                                  })
+                                  // if (
+                                  //   newDutyManagerName !== "" &&
+                                  //   newDutyManagerEmail !== "" &&
+                                  //   newDutyManagerLicenseNumber !== "" &&
+                                  //   newDutyManagerLicenseExpiry !== ""
+                                  // ) {
+                                  //   profile?.dutyManagers.push({
+                                  //     name: newDutyManagerName,
+                                  //     email: newDutyManagerEmail,
+                                  //     licenseNumber:
+                                  //       newDutyManagerLicenseNumber,
+                                  //     expiryDate: newDutyManagerLicenseExpiry,
+                                  //   });
+                                  //   setNewDutyManagerName("");
+                                  //   setNewDutyManagerEmail("");
+                                  //   setNewDutyManagerLicenseNumber("");
+                                  //   setNewDutyManagerLicenseExpiry("");
+                                  //   setAddDutyManager(false);
+                                  //   setProfile(profile);
+                                  // }
                                 }}
                               />
                             </Col>

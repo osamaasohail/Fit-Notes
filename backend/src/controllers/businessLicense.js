@@ -78,13 +78,13 @@ module.exports = {
     }
   },
   get: async (req, res) => {
-    console.log("User id is ", req.user._id)
     BusinessLicense.find({ refUser: req.user._id, isActive: true })
       .populate({
         path: "dutyManagers",
         match: { isActive: true },
       })
       .then((docs) => {
+        console.log("Docs is ", docs[0].dutyManagers);
         res.status(201).json({ licenses: docs });
       })
       .catch((err) => {

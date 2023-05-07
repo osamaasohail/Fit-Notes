@@ -13,6 +13,7 @@ import { postSignUp } from "../service/redux/middleware/postSignUp";
 import { signin } from "../service/redux/middleware/signin";
 import { getUser } from "../service/redux/middleware/getUser";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Wrapper = styled.div`
   background: white;
@@ -54,15 +55,24 @@ export default function Blogin() {
   // const count = useSelector((state) => state.singin)
   const count = useSelector((state) => state)
   // dispatch(getUser())
-
-  // const count = useSelector((state) => state.user)
-  // console.log("i am the redux value",count)
-
-  useEffect(() => {
-    console.log("Count is :", count)
-  }, [count])
   
   const handleSignup = async () => {
+    if(!accountType) {
+      toast.error("Please select account type")
+      return;
+    } else if(!businessName) {
+      toast.error("Please enter business name")
+      return;
+    } else if(!businessEmail) {
+      toast.error("Please enter business email")
+      return;
+    } else if(!password) {
+      toast.error("Please enter password")
+      return;
+    } else if(!terms) {
+      toast.error("Please accept terms and conditions")
+      return;
+    }
     const data = {
       accountType: accountType,
       name: businessName,
@@ -71,11 +81,19 @@ export default function Blogin() {
     };
     dispatch(postSignUp(data)).then((res) => {
       if(res.payload.status === 201){
-        setSignUp(false)
+        setSignUp(false);
+        return toast.success("Account created successfully")
       }
     });
   };
   const handleLogin = () => {
+    if(!loginEmail) {
+      toast.error("Please enter email");
+      return;
+    } else if(!loginPassword) {
+      toast.error("Please enter password")
+      return;
+    }
     const data = {
       email: loginEmail,
       password: loginPassword,
