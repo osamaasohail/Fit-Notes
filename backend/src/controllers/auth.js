@@ -147,7 +147,7 @@ module.exports = {
         
             // Save the user document
             await user.save();
-            const link = `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}`;
+            const link = `${process.env.FRONTEND_URL}/profile/reset-password?token=${resetToken}`;
             console.log("Link is " + link);
             const transporter = nodemailer.createTransport({
                 service: "gmail",
