@@ -22,7 +22,14 @@ cron.schedule('0 */12 * * *', async () => { // for business licenses
                 break;
             }
         }
-        if (sendNotification) {
+        // const notifications = {
+        //     name: 'License Expiry Notification',
+        //     createdBy: 'System',
+        //     refUser: license.refUser._id,
+        //     businessLicense: license._id
+        // };
+        let notification = await notificationsSchema.find({refUser: license.refUser._id, businessLicense: license._id});
+        if (sendNotification && notification.length === 0) {
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
@@ -46,13 +53,13 @@ cron.schedule('0 */12 * * *', async () => { // for business licenses
                     cid: 'unique@logo.png'
                 }]
             };
-            // transporter.sendMail(mailOptions, (error, info) => {
-            //     if (error) {
-            //         console.log(error);
-            //     } else {
-            //         console.log("Email sent: " + info.response);
-            //     }
-            // });
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Email sent: " + info.response);
+                }
+            });
             const notifications = {
                 name: 'License Expiry Notification',
                 createdBy: 'System',
@@ -80,7 +87,8 @@ cron.schedule('0 */12 * * *', async () => { // for individual licenses
                 break;
             }
         }
-        if (sendNotification) {
+        let notification = await notificationsSchema.find({refUser: license.refUser._id, individualLicense: license._id});
+        if (sendNotification && notification.length === 0) {
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
