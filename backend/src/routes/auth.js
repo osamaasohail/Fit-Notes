@@ -15,4 +15,6 @@ module.exports = (app) => {
         .post(authController.sendPasswordRequest)
     app.route('/reset-password')
         .get(authController.resetPassword)
+    app.route('/change-password')
+        .post(authController.changePassword)
 }
