@@ -193,11 +193,30 @@ module.exports = {
             return res.status(400).send('Invalid or expired reset token');
             }
             // Render a form to enter a new password
-            res.render('reset-password', { token });
+            // res.render('reset-password', { token });
+            res.json({token: token, email: user.email});
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal server error');
         }
+    },
+    changePassword: async (req, res) => {
+        try {
+            const {email, oldPassword, newPassword} = req.body;
+            const user = await User.findOne({ email });
+            const isMatch = await comparePassword(oldPassword, user.password);
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Invalid Password' });
+            }
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+            user.password = hashedPassword;
+            user.save();
+        } catch(err) {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+
     }
 }
 const comparePassword = async (password, hash) => {
