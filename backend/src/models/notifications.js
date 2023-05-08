@@ -12,6 +12,7 @@ const notificationsSchema = new Schema({
     },
     refUser: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'},
     businessLicense: { type: mongoose.Schema.Types.ObjectId, ref: 'businessLicense'},
-    individualLicense: { type: mongoose.Schema.Types.ObjectId, ref: 'individualLicense'}
+    individualLicense: { type: mongoose.Schema.Types.ObjectId, ref: 'individualLicense'},
+    sendNotiDay: { type: Number, required: true }
 }, { timestamps: true });
 module.exports = mongoose.model('Notifications', notificationsSchema);
