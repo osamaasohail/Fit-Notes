@@ -20,7 +20,9 @@ module.exports = {
     },
     add: async(req, res) => {
         try {
+            const objectId = new mongoose.Types.ObjectId();
             let dutyManager = {
+                _id: objectId,
                 name: req.body.name,
                 email: req.body.email,
                 licenseNumber: req.body.licenseNumber,
@@ -28,9 +30,12 @@ module.exports = {
                 isActive: true,
                 certId: req.params.certId
             };
+            let businessLicenses = await BusinessLicense.findOne({_id: req.params.certId});
+            businessLicenses.dutyManagers.push(objectId);
+            await businessLicenses.save();
             const doc = new DutyManagers(dutyManager);
             await doc.save();
-            res.status(201).json({message: 'Duty Manager Added'});
+            res.status(201).json({message: 'Duty Manager Added', objectId: objectId});
         } catch (err) {
             res.status(500).json({ error: err, message: "Internal server error" });
         }

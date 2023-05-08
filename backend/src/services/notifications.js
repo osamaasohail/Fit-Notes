@@ -34,8 +34,8 @@ cron.schedule('0 */12 * * *', async () => { // for business licenses
                 service: "gmail",
                 auth: {
                     user: process.env.EMAIL,
-                    pass: process.env.PASSWORD,
-                },
+                    pass: process.env.PASSWORD
+                }
             });
             const source = fs.readFileSync('src/templates/email-template-license.html', 'utf8');
             const template = handlebars.compile(source);
