@@ -216,7 +216,6 @@ module.exports = {
             console.error(err);
             res.status(500).json({ error: 'Internal server error' });
         }
-
     }
 }
 const comparePassword = async (password, hash) => {
