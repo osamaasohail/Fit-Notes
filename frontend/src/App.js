@@ -17,6 +17,7 @@ import ResetEmail from "./pages/profile/ResetEmail";
 import ConfrimPassword from "./pages/profile/ConfirmPassword";
 import Payment from "./pages/Payment";
 import IndividualPayment from "./pages/IndividualPayment";
+import SingIn from "./pages/SingIn";
 
 function App() {
   const [pathName, setPathName] = useState();
@@ -48,6 +49,8 @@ function App() {
           <Route path="/profile/reset-password" element={<ConfrimPassword/>} />
           <Route path="/payment" element={<Payment/>} />  
           <Route path="/individual-payment" element={<IndividualPayment/>} />  
+          <Route path="/sign-in" element={<SingIn/>} />
+
 
 
 

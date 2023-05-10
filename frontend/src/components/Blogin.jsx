@@ -82,6 +82,7 @@ export default function Blogin() {
     dispatch(postSignUp(data)).then((res) => {
       if(res.payload.status === 201){
         setSignUp(false);
+        navigate("/sign-in")
         return toast.success("Account created successfully")
       }
     });
@@ -116,7 +117,7 @@ export default function Blogin() {
   return (
     <>
       <Wrapper>
-        {signup ? (
+      
           <TextContainer>
             <Scrool>
               <div>
@@ -232,7 +233,7 @@ export default function Blogin() {
                 >
                   Alreay have Account?{" "}
                   <span
-                    onClick={() => setSignUp(false)}
+                    onClick={() =>  navigate("/sign-in")}
                     style={{ fontWeight: "bold", cursor: "pointer" }}
                   >
                     Login
@@ -242,90 +243,7 @@ export default function Blogin() {
               </div>
             </Scrool>
           </TextContainer>
-        ) : (
-          <TextContainer>
-            <div>
-              <H1 color="#161616" weight="500" fontSize="40px">
-                Login
-              </H1>
-              <Spacer height="21px" />
-              <P color="#161616" fontSize="14px">
-                Email<span style={{ color: "red" }}>*</span>
-              </P>
-              <Input
-                onChange={(e) => {
-                  setLoginEmail(e.target.value);
-                }}
-                type="email"
-              />
-              <Spacer height="21px" />
-
-              <P color="#161616" fontSize="14px">
-                Password<span style={{ color: "red" }}>*</span>
-              </P>
-              <Input
-                onChange={(e) => {
-                  setLoginPassword(e.target.value);
-                }}
-                type="password"
-              />
-              <Spacer height="21px" />
-
-              <Row className="align-items-center">
-                <Col style={{ paddingRight: "0px" }} sm={1} xs={1}>
-                  <Input
-                    onChange={() => {
-                      setLoginTerms(!loginTerms);
-                    }}
-                    type="checkbox"
-                  />
-                </Col>
-                <Col style={{ paddingLeft: "0px" }}>
-                  <P
-                    className={isResponsive ? "px-1" : ""}
-                    lHeight={isResponsive ? "16px" : "19px"}
-                    color="#161616"
-                    fontSize="14px"
-                    weight="400"
-                  >
-                    By creating an account you are agreeing to{" "}
-                    {isResponsive ? "" : <br />} our Terms and Conditions and
-                    Privacy Policy
-                  </P>
-                </Col>
-              </Row>
-              <Spacer height="21px" />
-
-              <Button
-                onClick={() => {
-                  // navigate("/");
-                  handleLogin();
-                }}
-                background="black"
-                style={{ color: "white", width: "100%" }}
-              >
-                LOGIN
-              </Button>
-              <Spacer height="21px" />
-              <P
-                style={{ textAlign: "center" }}
-                color="#161616"
-                fontSize="14px"
-                weight="400"
-              >
-                Donot have Account?{" "}
-                <span
-                  onClick={() => {
-                    setSignUp(true);
-                  }}
-                  style={{ fontWeight: "bold", cursor: "pointer" }}
-                >
-                  Signup
-                </span>
-              </P>
-            </div>
-          </TextContainer>
-        )}
+        
       </Wrapper>
     </>
   );

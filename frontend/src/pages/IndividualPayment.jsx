@@ -86,14 +86,13 @@ export default function IndividualPayment() {
     dispatch(individualLicense(userData)).then((res) => {
       window.location.href = res.payload.data.url;
     });
-    
   };
 
   return (
     <>
       <Wrapper>
         <Row style={{ height: "100%", margin: "0px" }}>
-          <Row className="mt-3">
+          <Row className="mt-3 mb-3">
             <Col md={6}>
               <Logo
                 onClick={() => {
@@ -268,7 +267,8 @@ export default function IndividualPayment() {
               <Spacer height="24px" />
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
-                  Add Duty Manager License Number<span style={{ color: "red" }}>*</span>
+                  Add Duty Manager License Number
+                  <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
                       value={dutyManagerLicenseNumber}
@@ -383,6 +383,25 @@ export default function IndividualPayment() {
                 <ReCAPTCHA
                   sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
                 /> */}
+                <Spacer height="30px"/>
+                <Row className="align-items-center">
+                  <Col style={{ paddingRight: "0px",paddingLeft:"0px" }} sm={1} xs={1}>
+                    <Input onChange={() => {}} type="checkbox" />
+                  </Col>
+                  <Col style={{ paddingLeft: "0px" }}>
+                    <P
+                      className={isResponsive ? "px-1" : ""}
+                      lHeight={isResponsive ? "16px" : "19px"}
+                      color="#161616"
+                      fontSize="14px"
+                      weight="400"
+                    >
+                      By creating an account you are agreeing to{" "}
+                      {isResponsive ? "" : <br />} our Terms and Conditions and
+                      Privacy Policy
+                    </P>
+                  </Col>
+                </Row>
                 <Spacer />
                 <Button
                   background="black"
