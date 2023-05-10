@@ -67,7 +67,7 @@ const A = styled.a`
   margin-bottom: 0px;
   margin-left: 7px;
   :hover {
-    color: #caca0f;
+    color: rgba(177, 149, 56, 1);
   }
 `;
 const Logout = styled.div`
@@ -117,7 +117,7 @@ export default function SideNavbar() {
                   <A
                     color={
                       window.location.pathname === "/profile/edit-profil"
-                        ? "#CACA0F"
+                        ? "rgba(177, 149, 56, 1)"
                         : "white"
                     }
                     onClick={() => {
@@ -142,7 +142,7 @@ export default function SideNavbar() {
                   <A
                     color={
                       window.location.pathname === "/profile/edit-profile"
-                        ? "#CACA0F"
+                        ? "rgba(177, 149, 56, 1)"
                         : "white"
                     }
                     onClick={() => {
@@ -167,7 +167,7 @@ export default function SideNavbar() {
                   <A
                     color={
                       window.location.pathname === "/profile/subscribtion"
-                        ? "#CACA0F"
+                        ? "rgba(177, 149, 56, 1)"
                         : "white"
                     }
                     onClick={() => {
@@ -192,7 +192,7 @@ export default function SideNavbar() {
                   <A
                     color={
                       window.location.pathname === "/profile/notification"
-                        ? "#CACA0F"
+                        ? "rgba(177, 149, 56, 1)"
                         : "white"
                     }
                     onClick={() => {
@@ -217,7 +217,7 @@ export default function SideNavbar() {
                   <A
                     color={
                       window.location.pathname === "/profile/reset"
-                        ? "#CACA0F"
+                        ? "rgba(177, 149, 56, 1)"
                         : "white"
                     }
                     onClick={() => {

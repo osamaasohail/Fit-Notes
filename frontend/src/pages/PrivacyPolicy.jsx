@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
         <Navbar />
         <Margin>
           <PrivacyContent>
-            <H1 fontSize="36px" color="#CACA0F">
+            <H1 fontSize="36px" color="rgba(177, 149, 56, 1)">
               Privacy Policy
             </H1>
             <Spacer height={isResponsive ? "10px" : "48px"} />
@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
                       : {
                           color: "white",
                           marginTop: "12px",
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -55,7 +55,7 @@ export default function PrivacyPolicy() {
                       : {
                           color: "white",
 
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -72,7 +72,7 @@ export default function PrivacyPolicy() {
                       : {
                           color: "white",
 
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -89,7 +89,7 @@ export default function PrivacyPolicy() {
                       : {
                           color: "white",
 
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -115,7 +115,7 @@ You have the right to ask for a copy of any personal information we hold about y
                       : {
                           color: "white",
 
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -137,7 +137,7 @@ You have the right to ask for a copy of any personal information we hold about y
                       : {
                           color: "white",
                           marginTop: "12px",
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -155,7 +155,7 @@ You have the right to ask for a copy of any personal information we hold about y
                       : {
                           color: "white",
                           marginTop: "12px",
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
@@ -180,14 +180,14 @@ You have the right to ask for a copy of any personal information we hold about y
                       : {
                           color: "white",
                           marginTop: "12px",
-                          fontSize: "20px",
+                          fontSize: "24px",
                         }
                   }
                 >
                   If you choose not to enter we'll{" "}
                 </li>
               </ul>
-              <P fontSize="20px" weight="400" lHeight="30px">
+              <P fontSize="24px" weight="400" lHeight="30px">
                 We keep your information safe by storing it in encrypted files
                 and only allowing certain staff <br /> to access it . <br /> We
                 keep your information for a maximum of two years upon service
@@ -198,15 +198,15 @@ You have the right to ask for a copy of any personal information we hold about y
                 we hold about you, and to <br /> ask for it to be corrected if
                 you think it is wrong. If you’d like to ask for a copy of your{" "}
                 <br />
-                information, or to have it corrected, please contact us at
-                info@hospitalityguardian.co.nz.
+                information, or to have it corrected, please contact us at <span style={{color:"rgba(177, 149, 56, 1)",textDecoration:"underline",cursor:"pointer"}}> info@hospitalityguardian.co.nz.</span>
+               
               </P>
             </div>
           </PrivacyContent>
         </Margin>
         <Spacer height="200px" />
 
-        <Footer background={"#CACA0F"} color={"black"} />
+        <Footer background={"rgba(177, 149, 56, 1)"} color={"#161616"} />
       </Wrapper>
     </>
   );

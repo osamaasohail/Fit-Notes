@@ -67,7 +67,7 @@ export default function Card() {
               alignItems="space-between"
               style={{ flexDirection: "column", height: "100%" }}
             >
-              <H1 color="#CACA0F" fontSize="32px" weight="700">
+              <H1 color="rgba(177, 149, 56, 1)" fontSize="32px" weight="700">
                 Getting Started
               </H1>
               <P
@@ -103,7 +103,7 @@ export default function Card() {
               alignItems="space-between"
               style={{ flexDirection: "column", height: "100%" }}
             >
-              <H1 color="#CACA0F" fontSize="32px" weight="700">
+              <H1 color="rgba(177, 149, 56, 1)" fontSize="32px" weight="700">
                 Getting Started
               </H1>
               <P
@@ -137,7 +137,7 @@ export default function Card() {
               alignItems="space-between"
               style={{ flexDirection: "column", height: "100%" }}
             >
-              <H1 color="#CACA0F" fontSize="32px" weight="700">
+              <H1 color="rgba(177, 149, 56, 1)" fontSize="32px" weight="700">
                 Getting Started
               </H1>
               <P

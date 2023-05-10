@@ -14,7 +14,7 @@ import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
 
 const Wrapper = styled.div`
-  background: #caca0f;
+  background: rgba(177, 149, 56, 1);
   padding: 46px 0 46px 0;
   text-align: center;
 `;
@@ -60,28 +60,37 @@ function PricingCard() {
                   <H1
                     style={{ marginTop: "10px", marginBottom: "10px" }}
                     fontSize="32px"
-                    color="#CACA0F"
+                    color="rgba(177, 149, 56, 1)"
                     weight="700"
                   >
                     {" "}
                     Single Certificates
                   </H1>
+                  <H1
+                    style={{ marginTop: "20px", marginBottom: "20px" }}
+                    fontSize="24px"
+                    color="rgba(177, 149, 56, 1)"
+                    weight="400"
+                  >
+                    {" "}
+                    5NZD/Year
+                  </H1>
                 </Card.Title>
                 <Card.Text>
                   <P
                     style={{
-                      marginBottom: "30px",
+                      marginBottom: "100px",
                     }}
                     lHeight="30px"
                     weight="400"
                     fontSize="20px"
                   >
                     {" "}
-                    Liquor Licenses are free to add, but the <br /> 
-                    price for registering duty managers is $5.00 <br /> 
-                    plus GST and applicable fees (if any). This price is annually.
-                    {/* Registering the only Duty Manager at <br /> your business?
-                    Don't worry this one is <br /> free */}
+                    Get peace of mind with our <br /> certification expiry date
+                    registration <br /> service for just $5.00 NZD per <br />{" "}
+                    certificate. Whether you’re an <br /> individual or a
+                    business of any size, <br />
+                    we’ve got you covered!
                   </P>
                 </Card.Text>
                 <Button style={{ fontWeight: "600" }}>Apply Here</Button>
@@ -121,11 +130,20 @@ function PricingCard() {
                   <H1
                     style={{ marginTop: "10px", marginBottom: "10px" }}
                     fontSize="32px"
-                    color="#CACA0F"
+                    color="rgba(177, 149, 56, 1)"
                     weight="700"
                   >
                     {" "}
                     2 to 4 Certificates
+                  </H1>
+                  <H1
+                    style={{ marginTop: "20px", marginBottom: "30px" }}
+                    fontSize="24px"
+                    color="rgba(177, 149, 56, 1)"
+                    weight="400"
+                  >
+                    {" "}
+                    20NZD/Year
                   </H1>
                 </Card.Title>
                 <Card.Text>
@@ -138,8 +156,12 @@ function PricingCard() {
                     fontSize="20px"
                   >
                     {" "}
-                    This is most popular choice for most <br /> small and medium
-                    sized hospitality <br /> businesses, just $7.00 per month.
+                    Don’t let your certifications expiry <br /> dates surprise
+                    you - register with us <br /> today for just $5.00 NZD per{" "}
+                    <br /> certificate. Our registration service is <br />{" "}
+                    perfect for small to medium-sized <br /> liquor businesses
+                    or larger <br /> enterprises with multiple certificates{" "}
+                    <br /> to manage.
                   </P>
                 </Card.Text>
                 <Button style={{ fontWeight: "600" }}>Apply Here</Button>
@@ -179,11 +201,20 @@ function PricingCard() {
                   <H1
                     style={{ marginTop: "10px", marginBottom: "10px" }}
                     fontSize="32px"
-                    color="#CACA0F"
+                    color="rgba(177, 149, 56, 1)"
                     weight="700"
                   >
                     {" "}
                     5+ Certificates
+                  </H1>
+                  <H1
+                    style={{ marginTop: "20px", marginBottom: "30px" }}
+                    fontSize="24px"
+                    color="rgba(177, 149, 56, 1)"
+                    weight="400"
+                  >
+                    {" "}
+                    +20NZD/Year
                   </H1>
                 </Card.Title>
                 <Card.Text>
@@ -196,8 +227,11 @@ function PricingCard() {
                     fontSize="20px"
                   >
                     {" "}
-                    Our large staff certificate <br /> management service, at
-                    $10.00 <br /> monthly.
+                    Stay on top of your certification <br /> game with our affordable <br />
+                    registration service, starting at just <br /> $5.00 NZD per
+                    certificate. Whether <br /> you have one or multiple certificates <br />
+                    and licenses, we make it easy to <br /> manage your expiry dates
+                    and <br /> maintain compliance.
                   </P>
                 </Card.Text>
                 <Button style={{ fontWeight: "600" }}>Apply Here</Button>

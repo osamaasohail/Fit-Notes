@@ -14,6 +14,7 @@ const Accordion = styled.div`
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  align-items: center;
 `;
 const Hr = styled.hr`
   border: 0.5px solid #ffffff;
@@ -45,9 +46,9 @@ const data = [
   {
     id: 5,
     head: "What are the differences between the plans?",
-    para: `liquor licenses are free to add but the cost is calculated on how many mangers the business will add. Our single certificate category is for solo licensees or certifications business owners and is a free service.
-    Our 2 to 4 certificates option is for most small to medium hospitality businesses with management of multiple duty managers certificates. This service is $7.00 NZD monthly plus GST and applicable fees.
-    Our 5+ certificate option is designed for medium to large hospitality businesses, accounting for multiple duty managers for each day. This service is $10.00 monthly plus GST and applicable fees.`,
+    para: `liquor licenses are free to add but the  cost is calculated on how many mangers the business will add. Our single \n certificate category is for solo licensees or certifications business owners and is a free service. \n
+    Our 2 to 4 certificates option is for most small to medium hospitality businesses with management of multiple duty \n managers certificates. This service is $7.00 NZD monthly plus GST and applicable fees. \n
+    Our 5+ certificate option is designed for medium to large hospitality businesses, accounting for multiple duty \n managers for each day. This service is $10.00 monthly plus GST and applicable fees.`,
   },
   {
     id: 6,
@@ -64,13 +65,13 @@ function Accordian() {
   });
   return (
     <Wrapper>
-      <H1 style={{ textAlign: "center" }} fontSize="30px" color="#CACA0F">
+      <H1 style={{ textAlign: "center",fontWeight:"700" }} fontSize="30px" color="rgba(177, 149, 56, 1)">
         Frequently Asked Questions
       </H1>
       <Spacer height="39px" />
       <P fontSize="20px" style={isResponsive?{ textAlign: "center",padding:"0 15px" }:{textAlign: "center",padding:"0"}}>
         Please reach us at{" "}
-        <span style={{ color: "#CACA0F" }}>info@hospitalityguardian.co </span>{" "}
+        <span style={{ color: "rgba(177, 149, 56, 1)" }}>info@hospitalityguardian.co </span>{" "}
         .nz if you cannot find an answer to your question.
       </P>
       <Spacer height="81px" />
@@ -84,14 +85,14 @@ function Accordian() {
                   setAccordianId(item.id);
                 }}
               >
-                <H1 fontSize="20px">{item.head}</H1>
+                <H1 style={{fontWeight:"600"}} fontSize="20px">{item.head}</H1>
                 <img src={DropArrow} />
               </Accordion>
               <Spacer height="12px" />
               {accordianOpen && accordianId === item.id ? (
                 <AccordionBody>
-                  <P style={{ opacity: "0.6" }} fontSize="16px" weight="400">
-                    {item.para}
+                  <P dangerouslySetInnerHTML={{ __html: item.para.replace(/\n/g, "<br>") }} style={{ opacity: "0.6" }} fontSize="16px" weight="400">
+                    
                   </P>
                 </AccordionBody>
               ) : (

@@ -33,7 +33,7 @@ export default function HowWorks() {
               <H1
                 style={isResponsive ? { marginTop: "30px" } : { marginTop: "" }}
                 fontSize="36px"
-                color="#CACA0F"
+                color="rgba(177, 149, 56, 1)"
                 weight="700"
               >
                 How it works?
@@ -80,7 +80,7 @@ export default function HowWorks() {
               <H1
                 style={isResponsive ? { marginTop: "30px" } : { marginTop: "" }}
                 fontSize="36px"
-                color="#CACA0F"
+                color="rgba(177, 149, 56, 1)"
                 weight="700"
               >
                 What happens after I renew?
@@ -114,7 +114,7 @@ export default function HowWorks() {
               <H1
                 style={isResponsive ? { marginTop: "30px" } : { marginTop: "" }}
                 fontSize="36px"
-                color="#CACA0F"
+                color="rgba(177, 149, 56, 1)"
                 weight="700"
               >
                 What happens now?
@@ -153,7 +153,7 @@ export default function HowWorks() {
               <H1
                 style={isResponsive ? { marginTop: "30px" } : { marginTop: "" }}
                 fontSize="36px"
-                color="#CACA0F"
+                color="rgba(177, 149, 56, 1)"
                 weight="700"
               >
                 What if i decide this service isn't for my business?
@@ -176,7 +176,7 @@ export default function HowWorks() {
 
         <Spacer height={isResponsive ? "60px" : "200px"} />
 
-        <Footer background={"#CACA0F"} color={"black"} />
+        <Footer background={"rgba(177, 149, 56, 1)"} color={"black"} />
       </Wrapper>
     </>
   );

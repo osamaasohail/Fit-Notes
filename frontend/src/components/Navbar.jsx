@@ -92,7 +92,7 @@ export default function Navbar() {
                    onClick={()=>{navigate("/")}}
                     style={window.location.pathname==="/"?{
                       
-                      color: "#caca0f",
+                      color: "rgba(177, 149, 56, 1)",
                       marginRight: "29px",
                       fontSize: "16px",
                       textDecoration:"none",
@@ -112,7 +112,7 @@ export default function Navbar() {
                   <a 
                   onClick={()=>{navigate("/pricing")}}
                     style={window.location.pathname==="/pricing"?{
-                      color: "#caca0f",
+                      color: "rgba(177, 149, 56, 1)",
                       marginRight: "29px",
                       fontSize: "16px",
                       textDecoration:"none"
@@ -132,7 +132,7 @@ export default function Navbar() {
                   <a
                     onClick={()=>{navigate("/sign-up")}}
                     style={window.location.pathname==="/sign-up"?{
-                      color: "#caca0f",
+                      color: "rgba(177, 149, 56, 1)",
                       marginRight: "29px",
                       fontSize: "16px",
                       textDecoration:"none"
@@ -152,7 +152,7 @@ export default function Navbar() {
                   <a 
                    onClick={()=>{navigate("/privacy-policy")}}
                     style={window.location.pathname==="/privacy-policy"?{
-                      color: "#caca0f",
+                      color: "rgba(177, 149, 56, 1)",
                       marginRight: "29px",
                       fontSize: "16px",
                       textDecoration:"none"
@@ -173,7 +173,7 @@ export default function Navbar() {
                   
                   
                     style={ window.location.pathname==="/about-us"?{
-                      color: "#caca0f",
+                      color: "rgba(177, 149, 56, 1)",
                       marginRight: "29px",
                       fontSize: "16px",
                       textDecoration:"none"
@@ -200,7 +200,7 @@ export default function Navbar() {
                   
                   
                     style={ window.location.pathname==="/edit-profile"?{
-                      color: "#caca0f",
+                      color: "rgba(177, 149, 56, 1)",
                       marginRight: "29px",
                       fontSize: "16px",
                       textDecoration:"none"

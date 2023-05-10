@@ -5,7 +5,6 @@ import Blogin from "../components/Blogin";
 import { Wrapper } from "../components/Style";
 import { H1 } from "../components/Typography";
 import { Spacer } from "../components/Spacer";
-import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
@@ -25,11 +24,10 @@ const Logo = styled(H1)`
   font-weight: 700;
   cursor: pointer;
   :hover {
-    color: #caca0f;
+    color: rgba(177, 149, 56, 1);
   }
 `;
 export default function BussinessLogin() {
-  const navigate = useNavigate();
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -39,7 +37,7 @@ export default function BussinessLogin() {
     <ToastContainer />
       <Wrapper>
         <WrapperIn>
-          <Row>
+          {/* <Row>
             <Col md={6}>
               <Logo
                 onClick={() => {
@@ -58,7 +56,7 @@ export default function BussinessLogin() {
                 </H1>
               </Col>
             )}
-          </Row>
+          </Row> */}
           <Spacer height="18px" />
           <Row>
             <Col style={{ padding: "0px" }} md={6}>

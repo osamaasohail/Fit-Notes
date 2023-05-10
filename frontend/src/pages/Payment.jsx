@@ -26,7 +26,7 @@ const Logo = styled(H1)`
   //   padding-top:10px;
   cursor: pointer;
   :hover {
-    color: #caca0f;
+    color: rgba(177, 149, 56, 1);
   }
   @media (max-width: 768px) {
     padding-left: 5px;
