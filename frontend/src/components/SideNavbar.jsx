@@ -11,12 +11,11 @@ import ActiveEdit from "../images/activeedit.svg";
 import ActveSub from "../images/activesub.svg";
 import ActiveNoti from "../images/activenot.svg";
 import ActivePass from "../images/activepass.svg";
-import Home from "../images/home.png"
+import Home from "../images/home.png";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
 import { useState } from "react";
-
 
 const Wrapper = styled.div`
   //   width: 242px;
@@ -24,12 +23,11 @@ const Wrapper = styled.div`
   height: 100vh;
   @media (max-width: 768px) {
     height: 100%;
-    
   }
 `;
 const UL = styled.div`
-  @media(max-width:768px){
-    display: ${(props)=>props.display?props.display:"none"};
+  @media (max-width: 768px) {
+    display: ${(props) => (props.display ? props.display : "none")};
   }
 `;
 const LI = styled.div`
@@ -42,24 +40,22 @@ const NavContainer = styled.div`
   justify-content: space-between;
 
   padding: 45px 0px;
-  @media(max-width:768px){
-  flex-direction: row;
- padding:10px 20px
-
-
+  @media (max-width: 768px) {
+    flex-direction: row;
+    padding: 10px 20px;
   }
 `;
 const ProfileWrape = styled.div`
   text-align: center;
-  @media(max-width:768px){
-    text-align:left;
+  @media (max-width: 768px) {
+    text-align: left;
   }
 `;
 const A = styled.a`
   cursor: pointer;
   text-decoration: none;
   font-size: 16px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 
   font-style: normal;
   font-weight: 400;
@@ -75,7 +71,7 @@ const Logout = styled.div`
 `;
 export default function SideNavbar() {
   const navigate = useNavigate();
-  const [active,setActive]=useState(false)
+  const [active, setActive] = useState(false);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -85,24 +81,22 @@ export default function SideNavbar() {
       <Wrapper>
         <NavContainer>
           <div>
-            <ProfileWrape onClick={()=>{setActive(!active)}}>
+            <ProfileWrape
+              onClick={() => {
+                setActive(!active);
+              }}
+            >
               <img
                 width={isResponsive && "26px"}
                 alt="profile"
                 src={ProfilePic}
               />
             </ProfileWrape>
-            {
-              !isResponsive &&
-            <Spacer height="48px" />
-            }
-            {
-              (isResponsive && active===true )&&
-              <Spacer/>
-            }
+            {!isResponsive && <Spacer height="48px" />}
+            {isResponsive && active === true && <Spacer />}
             <div className="d-flex justify-content-center">
-              <UL display={active?"block":"none"}>
-              <LI>
+              <UL display={active ? "block" : "none"}>
+                <LI>
                   <img
                     width={"18px"}
                     height={"18px"}
@@ -230,17 +224,19 @@ export default function SideNavbar() {
               </UL>
             </div>
           </div>
-          
-       
-            <Logout>
-              <img alt="logout" src={LogoutPic} />
 
-              <A>Logout</A>
-            </Logout>
-        
+          <Logout
+            onClick={() => {
+              localStorage.clear();
+              navigate("/");
+            }}
+          >
+            <img alt="logout" src={LogoutPic} />
+
+            <A>Logout</A>
+          </Logout>
         </NavContainer>
       </Wrapper>
-     
     </>
   );
 }

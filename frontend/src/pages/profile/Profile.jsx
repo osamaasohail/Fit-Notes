@@ -22,9 +22,9 @@ import {
 import { useState } from "react";
 import Moment from "react-moment";
 import { Input } from "../../components/Input";
-import { editBasicInfoThunk } from "../../service/redux/middleware/profile";
+import { editBasicInfoThunk, updateDutyManagerInfo } from "../../service/redux/middleware/profile";
 import { ToastContainer, toast } from "react-toastify";
-import { addDutyManagerThunk } from "../../service/redux/middleware/dutyManager";
+import { addDutyManagerThunk, updateSingleManager } from "../../service/redux/middleware/dutyManager";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -90,13 +90,46 @@ export default function Profile() {
             var temp = [];
             res?.payload?.data?.licenses[0]?.dutyManagers?.map((item) => {
               temp.push(false);
-            })
+            });
             setEditableManager(temp);
           }
         });
       }
     }
   }, [userData]);
+
+  const callLicenseAPI = async () => {
+    if (userData?.accountType === 1) {
+      dispatch(getIndividualLicense()).then((res) => {
+        setBusinessName(res?.payload?.data?.licenses[0]?.name);
+        setProfile(res.payload.data.licenses[0]);
+      });
+    } else {
+      dispatch(getBusinessLicense()).then((res) => {
+        console.log("Res for business profile :", res);
+        if (res.payload.data.licenses.length > 0) {
+          setProfile(res.payload.data.licenses[0]);
+          setBusinessName(res?.payload?.data?.licenses[0]?.businessName);
+          setLiquorLicenseNumber(
+            res?.payload?.data?.licenses[0]?.licenseNumber
+          );
+          setLiquorLicenseExpiry(res?.payload?.data?.licenses[0]?.expiryDate);
+          setGamingLicenseNumber(
+            res?.payload?.data?.licenses[0]?.gamingLicense
+          );
+          setGamingLicenseExpiry(
+            res?.payload?.data?.licenses[0]?.gamingLicenseExpiry
+          );
+          var temp = [];
+          res?.payload?.data?.licenses[0]?.dutyManagers?.map((item) => {
+            temp.push(false);
+          });
+          setEditableManager(temp);
+        }
+      });
+    }
+  };
+
   return (
     <>
       <ToastContainer />
@@ -677,6 +710,7 @@ export default function Profile() {
                         </Row>
                       </div>
                       {profile?.dutyManagers?.map((manager, index) => {
+                        console.log("Duty manager ", manager._id)
                         return (
                           <Row
                             style={
@@ -700,11 +734,10 @@ export default function Profile() {
                                 }
                                 disabled={editableManager[index] ? false : true}
                                 placeholder={manager?.name}
+                                onChange={(e) => {
+                                  manager.name = e.target.value;
+                                }}
                               />
-                              {/* <P color="black" weight="400">
-                            {manager?.name}
-                            asad
-                          </P> */}
                             </Col>
                             <Col md={3} sm={3} xs={3}>
                               <Input
@@ -715,6 +748,9 @@ export default function Profile() {
                                 }
                                 disabled={editableManager[index] ? false : true}
                                 placeholder={manager?.email}
+                                onChange={(e) => {
+                                  manager.email = e.target.value;
+                                }}
                               />
                             </Col>
                             <Col md={3} sm={3} xs={3}>
@@ -726,6 +762,9 @@ export default function Profile() {
                                 }
                                 disabled={editableManager[index] ? false : true}
                                 placeholder={manager?.licenseNumber}
+                                onChange={(e) => {
+                                  manager.licenseNumber = e.target.value;
+                                }}
                               />
                             </Col>
                             <Col
@@ -742,9 +781,14 @@ export default function Profile() {
                                       ? { background: "none", color: "black" }
                                       : { background: "none", color: "black" }
                                   }
-                                  disabled={editableManager[index] ? false : true}
+                                  disabled={
+                                    editableManager[index] ? false : true
+                                  }
                                   type="date"
                                   placeholder={manager?.expiryDate}
+                                  onChange={(e) => {
+                                    manager.expiryDate = e.target.value;
+                                  }}
                                 />
                               ) : (
                                 <Moment format="DD/MM/YYYY">
@@ -753,15 +797,40 @@ export default function Profile() {
                               )}
                             </Col>
                             <Col md={1} sm={1} xs={1}>
-                              <img
-                                src={Edit}
-                                alt="edit"
-                                onClick={() => {
-                                  var temp = [...editableManager];
-                                  temp[index] = !editableManager[index];
-                                  setEditableManager(temp);
-                                }}
-                              />
+                              {!editableManager[index] ? (
+                                <img
+                                  src={Edit}
+                                  alt="edit"
+                                  onClick={() => {
+                                    var temp = [...editableManager];
+                                    temp[index] = !editableManager[index];
+                                    setEditableManager(temp);
+                                  }}
+                                />
+                              ) : (
+                                <img
+                                  src={Tick}
+                                  alt="edit"
+                                  onClick={() => {
+                                    dispatch(
+                                      updateSingleManager({
+                                        name: manager?.name,
+                                        email: manager?.email,
+                                        licenseNumber:
+                                        manager?.licenseNumber,
+                                        expiryDate: manager?.expiryDate,
+                                        certId: profile?._id,
+                                        dutyManagerId: manager?._id,
+                                      })
+                                    ).then((res) => {
+                                      if (res) {
+                                        callLicenseAPI();
+                                      }
+                                    });
+                                  }}
+                                />
+                              )}
+
                               <img
                                 alt="delete"
                                 style={{ marginLeft: "10px" }}
@@ -877,26 +946,29 @@ export default function Profile() {
                                 height={20}
                                 src={Plus}
                                 onClick={() => {
-                                  if(!newDutyManagerName){
-                                    toast.error("Please enter name")
+                                  if (!newDutyManagerName) {
+                                    toast.error("Please enter name");
                                     return;
-                                  } else if(!newDutyManagerEmail){
-                                    toast.error("Please enter email")
+                                  } else if (!newDutyManagerEmail) {
+                                    toast.error("Please enter email");
                                     return;
-                                  } else if(!newDutyManagerLicenseNumber){
-                                    toast.error("Please enter license number")
+                                  } else if (!newDutyManagerLicenseNumber) {
+                                    toast.error("Please enter license number");
                                     return;
-                                  } else if(!newDutyManagerLicenseExpiry){
-                                    toast.error("Please enter license expiry")
+                                  } else if (!newDutyManagerLicenseExpiry) {
+                                    toast.error("Please enter license expiry");
                                     return;
                                   }
-                                  dispatch(addDutyManagerThunk({
-                                    name: newDutyManagerName,
-                                    email: newDutyManagerEmail,
-                                    licenseNumber: newDutyManagerLicenseNumber,
-                                    expiryDate: newDutyManagerLicenseExpiry,
-                                    certId: profile?._id,
-                                  })).then((res) => {
+                                  dispatch(
+                                    addDutyManagerThunk({
+                                      name: newDutyManagerName,
+                                      email: newDutyManagerEmail,
+                                      licenseNumber:
+                                        newDutyManagerLicenseNumber,
+                                      expiryDate: newDutyManagerLicenseExpiry,
+                                      certId: profile?._id,
+                                    })
+                                  ).then((res) => {
                                     if (res) {
                                       toast.success("Duty Manager Added");
                                       setNewDutyManagerName("");
@@ -905,8 +977,9 @@ export default function Profile() {
                                       setNewDutyManagerLicenseExpiry("");
                                       setAddDutyManager(false);
                                       setProfile(res);
+                                      callLicenseAPI();
                                     }
-                                  })
+                                  });
                                   // if (
                                   //   newDutyManagerName !== "" &&
                                   //   newDutyManagerEmail !== "" &&

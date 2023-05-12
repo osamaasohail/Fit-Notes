@@ -67,7 +67,7 @@ export default function LoginInfo() {
             <img src={LeftTriangle} />
           </TopTriangle>
           <RightCross>
-            <img src={RightTopCross} />
+            <img src={RightTopCross} onClick={() => navigate('/')} />
           </RightCross>
           {
             isResponsive && (
