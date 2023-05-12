@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 const Box = styled.div`
-  background: #caca0f;
+  background:rgba(177, 149, 56, 1);
   // padding: 59px 57px 93px 57px;
   border-radius: 5px;
   position: absolute;
@@ -47,6 +47,10 @@ const Buttons = styled(Button)`
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: #161616;
+  border-radius: 8px;
 `;
 
 export default function HeroSection({ box, buttonText, image, boxText }) {

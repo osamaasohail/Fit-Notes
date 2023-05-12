@@ -12,6 +12,7 @@ export default function HomePage() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
+
   return (
     <>
       <Wrapper>

@@ -31,7 +31,7 @@ export default function AboutUs() {
         </Margin>
         <Spacer />
         <WhosText>
-          <H1 fontSize="32px" color="#CACA0F" weight="700">
+          <H1 fontSize="32px" color="rgba(177, 149, 56, 1)" weight="700">
             Who we are?
           </H1>
           <Spacer height={isResponsive ? "20px" : "51px"} />
@@ -54,12 +54,12 @@ export default function AboutUs() {
             expiration date, for <br />
             comprehensive license management.
           </P>
-          <Spacer height={isResponsive ? "23px" : "89px"} />
+          <Spacer height={isResponsive ? "23px" : "20px"} />
 
-          <Button>Find out More</Button>
+          <Button style={{fontWeight:"700",color:"#161616"}}>Find out More</Button>
         </WhosText>
 
-        <Footer background={"#CACA0F"} color={"black"} />
+        <Footer background={"rgba(177, 149, 56, 1)"} color={"black"} />
       </Wrapper>
     </>
   );

@@ -5,6 +5,8 @@ import LeftTriangle from "../images/lefttrinangle.svg";
 import RightTopCross from "../images/topCross.svg";
 import BottomRightCross from "../images/BottomCross.svg";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
+
 
 const Wrapper = styled.div`
   background: black;
@@ -21,6 +23,7 @@ const TextContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 const TopTriangle = styled.div`
   position: absolute;
@@ -42,7 +45,17 @@ const BottomCross = styled.div`
   bottom: 5%;
   right: 7%;
 `;
+const Logo = styled(H1)`
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  :hover {
+    color: rgba(177, 149, 56, 1);
+  }
+`;
 export default function LoginInfo() {
+  const navigate = useNavigate();
+
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -56,13 +69,27 @@ export default function LoginInfo() {
           <RightCross>
             <img src={RightTopCross} />
           </RightCross>
+          {
+            isResponsive && (
+              <Spacer height="50px" />
+            )
+          }
+          <Logo
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                The Hospitality Guardian
+              </Logo>
+
+              <Spacer height={isResponsive?"30px":"67px"} />
 
           <div>
-            <H1 color="#CACA0F" weight="700" fontSize="48px">
+            <H1 color="rgba(177, 149, 56, 1)" weight="700" fontSize="48px">
               Welcome to our Platform
             </H1>
             <Spacer height="20px" />
-            <P fontSize="16px" lHeight="31px">
+            <P fontSize="16px" lHeight={isResponsive?"26px":"31px"}>
               By signing up, you're taking the first step in ensuring your{" "}
               <br /> business stays compliant with liquor laws. Our platform{" "}
               <br /> is designed to help you manage your liquor license and{" "}

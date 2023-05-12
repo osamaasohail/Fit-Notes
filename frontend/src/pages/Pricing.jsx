@@ -22,7 +22,7 @@ export default function Pricing() {
 
         <Spacer height="127px" />
         <Accordian />
-        <Footer color={"#CACA0F"} />
+        <Footer color={"rgba(177, 149, 56, 1)"} />
       </Wrapper>
     </>
   );

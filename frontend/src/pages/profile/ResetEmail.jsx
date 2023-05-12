@@ -9,7 +9,9 @@ import styled from "styled-components";
 import { Input } from "../../components/Input";
 import Check from "../../images/check.svg";
 import { useMediaQuery } from "react-responsive";
-
+import { useDispatch } from "react-redux";
+import { forgotPassword } from "../../service/redux/middleware/password";
+import { useState } from "react";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -20,6 +22,14 @@ export default function ResetEmail() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [onSuccess, setOnSuccess] = useState(false);
+  const onForgotPassword = () => {
+    dispatch(forgotPassword({ email: email })).then((res) => {
+      setOnSuccess(true);
+    });
+  };
   return (
     <>
       <Row style={{ margin: "0px" }}>
@@ -46,7 +56,7 @@ export default function ResetEmail() {
 
           <Box
             //   className="text-center"
-            width={isResponsive?"90%":"55vw"}
+            width={isResponsive ? "90%" : "55vw"}
             padding="3vw 13vw 3vw 13vw"
           >
             <P color="black" fontSize="14px">
@@ -56,10 +66,11 @@ export default function ResetEmail() {
               <Input
                 style={{
                   fontSize: "14px",
-                  // background: "#FCFCFC",
                   width: "100%",
                 }}
                 placeholder="Enter Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <div style={{ position: "absolute", top: "5%", right: "2%" }}>
                 <img src={Check} />
@@ -74,18 +85,21 @@ export default function ResetEmail() {
                   fontSize: "14px",
                   borderRadius: "3px",
                 }}
+                onClick={() => onForgotPassword()}
               >
                 Reset Request
               </Button>
               <Spacer height="16px" />
-              <P
-                className="text-center"
-                fontSize="14px"
-                weight="400"
-                color="#11AF22"
-              >
-                An email is sent with the link to change password
-              </P>
+              {onSuccess && (
+                <P
+                  className="text-center"
+                  fontSize="14px"
+                  weight="400"
+                  color="#11AF22"
+                >
+                  An email is sent with the link to change password
+                </P>
+              )}
             </div>
           </Box>
           {/* <Spacer height="60px" /> */}

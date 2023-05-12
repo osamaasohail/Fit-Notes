@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import IndividualLogin from "../components/IndividualLogin";
 
 const WrapperIn = styled.div`
   height: 100vh;
@@ -27,7 +28,7 @@ const Logo = styled(H1)`
     color: rgba(177, 149, 56, 1);
   }
 `;
-export default function BussinessLogin() {
+export default function SingIn() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -63,7 +64,7 @@ export default function BussinessLogin() {
               <LoginInfo />
             </Col>
             <Col style={{ padding: "0px" }} md={6}>
-              <Blogin />
+             <IndividualLogin/>
             </Col>
           </Row>
         </WrapperIn>

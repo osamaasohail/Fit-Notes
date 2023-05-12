@@ -18,8 +18,8 @@ const Input = styled.input`
   }
 `;
 const StarteWrapper = styled.div`
-  background: #caca0f;
-  padding: 83px 155px 84px 154px;
+  background: rgba(177, 149, 56, 1);
+  padding: 120px 155px 120px 154px;
   border-radius: 25px;
   @media(max-width:768px){
     padding:20px
@@ -36,7 +36,7 @@ export default function Startted() {
         <StarteWrapper>
           <div className="row align-items-center text-center">
             <div  className="col-lg-4">
-              <H1 weight="600" color="black" fontSize="32px">
+              <H1 style={{letterSpacing:"0.02em"}} weight="600" color="#1C1C1C" fontSize="32px">
                 Get Started
               </H1>
             </div>
@@ -44,13 +44,13 @@ export default function Startted() {
             {
                 isResponsive && <Spacer height="20px" />
               }
-              <Input placeholder="Email" />
+              <Input style={{border:"1px solid #161616",fontWeight:"700",color:"#161616"}} placeholder="Email" />
             </div>
             <div className="col-lg-2">
               {
                 isResponsive && <Spacer height="20px" />
               }
-              <Button style={{ color: "white" }} background="#1C1C1C">
+              <Button style={{ color: "white",fontWeight:"700" }} background="#1C1C1C">
                 SignUp{" "}
               </Button>
             </div>

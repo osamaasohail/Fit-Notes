@@ -13,6 +13,7 @@ import { postSignUp } from "../service/redux/middleware/postSignUp";
 import { signin } from "../service/redux/middleware/signin";
 import { getUser } from "../service/redux/middleware/getUser";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Wrapper = styled.div`
   background: white;
@@ -54,15 +55,24 @@ export default function Blogin() {
   // const count = useSelector((state) => state.singin)
   const count = useSelector((state) => state)
   // dispatch(getUser())
-
-  // const count = useSelector((state) => state.user)
-  // console.log("i am the redux value",count)
-
-  useEffect(() => {
-    console.log("Count is :", count)
-  }, [count])
   
   const handleSignup = async () => {
+    if(!accountType) {
+      toast.error("Please select account type")
+      return;
+    } else if(!businessName) {
+      toast.error("Please enter business name")
+      return;
+    } else if(!businessEmail) {
+      toast.error("Please enter business email")
+      return;
+    } else if(!password) {
+      toast.error("Please enter password")
+      return;
+    } else if(!terms) {
+      toast.error("Please accept terms and conditions")
+      return;
+    }
     const data = {
       accountType: accountType,
       name: businessName,
@@ -71,11 +81,20 @@ export default function Blogin() {
     };
     dispatch(postSignUp(data)).then((res) => {
       if(res.payload.status === 201){
-        setSignUp(false)
+        setSignUp(false);
+        navigate("/sign-in")
+        return toast.success("Account created successfully")
       }
     });
   };
   const handleLogin = () => {
+    if(!loginEmail) {
+      toast.error("Please enter email");
+      return;
+    } else if(!loginPassword) {
+      toast.error("Please enter password")
+      return;
+    }
     const data = {
       email: loginEmail,
       password: loginPassword,
@@ -98,7 +117,7 @@ export default function Blogin() {
   return (
     <>
       <Wrapper>
-        {signup ? (
+      
           <TextContainer>
             <Scrool>
               <div>
@@ -214,7 +233,7 @@ export default function Blogin() {
                 >
                   Alreay have Account?{" "}
                   <span
-                    onClick={() => setSignUp(false)}
+                    onClick={() =>  navigate("/sign-in")}
                     style={{ fontWeight: "bold", cursor: "pointer" }}
                   >
                     Login
@@ -224,90 +243,7 @@ export default function Blogin() {
               </div>
             </Scrool>
           </TextContainer>
-        ) : (
-          <TextContainer>
-            <div>
-              <H1 color="#161616" weight="500" fontSize="40px">
-                Login
-              </H1>
-              <Spacer height="21px" />
-              <P color="#161616" fontSize="14px">
-                Email<span style={{ color: "red" }}>*</span>
-              </P>
-              <Input
-                onChange={(e) => {
-                  setLoginEmail(e.target.value);
-                }}
-                type="email"
-              />
-              <Spacer height="21px" />
-
-              <P color="#161616" fontSize="14px">
-                Password<span style={{ color: "red" }}>*</span>
-              </P>
-              <Input
-                onChange={(e) => {
-                  setLoginPassword(e.target.value);
-                }}
-                type="password"
-              />
-              <Spacer height="21px" />
-
-              <Row className="align-items-center">
-                <Col style={{ paddingRight: "0px" }} sm={1} xs={1}>
-                  <Input
-                    onChange={() => {
-                      setLoginTerms(!loginTerms);
-                    }}
-                    type="checkbox"
-                  />
-                </Col>
-                <Col style={{ paddingLeft: "0px" }}>
-                  <P
-                    className={isResponsive ? "px-1" : ""}
-                    lHeight={isResponsive ? "16px" : "19px"}
-                    color="#161616"
-                    fontSize="14px"
-                    weight="400"
-                  >
-                    By creating an account you are agreeing to{" "}
-                    {isResponsive ? "" : <br />} our Terms and Conditions and
-                    Privacy Policy
-                  </P>
-                </Col>
-              </Row>
-              <Spacer height="21px" />
-
-              <Button
-                onClick={() => {
-                  // navigate("/");
-                  handleLogin();
-                }}
-                background="black"
-                style={{ color: "white", width: "100%" }}
-              >
-                LOGIN
-              </Button>
-              <Spacer height="21px" />
-              <P
-                style={{ textAlign: "center" }}
-                color="#161616"
-                fontSize="14px"
-                weight="400"
-              >
-                Donot have Account?{" "}
-                <span
-                  onClick={() => {
-                    setSignUp(true);
-                  }}
-                  style={{ fontWeight: "bold", cursor: "pointer" }}
-                >
-                  Signup
-                </span>
-              </P>
-            </div>
-          </TextContainer>
-        )}
+        
       </Wrapper>
     </>
   );

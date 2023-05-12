@@ -1,4 +1,5 @@
-const DutyManagers = require('../models/DutyManagers');
+const BusinessLicense = require("../models/BusinessLicense");
+const DutyManagers = require("../models/DutyManagers");
 module.exports = {
     get: async(req, res) => {
         DutyManagers.find({certId: req.params.certId})
@@ -39,25 +40,31 @@ module.exports = {
         } catch (err) {
             res.status(500).json({ error: err, message: "Internal server error" });
         }
-    },
-    update: async(req, res) => {
-        DutyManagers.updateOne({ _id: req.params.dmId }, {$set: req.body })
-        .then(updatedDocument => {
-            res.status(201).json({doc: updatedDocument});
-        })
-        .catch(err => {
-            res.status(500).json({ error: err, message: "Internal server error" });
-        });
-    },
-    delete: async(req, res) => {
-        DutyManagers.updateOne({ _id: req.params.dmId }, { $set: { isActive: false } }, { new: true })
-            .then(updatedDocument => {
-                res.status(201).json({doc: updatedDocument});
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({ error: err, message: "Internal server error" });
-        });
-    }
-
-}
+     
+      //   res.status(201).json({ message: "Duty Manager Added" });
+   
+  },
+  update: async (req, res) => {
+    DutyManagers.updateOne({ _id: req.params.dmId }, { $set: req.body })
+      .then((updatedDocument) => {
+        res.status(201).json({ doc: updatedDocument });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err, message: "Internal server error" });
+      });
+  },
+  delete: async (req, res) => {
+    DutyManagers.updateOne(
+      { _id: req.params.dmId },
+      { $set: { isActive: false } },
+      { new: true }
+    )
+      .then((updatedDocument) => {
+        res.status(201).json({ doc: updatedDocument });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err, message: "Internal server error" });
+      });
+  },
+};
