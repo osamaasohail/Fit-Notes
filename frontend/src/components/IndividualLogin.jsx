@@ -103,10 +103,14 @@ export default function IndividualLogin() {
         if(res.payload.data.user.accountType === 1){
           if(res.payload.data.user.isProfileCompleted === false){
             navigate("/individual-payment")
+          } else {
+            navigate("/profile/edit-profile")
           }
         } else if(res.payload.data.user.accountType === 2){
           if(res.payload.data.user.isProfileCompleted === false){
             navigate("/payment")
+          } else {
+            navigate("/profile/edit-profile")
           }
         }
       }

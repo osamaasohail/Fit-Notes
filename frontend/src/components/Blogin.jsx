@@ -231,7 +231,7 @@ export default function Blogin() {
                   fontSize="14px"
                   weight="400"
                 >
-                  Alreay have Account?{" "}
+                  Already have Account?{" "}
                   <span
                     onClick={() =>  navigate("/sign-in")}
                     style={{ fontWeight: "bold", cursor: "pointer" }}
