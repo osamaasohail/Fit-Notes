@@ -11,7 +11,10 @@ import Search from "../../images/search.svg";
 import circle from "../../images/active.svg";
 import notification from "../../images/notficationpic.svg";
 import { useMediaQuery } from "react-responsive";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getNotificationThunk } from "../../service/redux/middleware/notification";
+import { useState } from "react";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -38,6 +41,20 @@ export default function Notification() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
+  const dispatch = useDispatch();
+  const [userData] = useSelector((state) => {
+    return [state.signin.signInData.data.user];
+  });
+  const [notifications, setNotifications] = useState([]);
+  useEffect(() => {
+    dispatch(getNotificationThunk()).then((res, err) => {
+      console.log(res, err);
+      if (res.payload.status === 201) {
+        setNotifications(res.payload.data.notifications);
+        console.log(res.payload.data.notifications);
+      }
+    });
+  }, []);
   return (
     <>
       <Row style={{ margin: "0px" }}>
@@ -52,8 +69,10 @@ export default function Notification() {
         >
           <Box
             style={{ background: "none", boxShadow: "none" }}
-            width={isResponsive?"100%":"55vw"}
-            padding={isResponsive?"41px 30px 20px 30px":"41px 20px 52px 64px"}
+            width={isResponsive ? "100%" : "55vw"}
+            padding={
+              isResponsive ? "41px 30px 20px 30px" : "41px 20px 52px 64px"
+            }
           >
             <Row>
               <Col md={7}>
@@ -62,7 +81,7 @@ export default function Notification() {
                 </H1>
               </Col>
               <Col md={5}>
-                <div style={{ position: "relative" }}>
+                {/* <div style={{ position: "relative" }}>
                   <Input
                     style={{
                       fontSize: "14px",
@@ -76,28 +95,43 @@ export default function Notification() {
                   >
                     <img src={Search} />
                   </div>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </Box>
           <Scrool>
             {/* <SideNavbar /> */}
 
-            <Spacer height={isResponsive?"20px":"59px"} />
-            {data.map((item, index) => {
+            <Spacer height={isResponsive ? "20px" : "59px"} />
+
+            {notifications?.length === 0 && (
+              <Box width={isResponsive ? "100%" : "55vw"} padding="20px">
+                <p>No notifications found</p>
+              </Box>
+            )}
+            {notifications?.map((item, index) => {
               return (
                 <>
-                  <Box width={isResponsive?"100%":"55vw"} padding="20px">
+                  <Box width={isResponsive ? "100%" : "55vw"} padding="20px">
                     <div className="d-flex align-items-end">
-                        {
-                            item.active? <img alt="active" src={circle} />:""
-                        }
-                     
+                      {item.active ? <img alt="active" src={circle} /> : ""}
+
                       <div className="d-flex justify-content-between w-100 align-items-center">
                         <div className="d-flex align-items-center">
                           <img className="mx-1" src={notification} />
                           <P className="mx-1" color="black" weight="400">
-                            {item.msg}
+                            {userData?.accountType === 1 && (
+                              <span>
+                                Your license ${item?.individualLicense?.name} is
+                                going to be expired in ${item?.sendNotiDay}
+                              </span>
+                            )}
+                            {userData?.accountType === 2 && (
+                              <span>
+                                Your license ${item?.businessLicense?.name} is
+                                going to be expired in ${item?.sendNotiDay}
+                              </span>
+                            )}
                           </P>
                         </div>
                         <div className="d-flex ">
@@ -107,7 +141,8 @@ export default function Notification() {
                             color="black"
                             weight="400"
                           >
-                            {item.status}
+                            {/* {item.status} */}
+                            SENT
                           </P>
                           <P
                             style={{ opacity: "0.5" }}
@@ -115,13 +150,13 @@ export default function Notification() {
                             color="black"
                             weight="400"
                           >
-                           {item.time}
+                            {item?.createdAt}
                           </P>
                         </div>
                       </div>
                     </div>
                   </Box>
-                  <Spacer height="10px"/>
+                  <Spacer height="10px" />
                 </>
               );
             })}
