@@ -152,7 +152,7 @@ export default function SideNavbar() {
                     height={"16px"}
                     alt="subscribe"
                     src={
-                      window.location.pathname === "/profile/subscribtion"
+                      window.location.pathname === "/profile/subscription"
                         ? ActveSub
                         : Subscribtion
                     }
@@ -160,12 +160,12 @@ export default function SideNavbar() {
 
                   <A
                     color={
-                      window.location.pathname === "/profile/subscribtion"
+                      window.location.pathname === "/profile/subscription"
                         ? "rgba(177, 149, 56, 1)"
                         : "white"
                     }
                     onClick={() => {
-                      navigate("/profile/subscribtion");
+                      navigate("/profile/subscription");
                     }}
                   >
                     Subscription
