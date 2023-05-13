@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { client } from "../../client";
+
 export const individualLicense = createAsyncThunk(
   "individualLicense",
   async (data) => {

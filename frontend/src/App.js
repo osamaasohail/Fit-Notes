@@ -43,7 +43,7 @@ function App() {
           <Route path="/how-it-works" element={<HowWorks />} />
           <Route path="/sign-up" element={<BussinessLogin />} />
           <Route path="/profile/edit-profile" element={<Profile />} />
-          <Route path="/profile/subscribtion" element={<Subscribtion />} />
+          <Route path="/profile/subscription" element={<Subscribtion />} />
           <Route path="/profile/notification" element={<Notification />} />
           <Route path="/profile/reset" element={<ResetEmail />} />
           <Route path="/profile/reset-password" element={<ConfrimPassword/>} />

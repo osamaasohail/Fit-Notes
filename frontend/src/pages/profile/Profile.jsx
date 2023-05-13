@@ -22,9 +22,15 @@ import {
 import { useState } from "react";
 import Moment from "react-moment";
 import { Input } from "../../components/Input";
-import { editBasicInfoThunk, updateDutyManagerInfo } from "../../service/redux/middleware/profile";
+import {
+  editBasicInfoThunk,
+  updateDutyManagerInfo,
+} from "../../service/redux/middleware/profile";
 import { ToastContainer, toast } from "react-toastify";
-import { addDutyManagerThunk, updateSingleManager } from "../../service/redux/middleware/dutyManager";
+import {
+  addDutyManagerThunk,
+  updateSingleManager,
+} from "../../service/redux/middleware/dutyManager";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -55,6 +61,7 @@ export default function Profile() {
   const [gamingLicenseNumber, setGamingLicenseNumber] = useState("");
   const [gamingLicenseExpiry, setGamingLicenseExpiry] = useState("");
   const [editableManager, setEditableManager] = useState([]);
+  const [editableManagerInd, setEditableManagerInd] = useState(false);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -709,9 +716,158 @@ export default function Profile() {
                           </Col>
                         </Row>
                       </div>
-                      {profile?.dutyManagers?.map((manager, index) => {
-                        console.log("Duty manager ", manager._id)
-                        return (
+                      {userData?.accountType == 2 && (
+                        <>
+                          {profile?.dutyManagers?.map((manager, index) => {
+                            console.log("Duty manager ", manager._id);
+                            return (
+                              <Row
+                                style={
+                                  isResponsive
+                                    ? {
+                                        padding: "16px 2px 12px 2px",
+                                        margin: "0px 20px 0px 0px",
+                                      }
+                                    : {
+                                        padding: "16px 30px 12px 20px",
+                                        margin: "0px 20px 0px 0px",
+                                      }
+                                }
+                              >
+                                <Col md={3} sm={3} xs={3}>
+                                  <Input
+                                    style={
+                                      editableManager[index]
+                                        ? { background: "none", color: "black" }
+                                        : { background: "none", color: "black" }
+                                    }
+                                    disabled={
+                                      editableManager[index] ? false : true
+                                    }
+                                    placeholder={manager?.name}
+                                    onChange={(e) => {
+                                      manager.name = e.target.value;
+                                    }}
+                                  />
+                                </Col>
+                                <Col md={3} sm={3} xs={3}>
+                                  <Input
+                                    style={
+                                      edit
+                                        ? { background: "none", color: "black" }
+                                        : { background: "none", color: "black" }
+                                    }
+                                    disabled={
+                                      editableManager[index] ? false : true
+                                    }
+                                    placeholder={manager?.email}
+                                    onChange={(e) => {
+                                      manager.email = e.target.value;
+                                    }}
+                                  />
+                                </Col>
+                                <Col md={3} sm={3} xs={3}>
+                                  <Input
+                                    style={
+                                      editableManager[index]
+                                        ? { background: "none", color: "black" }
+                                        : { background: "none", color: "black" }
+                                    }
+                                    disabled={
+                                      editableManager[index] ? false : true
+                                    }
+                                    placeholder={manager?.licenseNumber}
+                                    onChange={(e) => {
+                                      manager.licenseNumber = e.target.value;
+                                    }}
+                                  />
+                                </Col>
+                                <Col
+                                  className="d-flex align-items-center"
+                                  md={2}
+                                  sm={2}
+                                  xs={2}
+                                >
+                                  {editableManager[index] ? (
+                                    <Input
+                                      className="textPlaceholder"
+                                      style={
+                                        editableManager[index]
+                                          ? {
+                                              background: "none",
+                                              color: "black",
+                                            }
+                                          : {
+                                              background: "none",
+                                              color: "black",
+                                            }
+                                      }
+                                      disabled={
+                                        editableManager[index] ? false : true
+                                      }
+                                      type="date"
+                                      placeholder={manager?.expiryDate}
+                                      onChange={(e) => {
+                                        manager.expiryDate = e.target.value;
+                                      }}
+                                    />
+                                  ) : (
+                                    <Moment format="DD/MM/YYYY">
+                                      {manager?.expiryDate}
+                                    </Moment>
+                                  )}
+                                </Col>
+                                <Col md={1} sm={1} xs={1}>
+                                  {!editableManager[index] ? (
+                                    <img
+                                      src={Edit}
+                                      alt="edit"
+                                      onClick={() => {
+                                        var temp = [...editableManager];
+                                        temp[index] = !editableManager[index];
+                                        setEditableManager(temp);
+                                      }}
+                                    />
+                                  ) : (
+                                    <img
+                                      src={Tick}
+                                      alt="edit"
+                                      onClick={() => {
+                                        dispatch(
+                                          updateSingleManager({
+                                            name: manager?.name,
+                                            email: manager?.email,
+                                            licenseNumber:
+                                              manager?.licenseNumber,
+                                            expiryDate: manager?.expiryDate,
+                                            certId: profile?._id,
+                                            dutyManagerId: manager?._id,
+                                          })
+                                        ).then((res) => {
+                                          if (res) {
+                                            callLicenseAPI();
+                                          }
+                                        });
+                                      }}
+                                    />
+                                  )}
+
+                                  <img
+                                    alt="delete"
+                                    style={{ marginLeft: "10px" }}
+                                    width={20}
+                                    height={20}
+                                    src={Delete}
+                                  />
+                                </Col>
+                              </Row>
+                            );
+                          })}
+                        </>
+                      )}
+
+                      {userData?.accountType == 1 && (
+                        <>
                           <Row
                             style={
                               isResponsive
@@ -728,14 +884,14 @@ export default function Profile() {
                             <Col md={3} sm={3} xs={3}>
                               <Input
                                 style={
-                                  editableManager[index]
+                                  editableManagerInd
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={editableManager[index] ? false : true}
-                                placeholder={manager?.name}
+                                disabled={editableManagerInd ? false : true}
+                                placeholder={profile?.dutyManager?.name}
                                 onChange={(e) => {
-                                  manager.name = e.target.value;
+                                  profile.dutyManager.name = e.target.value;
                                 }}
                               />
                             </Col>
@@ -746,24 +902,24 @@ export default function Profile() {
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={editableManager[index] ? false : true}
-                                placeholder={manager?.email}
+                                disabled={editableManagerInd ? false : true}
+                                placeholder={profile?.dutyManager?.email}
                                 onChange={(e) => {
-                                  manager.email = e.target.value;
+                                  profile.dutyManager.email = e.target.value;
                                 }}
                               />
                             </Col>
                             <Col md={3} sm={3} xs={3}>
                               <Input
                                 style={
-                                  editableManager[index]
+                                  editableManagerInd
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={editableManager[index] ? false : true}
-                                placeholder={manager?.licenseNumber}
+                                disabled={editableManagerInd ? false : true}
+                                placeholder={profile?.dutyManager?.licenseNumber}
                                 onChange={(e) => {
-                                  manager.licenseNumber = e.target.value;
+                                  profile.dutyManager.licenseNumber = e.target.value;
                                 }}
                               />
                             </Col>
@@ -773,38 +929,44 @@ export default function Profile() {
                               sm={2}
                               xs={2}
                             >
-                              {editableManager[index] ? (
+                              {editableManagerInd ? (
                                 <Input
                                   className="textPlaceholder"
                                   style={
-                                    editableManager[index]
-                                      ? { background: "none", color: "black" }
-                                      : { background: "none", color: "black" }
+                                    editableManagerInd
+                                      ? {
+                                          background: "none",
+                                          color: "black",
+                                        }
+                                      : {
+                                          background: "none",
+                                          color: "black",
+                                        }
                                   }
                                   disabled={
-                                    editableManager[index] ? false : true
+                                    editableManagerInd ? false : true
                                   }
                                   type="date"
-                                  placeholder={manager?.expiryDate}
+                                  placeholder={profile?.dutyManager?.expiryDate}
                                   onChange={(e) => {
-                                    manager.expiryDate = e.target.value;
+                                    profile.dutyManager.expiryDate = e.target.value;
                                   }}
                                 />
                               ) : (
                                 <Moment format="DD/MM/YYYY">
-                                  {profile?.gamingLicenseExpiry}
+                                  {profile?.dutyManager?.expiryDate}
                                 </Moment>
                               )}
                             </Col>
                             <Col md={1} sm={1} xs={1}>
-                              {!editableManager[index] ? (
+                              {!editableManagerInd ? (
                                 <img
                                   src={Edit}
                                   alt="edit"
                                   onClick={() => {
-                                    var temp = [...editableManager];
-                                    temp[index] = !editableManager[index];
-                                    setEditableManager(temp);
+                                    // var temp = [...editableManager];
+                                    // temp[index] = !editableManagerInd;
+                                    setEditableManagerInd(true);
                                   }}
                                 />
                               ) : (
@@ -814,13 +976,12 @@ export default function Profile() {
                                   onClick={() => {
                                     dispatch(
                                       updateSingleManager({
-                                        name: manager?.name,
-                                        email: manager?.email,
-                                        licenseNumber:
-                                        manager?.licenseNumber,
-                                        expiryDate: manager?.expiryDate,
+                                        name: profile?.dutyManager?.name,
+                                        email: profile?.dutyManager?.email,
+                                        licenseNumber: profile?.dutyManager?.licenseNumber,
+                                        expiryDate: profile?.dutyManager?.expiryDate,
                                         certId: profile?._id,
-                                        dutyManagerId: manager?._id,
+                                        dutyManagerId: profile?.dutyManager?._id,
                                       })
                                     ).then((res) => {
                                       if (res) {
@@ -831,17 +992,17 @@ export default function Profile() {
                                 />
                               )}
 
-                              <img
+                              {/* <img
                                 alt="delete"
                                 style={{ marginLeft: "10px" }}
                                 width={20}
                                 height={20}
                                 src={Delete}
-                              />
+                              /> */}
                             </Col>
                           </Row>
-                        );
-                      })}
+                        </>
+                      )}
                       {addDutyManager ? (
                         <>
                           <Row

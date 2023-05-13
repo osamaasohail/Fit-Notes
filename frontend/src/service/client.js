@@ -1,10 +1,17 @@
 import axios from 'axios';
-console.log("Localstorage : ", localStorage.getItem("token"));
 const client = axios.create({
   baseURL: 'http://localhost:4000/',
   headers: {
     "auth-token" : `${localStorage.getItem("token")}`
   }
+});
+
+client.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  config.headers['auth-token'] = `${token}`;
+  return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 export { client };
