@@ -1,6 +1,7 @@
 import axios from 'axios';
 const client = axios.create({
-  baseURL: 'http://ec2-18-189-44-153.us-east-2.compute.amazonaws.com:4000/',
+  // baseURL: 'http://ec2-18-189-44-153.us-east-2.compute.amazonaws.com:4000/',
+  baseURL: 'http://localhost:4000/',
   headers: {
     "auth-token" : `${localStorage.getItem("token")}`
   }

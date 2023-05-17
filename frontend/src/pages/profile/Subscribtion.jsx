@@ -33,8 +33,8 @@ export default function Subscribtion() {
     dispatch(getSubscription()).then((res, err) => {
       console.log(res, err);
       if (res.payload.status === 200) {
-        setSubscription(res.payload.data.subscription);
-        console.log(res.payload.data.subscription);
+        setSubscription(res.payload.data);
+        console.log(res.payload.data);
       }
     });
   }, []);
@@ -74,18 +74,18 @@ export default function Subscribtion() {
             <P color="black">Premium Plan</P>
             <Spacer height="16px" />
             <P fontSize="14px" weight="400" color="black">
-              NZ${subscription?.paymentAmount}/Year
+              NZ${subscription?.totalQuantity*5}/Year
             </P>
 
             <Spacer height="16px" />
             <P weight="400" color="black">
-              Your plan will be expired at the{" "}
+              Your plan will be renewed at the {" "}
               <span style={{ fontWeight: "bold" }}>
                 {" "}
-                <Moment format="DD/MM/YYYY">{subscription?.expiresAt}</Moment>
+                <Moment format="DD/MM/YYYY">{subscription?.nextInvoiceDate*1000}</Moment>
               </span>{" "}
-              {/* and you will be charge{" "}
-              <span style={{ fontWeight: "bold" }}>$50</span>{" "} */}
+              and you will be charged{" "}
+              <span style={{ fontWeight: "bold" }}>NZ${subscription?.nextInvoicePrice}</span>{" "}
             </P>
           </Box>
 

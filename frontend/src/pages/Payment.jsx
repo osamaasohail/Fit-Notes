@@ -42,7 +42,6 @@ export default function Payment() {
   const [liquorLicenseExpiry, setLiquorLicenseExpiry] = useState("");
   const [gamingLicense, setGamingLicense] = useState("");
   const [gamingLicenseExpiry, setGamingLicenseExpiry] = useState("");
-  const [totalPayment, setTotalPayment] = useState(0);
   const [term, setTerm] = useState(false);
 
   const [userData, token] = useSelector((state) => {
@@ -125,6 +124,32 @@ export default function Payment() {
     } else if(!dutyManagers[0].expiryDate) {
       toast.error("Please enter duty manager expiry date");
       return;
+    } else if(gamingLicense && !gamingLicenseExpiry) {
+      toast.error("Please enter gaming license expiry");
+      return;
+    } else if(gamingLicenseExpiry && !gamingLicense) {
+      toast.error("Please enter gaming license");
+      return;
+    }
+    dutyManagers.forEach((item) => {
+      if(!item.name) {
+        toast.error("Please enter duty manager name");
+        return;
+      } else if(!item.email) {
+        toast.error("Please enter duty manager email");
+        return;
+      } else if(!item.licenseNumber) {
+        toast.error("Please enter duty manager license number");
+        return;
+      } else if(!item.expiryDate) {
+        toast.error("Please enter duty manager expiry date");
+        return;
+      }
+    });
+
+    if(data.filter(item => item.isChecked).length === 0) {
+      toast.error("Please select notification preference");
+      return;
     }
     var userData = {
       name: businessName,
@@ -134,15 +159,16 @@ export default function Payment() {
       dutyManagers: dutyManagers,
       gamingLicense: gamingLicense,
       gamingLicenseExpiry: gamingLicenseExpiry,
-      sendNotiBeforeExpiry: data
-        .map((obj) => obj.id)
-        .filter((obj) => obj.isChecked),
+      sendNotiBeforeExpiry: data.filter(item => item.isChecked).map(item => item.id),
+      isGamingLicenseEnabled: false
     };
     var calculateQuantity = dutyManagers?.length;
     if ((gamingLicense && gamingLicenseExpiry) !== "") {
       calculateQuantity += 1;
+      userData.isGamingLicenseEnabled = true;
     }
     userData.quantity = calculateQuantity;
+    console.log("User data is ", userData)
     dispatch(businessLicense(userData, token)).then((res) => {
       window.location.href = res.payload.data.url;
     });
@@ -543,7 +569,7 @@ export default function Payment() {
                             //   background: "#FCFCFC",
                             width: "100%",
                           }}
-                          placeholder="Liquor Browdy"
+                          placeholder="123456"
                         />
                         <div
                           style={{

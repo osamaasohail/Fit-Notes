@@ -149,7 +149,7 @@ export default function IndividualLogin() {
               />
               <Spacer height="21px" />
 
-              <Row className="align-items-center">
+              {/* <Row className="align-items-center">
                 <Col style={{ paddingRight: "0px" }} sm={1} xs={1}>
                   <Input
                     onChange={() => {
@@ -171,7 +171,7 @@ export default function IndividualLogin() {
                     Privacy Policy
                   </P>
                 </Col>
-              </Row>
+              </Row> */}
               <Spacer height="21px" />
 
               <Button
@@ -191,7 +191,7 @@ export default function IndividualLogin() {
                 fontSize="14px"
                 weight="400"
               >
-                Donot have Account?{" "}
+                Don't have account?{" "}
                 <span
                   onClick={() => {
                    navigate("/sign-up");

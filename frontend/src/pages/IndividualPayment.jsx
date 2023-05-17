@@ -79,9 +79,7 @@ export default function IndividualPayment() {
         licenseNumber: dutyManagerLicenseNumber,
         expiryDate: dutyManagerLicenseExpiry,
       },
-      sendNotiBeforeExpiry: data
-        .map((obj) => obj.id)
-        .filter((obj) => obj.isChecked),
+      sendNotiBeforeExpiry: data.filter(item => item.isChecked).map(item => item.id),
     };
     dispatch(individualLicense(userData)).then((res) => {
       window.location.href = res.payload.data.url;

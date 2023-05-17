@@ -4,7 +4,7 @@ import { Spacer } from "./Spacer";
 import { Input } from "./Input";
 import { Col, Row } from "react-bootstrap";
 import { Button } from "./Button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -41,7 +41,7 @@ export default function Blogin() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
-
+  const recaptchaRef = useRef();
   const [signup, setSignUp] = useState(true);
   const [businessName, setBusinessName] = useState("");
   const [businessEmail, setBussinessEmail] = useState("");
@@ -206,7 +206,8 @@ export default function Blogin() {
                 <div style={{ width: "100%" }}>
                   <ReCAPTCHA
                     sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
-                    // onChange={onChange}
+                    ref={recaptchaRef}
+                    onChange={(e) => console.log("Recaptcha is : ", recaptchaRef.current.getValue())}
                   />
                 </div>
                 <Spacer height="21px" />
@@ -231,7 +232,7 @@ export default function Blogin() {
                   fontSize="14px"
                   weight="400"
                 >
-                  Already have Account?{" "}
+                  Already have an account?{" "}
                   <span
                     onClick={() =>  navigate("/sign-in")}
                     style={{ fontWeight: "bold", cursor: "pointer" }}

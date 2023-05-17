@@ -32,3 +32,18 @@ export const updateSingleManager = createAsyncThunk(
       }
     }
   );
+export const deleteSingleManager = createAsyncThunk(
+    "deleteSingleManager",
+    async (data) => {
+      try {
+        const res = await client.delete(`cert/${data?.certId}/duty-manager/${data.dutyManagerId}`);
+        return { status: res.status, data: res.data };
+      } catch (error) {
+        console.log(error);
+        return {
+          message: error.response.data.error,
+          status: error.response.status,
+        };
+      }
+    }
+  );
