@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { getNotificationThunk } from "../../service/redux/middleware/notification";
 import { useState } from "react";
 import Moment from "react-moment";
+import { ToastContainer } from "react-toastify";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -58,6 +59,7 @@ export default function Notification() {
   }, []);
   return (
     <>
+      <ToastContainer />
       <Row style={{ margin: "0px" }}>
         <Col style={{ padding: "0px" }} lg={2} md={3}>
           <SideNavbar />
@@ -129,8 +131,11 @@ export default function Notification() {
                             )}
                             {userData?.accountType === 2 && (
                               <span>
-                                Your license ${item?.businessLicense?.name} is
-                                going to be expired in ${item?.sendNotiDay}
+                                Your license {item?.businessLicense} is going to
+                                be expired in
+                                <Moment format="DD/MM/YYYY">
+                                  {item?.createdAt}
+                                </Moment>
                               </span>
                             )}
                           </P>
@@ -151,8 +156,9 @@ export default function Notification() {
                             color="black"
                             weight="400"
                           >
-                            <Moment format="DD/MM/YYYY hh:mm">{item?.createdAt}</Moment>
-                            
+                            <Moment format="DD/MM/YYYY hh:mm">
+                              {item?.createdAt}
+                            </Moment>
                           </P>
                         </div>
                       </div>

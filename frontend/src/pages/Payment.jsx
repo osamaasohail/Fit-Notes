@@ -167,7 +167,7 @@ export default function Payment() {
       calculateQuantity += 1;
       userData.isGamingLicenseEnabled = true;
     }
-    userData.quantity = calculateQuantity;
+    userData.quantity = dutyManagers?.length;
     console.log("User data is ", userData)
     dispatch(businessLicense(userData, token)).then((res) => {
       window.location.href = res.payload.data.url;
@@ -558,7 +558,7 @@ export default function Payment() {
                   <div>
                     <P color="#161616" fontSize="14px" weight="600">
                       Gaming License Number
-                      <span style={{ color: "red" }}>*</span>
+                      {/* <span style={{ color: "red" }}>*</span> */}
                       <div style={{ position: "relative" }}>
                         <Input
                           onChange={(e) => {
@@ -588,7 +588,8 @@ export default function Payment() {
                 <Col md={6}>
                   <div>
                     <P color="#161616" fontSize="14px" weight="600">
-                      License Expiry Date<span style={{ color: "red" }}>*</span>
+                      License Expiry Date
+                      {/* <span style={{ color: "red" }}>*</span> */}
                       <div style={{ position: "relative" }}>
                         <Input
                           onChange={(e) => {

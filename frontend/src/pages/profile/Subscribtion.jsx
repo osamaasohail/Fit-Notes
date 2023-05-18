@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { getSubscription } from "../../service/redux/middleware/subscription";
 import { useState } from "react";
 import Moment from "react-moment";
+import { ToastContainer } from "react-toastify";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -41,6 +42,7 @@ export default function Subscribtion() {
 
   return (
     <>
+      <ToastContainer />
       <Row style={{ margin: "0px" }}>
         <Col style={{ padding: "0px" }} lg={2} md={3}>
           <SideNavbar />
@@ -74,18 +76,22 @@ export default function Subscribtion() {
             <P color="black">Premium Plan</P>
             <Spacer height="16px" />
             <P fontSize="14px" weight="400" color="black">
-              NZ${subscription?.totalQuantity*5}/Year
+               NZD {subscription?.totalQuantity * 5}/Year
             </P>
 
             <Spacer height="16px" />
             <P weight="400" color="black">
-              Your plan will be renewed at the {" "}
+              Your plan will be renewed on{" "}
               <span style={{ fontWeight: "bold" }}>
                 {" "}
-                <Moment format="DD/MM/YYYY">{subscription?.nextInvoiceDate*1000}</Moment>
+                <Moment format="DD/MM/YYYY">
+                  {subscription?.nextInvoiceDate * 1000}
+                </Moment>
               </span>{" "}
               and you will be charged{" "}
-              <span style={{ fontWeight: "bold" }}>NZ${subscription?.nextInvoicePrice}</span>{" "}
+              <span style={{ fontWeight: "bold" }}>
+                NZD {subscription?.nextInvoicePrice}
+              </span>{" "}
             </P>
           </Box>
 

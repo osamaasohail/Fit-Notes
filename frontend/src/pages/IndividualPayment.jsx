@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
 import { individualLicense } from "../service/redux/middleware/licenses";
+import { ToastContainer } from "react-toastify";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -79,7 +80,9 @@ export default function IndividualPayment() {
         licenseNumber: dutyManagerLicenseNumber,
         expiryDate: dutyManagerLicenseExpiry,
       },
-      sendNotiBeforeExpiry: data.filter(item => item.isChecked).map(item => item.id),
+      sendNotiBeforeExpiry: data
+        .filter((item) => item.isChecked)
+        .map((item) => item.id),
     };
     dispatch(individualLicense(userData)).then((res) => {
       window.location.href = res.payload.data.url;
@@ -88,6 +91,7 @@ export default function IndividualPayment() {
 
   return (
     <>
+      <ToastContainer />
       <Wrapper>
         <Row style={{ height: "100%", margin: "0px" }}>
           <Row className="mt-3 mb-3">
@@ -381,9 +385,13 @@ export default function IndividualPayment() {
                 <ReCAPTCHA
                   sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
                 /> */}
-                <Spacer height="30px"/>
+                <Spacer height="30px" />
                 <Row className="align-items-center">
-                  <Col style={{ paddingRight: "0px",paddingLeft:"0px" }} sm={1} xs={1}>
+                  <Col
+                    style={{ paddingRight: "0px", paddingLeft: "0px" }}
+                    sm={1}
+                    xs={1}
+                  >
                     <Input onChange={() => {}} type="checkbox" />
                   </Col>
                   <Col style={{ paddingLeft: "0px" }}>

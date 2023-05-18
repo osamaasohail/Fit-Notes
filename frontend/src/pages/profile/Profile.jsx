@@ -16,6 +16,7 @@ import { Wrapper } from "../../components/Style";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  addGamingLicenseThunk,
   getBusinessLicense,
   getIndividualLicense,
 } from "../../service/redux/middleware/licenses";
@@ -32,6 +33,7 @@ import {
   deleteSingleManager,
   updateSingleManager,
 } from "../../service/redux/middleware/dutyManager";
+import { deleteGamingLicense } from "../../service/redux/middleware/licenses";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -61,8 +63,12 @@ export default function Profile() {
   const [liquorLicenseExpiry, setLiquorLicenseExpiry] = useState("");
   const [gamingLicenseNumber, setGamingLicenseNumber] = useState("");
   const [gamingLicenseExpiry, setGamingLicenseExpiry] = useState("");
+  const [addGamingLicenseNumber, setAddGamingLicenseNumber] = useState("");
+  const [addGamingLicenseExpiryDate, setAddGamingLicenseExpiryDate] =
+    useState("");
   const [editableManager, setEditableManager] = useState([]);
   const [editableManagerInd, setEditableManagerInd] = useState(false);
+  const [addGamingLicense, setAddGamingLicense] = useState(false);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -161,6 +167,7 @@ export default function Profile() {
         >
           <Scrool>
             {/* <SideNavbar /> */}
+            {/* ========================== Basic Info =============================================*/}
             <Row
               style={{
                 padding: isResponsive ? "0vw 0vw 0vw 1vw" : "0vw 10vw 0vw 1vw",
@@ -302,6 +309,7 @@ export default function Profile() {
               </Col>
             </Row>
             <Spacer height="10px" />
+            {/* ========================== Liquor License Info =============================================*/}
             {userData?.accountType == 2 && (
               <Row
                 style={{
@@ -470,7 +478,8 @@ export default function Profile() {
                 </Col>
               </Row>
             )}
-            {userData?.accountType == 2 && profile?.gamingLicense !== "" ? (
+            {/* ========================== Gaming License Info =============================================*/}
+            {userData?.accountType == 2 ? (
               <>
                 <Spacer height="10px" />
                 <Row
@@ -486,165 +495,352 @@ export default function Profile() {
                       Gaming Info
                     </H1>
                   </Col>
-                  <Col md={7}>
-                    <Box
-                      width={isResponsive ? "100%" : "55vw"}
-                      padding={
-                        isResponsive
-                          ? "41px 20px 20px 20px"
-                          : "41px 20px 52px 64px"
-                      }
-                    >
-                      <Row className="align-items-center">
-                        {/* <Col md={5}>
-                  <H1 color="black" fontSize="24px" weight="500">
-                    Liquor Info
-                  </H1>
-                </Col> */}
-                        <Col md={12}>
-                          <div>
-                            <Row
-                              style={
-                                isResponsive
-                                  ? {
-                                      background: "#F2F2F2",
-                                      padding: "12px 2px 12px 2px",
-                                      margin: "0px 20px 0px 0px",
-                                      borderRadius: "8px",
-                                    }
-                                  : {
-                                      background: "#F2F2F2",
-                                      padding: "12px 30px 12px 20px",
-                                      margin: "0px 20px 0px 0px",
-                                      borderRadius: "8px",
-                                    }
-                              }
-                            >
-                              <Col md={5} sm={5} xs={5}>
-                                <P color="black" weight="400">
-                                  License Number
-                                </P>
-                              </Col>
-                              <Col md={5} sm={5} xs={5}>
-                                <P color="black" weight="400">
-                                  Expiry Date
-                                </P>
-                              </Col>
-                              <Col md={2} sm={2} xs={2}>
-                                <P color="black" weight="300">
-                                  Action
-                                </P>
-                              </Col>
-                            </Row>
-                          </div>
-                          <Row
-                            style={
-                              isResponsive
-                                ? {
-                                    padding: "2px 2px 12px 2px",
-                                    margin: "0px 20px 0px 0px",
-                                  }
-                                : {
-                                    padding: "12px 30px 12px 20px",
-                                    margin: "0px 20px 0px 0px",
-                                  }
-                            }
-                          >
-                            <Col className="mt-4" md={5} sm={5} xs={5}>
-                              <Input
-                                style={
-                                  editGamingLicenseInfo
-                                    ? { background: "none", color: "black" }
-                                    : { background: "none", color: "black" }
-                                }
-                                disabled={editGamingLicenseInfo ? false : true}
-                                placeholder={profile?.gamingLicense}
-                                value={gamingLicenseNumber}
-                                onChange={(e) => {
-                                  setGamingLicenseNumber(e.target.value);
-                                }}
-                              />
-                            </Col>
-                            <Col className="mt-4" md={5} sm={5} xs={5}>
-                              {editGamingLicenseInfo ? (
-                                <Input
+                  {/* If new gaming license */}
+                  {addGamingLicense ? (
+                    <>
+                      <Col md={7}>
+                        <Box
+                          width={isResponsive ? "100%" : "55vw"}
+                          padding={
+                            isResponsive
+                              ? "41px 20px 20px 20px"
+                              : "41px 20px 52px 64px"
+                          }
+                        >
+                          <Row className="align-items-center">
+                            <Col md={12}>
+                              <div>
+                                <Row
                                   style={
-                                    editGamingLicenseInfo
-                                      ? { background: "none", color: "black" }
-                                      : { background: "none", color: "black" }
+                                    isResponsive
+                                      ? {
+                                          background: "#F2F2F2",
+                                          padding: "12px 2px 12px 2px",
+                                          margin: "0px 20px 0px 0px",
+                                          borderRadius: "8px",
+                                        }
+                                      : {
+                                          background: "#F2F2F2",
+                                          padding: "12px 30px 12px 20px",
+                                          margin: "0px 20px 0px 0px",
+                                          borderRadius: "8px",
+                                        }
                                   }
-                                  disabled={
-                                    editGamingLicenseInfo ? false : true
-                                  }
-                                  type="date"
-                                  placeholder={profile?.gamingLicenseExpiry}
-                                  value={gamingLicenseExpiry}
-                                  onChange={(e) => {
-                                    setGamingLicenseExpiry(e.target.value);
-                                  }}
-                                />
-                              ) : (
-                                <P color="#EF3061" weight="300">
-                                  <Moment format="DD/MM/YYYY">
-                                    {profile?.gamingLicenseExpiry}
-                                  </Moment>
-                                </P>
-                              )}
-                            </Col>
-                            <Col className="mt-4" md={2} sm={2} xs={2}>
-                              {editGamingLicenseInfo ? (
-                                <img
-                                  src={Tick}
-                                  alt="add"
-                                  onClick={() => {
-                                    if (!gamingLicenseNumber) {
-                                      toast.error(
-                                        "Please enter gaming license number"
-                                      );
-                                      return;
-                                    } else if (!gamingLicenseExpiry) {
-                                      toast.error(
-                                        "Please enter gaming license expiry date"
-                                      );
-                                      return;
-                                    }
-                                    dispatch(
-                                      editBasicInfoThunk({
-                                        gamingLicense: gamingLicenseNumber,
-                                        gamingLicenseExpiry:
-                                          gamingLicenseExpiry,
-                                        userId: profile?.refUser,
-                                      })
-                                    ).then((res) => {
-                                      dispatch(getBusinessLicense());
-                                      setEditGamingLicenseInfo(false);
-                                      toast.success(
-                                        "Gaming license updated successfully"
-                                      );
-                                    });
-                                  }}
-                                />
-                              ) : (
-                                <img
-                                  src={Edit}
-                                  alt="edit"
-                                  onClick={() => {
-                                    console.log("Edit basic info");
-                                    setEditGamingLicenseInfo(true);
-                                  }}
-                                />
-                              )}
+                                >
+                                  <Col md={5} sm={5} xs={5}>
+                                    <P color="black" weight="400">
+                                      License Number
+                                    </P>
+                                  </Col>
+                                  <Col md={5} sm={5} xs={5}>
+                                    <P color="black" weight="400">
+                                      Expiry Date
+                                    </P>
+                                  </Col>
+                                  <Col md={2} sm={2} xs={2}>
+                                    <P color="black" weight="300">
+                                      Action
+                                    </P>
+                                  </Col>
+                                </Row>
+                              </div>
+                              <Row
+                                style={
+                                  isResponsive
+                                    ? {
+                                        padding: "2px 2px 12px 2px",
+                                        margin: "0px 20px 0px 0px",
+                                      }
+                                    : {
+                                        padding: "12px 30px 12px 20px",
+                                        margin: "0px 20px 0px 0px",
+                                      }
+                                }
+                              >
+                                <Col className="mt-4" md={5} sm={5} xs={5}>
+                                  <Input
+                                    placeholder={123456}
+                                    value={addGamingLicenseNumber}
+                                    onChange={(e) => {
+                                      setAddGamingLicenseNumber(e.target.value);
+                                    }}
+                                  />
+                                </Col>
+                                <Col className="mt-4" md={5} sm={5} xs={5}>
+                                  <Input
+                                    type="date"
+                                    value={addGamingLicenseExpiryDate}
+                                    onChange={(e) => {
+                                      setAddGamingLicenseExpiryDate(e.target.value);
+                                    }}
+                                  />
+                                </Col>
+                                <Col className="mt-4" md={2} sm={2} xs={2}>
+                                    <img
+                                      src={Tick}
+                                      alt="add"
+                                      onClick={() => {
+                                        if (!addGamingLicenseNumber) {
+                                          toast.error(
+                                            "Please enter gaming license number"
+                                          );
+                                          return;
+                                        } else if (!addGamingLicenseExpiryDate) {
+                                          toast.error(
+                                            "Please enter gaming license expiry date"
+                                          );
+                                          return;
+                                        }
+                                        dispatch(
+                                          addGamingLicenseThunk({
+                                            businessId: profile?._id,
+                                            gamingLicense: addGamingLicenseNumber,
+                                            gamingLicenseExpiry: addGamingLicenseExpiryDate,
+                                            isGamingLicenseEnabled: true
+                                          })
+                                        ).then((res) => {
+                                          dispatch(getBusinessLicense());
+                                          setEditGamingLicenseInfo(false);
+                                          toast.success(
+                                            "Gaming license added successfully"
+                                          );
+                                        });
+                                      }}
+                                    />
+                                </Col>
+                              </Row>
                             </Col>
                           </Row>
-                        </Col>
-                      </Row>
-                    </Box>
-                  </Col>
+                        </Box>
+                      </Col>
+                    </>
+                  ) : null}
+
+                  {/* Show gaming license if it exists else show add gaming license button */}
+                  {profile?.isGamingLicenseEnabled ? (
+                    <>
+                      <Col md={7}>
+                        <Box
+                          width={isResponsive ? "100%" : "55vw"}
+                          padding={
+                            isResponsive
+                              ? "41px 20px 20px 20px"
+                              : "41px 20px 52px 64px"
+                          }
+                        >
+                          <Row className="align-items-center">
+                            <Col md={12}>
+                              <div>
+                                <Row
+                                  style={
+                                    isResponsive
+                                      ? {
+                                          background: "#F2F2F2",
+                                          padding: "12px 2px 12px 2px",
+                                          margin: "0px 20px 0px 0px",
+                                          borderRadius: "8px",
+                                        }
+                                      : {
+                                          background: "#F2F2F2",
+                                          padding: "12px 30px 12px 20px",
+                                          margin: "0px 20px 0px 0px",
+                                          borderRadius: "8px",
+                                        }
+                                  }
+                                >
+                                  <Col md={5} sm={5} xs={5}>
+                                    <P color="black" weight="400">
+                                      License Number
+                                    </P>
+                                  </Col>
+                                  <Col md={5} sm={5} xs={5}>
+                                    <P color="black" weight="400">
+                                      Expiry Date
+                                    </P>
+                                  </Col>
+                                  <Col md={2} sm={2} xs={2}>
+                                    <P color="black" weight="300">
+                                      Action
+                                    </P>
+                                  </Col>
+                                </Row>
+                              </div>
+                              <Row
+                                style={
+                                  isResponsive
+                                    ? {
+                                        padding: "2px 2px 12px 2px",
+                                        margin: "0px 20px 0px 0px",
+                                      }
+                                    : {
+                                        padding: "12px 30px 12px 20px",
+                                        margin: "0px 20px 0px 0px",
+                                      }
+                                }
+                              >
+                                <Col className="mt-4" md={5} sm={5} xs={5}>
+                                  <Input
+                                    style={
+                                      editGamingLicenseInfo
+                                        ? { background: "none", color: "black" }
+                                        : { background: "none", color: "black" }
+                                    }
+                                    disabled={
+                                      editGamingLicenseInfo ? false : true
+                                    }
+                                    placeholder={profile?.gamingLicense}
+                                    value={gamingLicenseNumber}
+                                    onChange={(e) => {
+                                      setGamingLicenseNumber(e.target.value);
+                                    }}
+                                  />
+                                </Col>
+                                <Col className="mt-4" md={5} sm={5} xs={5}>
+                                  {editGamingLicenseInfo ? (
+                                    <Input
+                                      style={
+                                        editGamingLicenseInfo
+                                          ? {
+                                              background: "none",
+                                              color: "black",
+                                            }
+                                          : {
+                                              background: "none",
+                                              color: "black",
+                                            }
+                                      }
+                                      disabled={
+                                        editGamingLicenseInfo ? false : true
+                                      }
+                                      type="date"
+                                      placeholder={profile?.gamingLicenseExpiry}
+                                      value={gamingLicenseExpiry}
+                                      onChange={(e) => {
+                                        setGamingLicenseExpiry(e.target.value);
+                                      }}
+                                    />
+                                  ) : (
+                                    <P color="#EF3061" weight="300">
+                                      <Moment format="DD/MM/YYYY">
+                                        {profile?.gamingLicenseExpiry}
+                                      </Moment>
+                                    </P>
+                                  )}
+                                </Col>
+                                <Col className="mt-4" md={2} sm={2} xs={2}>
+                                  {editGamingLicenseInfo ? (
+                                    <img
+                                      src={Tick}
+                                      alt="add"
+                                      onClick={() => {
+                                        if (!gamingLicenseNumber) {
+                                          toast.error(
+                                            "Please enter gaming license number"
+                                          );
+                                          return;
+                                        } else if (!gamingLicenseExpiry) {
+                                          toast.error(
+                                            "Please enter gaming license expiry date"
+                                          );
+                                          return;
+                                        }
+                                        dispatch(
+                                          editBasicInfoThunk({
+                                            gamingLicense: gamingLicenseNumber,
+                                            gamingLicenseExpiry:
+                                              gamingLicenseExpiry,
+                                            userId: profile?.refUser,
+                                          })
+                                        ).then((res) => {
+                                          dispatch(getBusinessLicense());
+                                          setEditGamingLicenseInfo(false);
+                                          toast.success(
+                                            "Gaming license updated successfully"
+                                          );
+                                        });
+                                      }}
+                                    />
+                                  ) : (
+                                    <>
+                                      {!editGamingLicenseInfo ? (
+                                        <>
+                                          <img
+                                            src={Edit}
+                                            alt="edit"
+                                            onClick={() => {
+                                              console.log("Edit basic info");
+                                              setEditGamingLicenseInfo(true);
+                                            }}
+                                          />
+                                          <img
+                                            alt="deletee"
+                                            style={{ marginLeft: "10px" }}
+                                            width={20}
+                                            height={20}
+                                            src={Delete}
+                                            onClick={() => {
+                                              dispatch(
+                                                deleteGamingLicense({
+                                                  businessId: profile?._id,
+                                                })
+                                              ).then((res) => {
+                                                if (res) {
+                                                  callLicenseAPI();
+                                                }
+                                              });
+                                            }}
+                                          />
+                                        </>
+                                      ) : null}
+                                    </>
+                                  )}
+                                </Col>
+                              </Row>
+                            </Col>
+                          </Row>
+                        </Box>
+                      </Col>
+                    </>
+                  ) : (
+                    <>
+                    {!addGamingLicense ? (
+                      
+                      <Col md={7}>
+                        <Box
+                          width={isResponsive ? "100%" : "55vw"}
+                          padding={
+                            isResponsive
+                              ? "41px 20px 20px 20px"
+                              : "41px 20px 52px 64px"
+                          }
+                        >
+                          <Button
+                            style={{
+                              width: "100%",
+                              padding: "9px 14px",
+                              background: "black",
+                              color: "white",
+                              fontSize: "14px",
+                              borderRadius: "3px",
+                            }}
+                            onClick={() => {
+                              setAddGamingLicense(true);
+                            }}
+                          >
+                            {" "}
+                            Add Gaming License
+                          </Button>
+                        </Box>
+                      </Col>
+                    ): null}
+                    </>
+                  )}
                 </Row>
               </>
             ) : null}
 
             <Spacer height="10px" />
+            {/* ========================== Manager Info =============================================*/}
             <Row
               style={{
                 padding: isResponsive ? "0vw 0vw 0vw 1vw" : "0vw 10vw 0vw 1vw",
@@ -940,7 +1136,7 @@ export default function Profile() {
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                disabled={editableManagerInd ? false : true}
+                                disabled={true}
                                 placeholder={profile?.dutyManager?.email}
                                 onChange={(e) => {
                                   profile.dutyManager.email = e.target.value;
@@ -1014,6 +1210,7 @@ export default function Profile() {
                                   src={Tick}
                                   alt="edit"
                                   onClick={() => {
+                                    console.log("Hello world")
                                     dispatch(
                                       updateSingleManager({
                                         name: profile?.dutyManager?.name,
@@ -1028,7 +1225,11 @@ export default function Profile() {
                                       })
                                     ).then((res) => {
                                       if (res) {
+                                        setEditableManagerInd(false);
                                         callLicenseAPI();
+                                        return toast.success(
+                                          "Duty Manager Updated Successfully"
+                                        );
                                       }
                                     });
                                   }}
@@ -1251,7 +1452,6 @@ export default function Profile() {
               <Button
                 onClick={() => {
                   if (edit) {
-                    // caallbackendfunction here
                   } else {
                     setEdit(true);
                   }

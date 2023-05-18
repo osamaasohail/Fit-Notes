@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { useDispatch } from "react-redux";
 import { forgotPassword } from "../../service/redux/middleware/password";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -32,6 +33,7 @@ export default function ResetEmail() {
   };
   return (
     <>
+      <ToastContainer />
       <Row style={{ margin: "0px" }}>
         <Col style={{ padding: "0px" }} lg={2} md={3}>
           <SideNavbar />
