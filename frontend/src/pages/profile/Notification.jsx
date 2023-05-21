@@ -125,8 +125,11 @@ export default function Notification() {
                           <P className="mx-1" color="black" weight="400">
                             {userData?.accountType === 1 && (
                               <span>
-                                Your license ${item?.individualLicense?.name} is
-                                going to be expired in ${item?.sendNotiDay}
+                                Your license ${item?.individualLicense} is going
+                                to be expired on{" "}
+                                <Moment format="DD/MM/YYYY">
+                                  {item?.createdAt}
+                                </Moment>
                               </span>
                             )}
                             {userData?.accountType === 2 && (
