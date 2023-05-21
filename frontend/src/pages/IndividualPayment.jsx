@@ -49,6 +49,10 @@ export default function IndividualPayment() {
 
   useEffect(() => {
     setFullName(userData.name);
+    setDutyManagerEmail(userData.email);
+    if(userData?.isProfileCompleted){
+      navigate("/profile/edit-profile");
+    }
   }, [userData]);
 
   // const [term, setTerm] = useState(false);
@@ -256,6 +260,7 @@ export default function IndividualPayment() {
                         width: "100%",
                       }}
                       placeholder="Email"
+                      disabled={true}
                     />
                     <div
                       style={{ position: "absolute", top: "15%", right: "2%" }}

@@ -50,6 +50,9 @@ export default function Payment() {
   useEffect(() => {
     setBusinessName(userData.name);
     setBussinerOwnerEmail(userData.email);
+    if(userData?.isProfileCompleted){
+      navigate("/profile/edit-profile");
+    }
   }, [userData]);
 
   const [dutyManagers, setDutyManagers] = useState([
