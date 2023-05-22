@@ -80,7 +80,7 @@ export default function Notification() {
             <Row>
               <Col md={7}>
                 <H1 fontSize="24px" weight="500" color="black">
-                  Notification
+                  Notifications
                 </H1>
               </Col>
               <Col md={5}>
@@ -125,7 +125,7 @@ export default function Notification() {
                           <P className="mx-1" color="black" weight="400">
                             {userData?.accountType === 1 && (
                               <span>
-                                Your license ${item?.individualLicense} is going
+                                Your license {item?.individualLicense} is going
                                 to be expired on{" "}
                                 <Moment format="DD/MM/YYYY">
                                   {item?.createdAt}

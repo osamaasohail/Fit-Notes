@@ -193,7 +193,7 @@ export default function SideNavbar() {
                       navigate("/profile/notification");
                     }}
                   >
-                    Notification Setting
+                    Notifications
                   </A>
                 </LI>
                 <LI>
