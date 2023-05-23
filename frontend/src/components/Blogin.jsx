@@ -205,7 +205,7 @@ export default function Blogin() {
 
                 <div style={{ width: "100%" }}>
                   <ReCAPTCHA
-                    sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
+                    sitekey="6LcUQy0mAAAAADbfyzXAUGUejxIzxH5yPavs9PKz"
                     ref={recaptchaRef}
                     onChange={(e) => console.log("Recaptcha is : ", recaptchaRef.current.getValue())}
                   />

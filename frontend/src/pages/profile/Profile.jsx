@@ -571,42 +571,45 @@ export default function Profile() {
                                     type="date"
                                     value={addGamingLicenseExpiryDate}
                                     onChange={(e) => {
-                                      setAddGamingLicenseExpiryDate(e.target.value);
+                                      setAddGamingLicenseExpiryDate(
+                                        e.target.value
+                                      );
                                     }}
                                   />
                                 </Col>
                                 <Col className="mt-4" md={2} sm={2} xs={2}>
-                                    <img
-                                      src={Tick}
-                                      alt="add"
-                                      onClick={() => {
-                                        if (!addGamingLicenseNumber) {
-                                          toast.error(
-                                            "Please enter gaming license number"
-                                          );
-                                          return;
-                                        } else if (!addGamingLicenseExpiryDate) {
-                                          toast.error(
-                                            "Please enter gaming license expiry date"
-                                          );
-                                          return;
-                                        }
-                                        dispatch(
-                                          addGamingLicenseThunk({
-                                            businessId: profile?._id,
-                                            gamingLicense: addGamingLicenseNumber,
-                                            gamingLicenseExpiry: addGamingLicenseExpiryDate,
-                                            isGamingLicenseEnabled: true
-                                          })
-                                        ).then((res) => {
-                                          dispatch(getBusinessLicense());
-                                          setEditGamingLicenseInfo(false);
-                                          toast.success(
-                                            "Gaming license added successfully"
-                                          );
-                                        });
-                                      }}
-                                    />
+                                  <img
+                                    src={Tick}
+                                    alt="add"
+                                    onClick={() => {
+                                      if (!addGamingLicenseNumber) {
+                                        toast.error(
+                                          "Please enter gaming license number"
+                                        );
+                                        return;
+                                      } else if (!addGamingLicenseExpiryDate) {
+                                        toast.error(
+                                          "Please enter gaming license expiry date"
+                                        );
+                                        return;
+                                      }
+                                      dispatch(
+                                        addGamingLicenseThunk({
+                                          businessId: profile?._id,
+                                          gamingLicense: addGamingLicenseNumber,
+                                          gamingLicenseExpiry:
+                                            addGamingLicenseExpiryDate,
+                                          isGamingLicenseEnabled: true,
+                                        })
+                                      ).then((res) => {
+                                        dispatch(getBusinessLicense());
+                                        setEditGamingLicenseInfo(false);
+                                        toast.success(
+                                          "Gaming license added successfully"
+                                        );
+                                      });
+                                    }}
+                                  />
                                 </Col>
                               </Row>
                             </Col>
@@ -782,6 +785,7 @@ export default function Profile() {
                                               dispatch(
                                                 deleteGamingLicense({
                                                   businessId: profile?._id,
+                                                  isGamingLicenseEnabled: true,
                                                 })
                                               ).then((res) => {
                                                 if (res) {
@@ -803,36 +807,35 @@ export default function Profile() {
                     </>
                   ) : (
                     <>
-                    {!addGamingLicense ? (
-                      
-                      <Col md={7}>
-                        <Box
-                          width={isResponsive ? "100%" : "55vw"}
-                          padding={
-                            isResponsive
-                              ? "41px 20px 20px 20px"
-                              : "41px 20px 52px 64px"
-                          }
-                        >
-                          <Button
-                            style={{
-                              width: "100%",
-                              padding: "9px 14px",
-                              background: "black",
-                              color: "white",
-                              fontSize: "14px",
-                              borderRadius: "3px",
-                            }}
-                            onClick={() => {
-                              setAddGamingLicense(true);
-                            }}
+                      {!addGamingLicense ? (
+                        <Col md={7}>
+                          <Box
+                            width={isResponsive ? "100%" : "55vw"}
+                            padding={
+                              isResponsive
+                                ? "41px 20px 20px 20px"
+                                : "41px 20px 52px 64px"
+                            }
                           >
-                            {" "}
-                            Add Gaming License
-                          </Button>
-                        </Box>
-                      </Col>
-                    ): null}
+                            <Button
+                              style={{
+                                width: "100%",
+                                padding: "9px 14px",
+                                background: "black",
+                                color: "white",
+                                fontSize: "14px",
+                                borderRadius: "3px",
+                              }}
+                              onClick={() => {
+                                setAddGamingLicense(true);
+                              }}
+                            >
+                              {" "}
+                              Add Gaming License
+                            </Button>
+                          </Box>
+                        </Col>
+                      ) : null}
                     </>
                   )}
                 </Row>
@@ -1210,7 +1213,7 @@ export default function Profile() {
                                   src={Tick}
                                   alt="edit"
                                   onClick={() => {
-                                    console.log("Hello world")
+                                    console.log("Hello world");
                                     dispatch(
                                       updateSingleManager({
                                         name: profile?.dutyManager?.name,
@@ -1441,34 +1444,36 @@ export default function Profile() {
             </Row>
           </Scrool>
           <Spacer />
-          <Row
-            style={{
-              width: "100%",
-              margin: "0",
-              padding: isResponsive ? "0vw 1vw 0vw 1vw" : "0vw 10vw 0vw 13vw",
-            }}
-          >
-            <Col md={12}>
-              <Button
-                onClick={() => {
-                  if (edit) {
-                  } else {
-                    setEdit(true);
-                  }
-                }}
-                style={{
-                  width: "100%",
-                  padding: "9px 14px",
-                  background: "black",
-                  color: "white",
-                  fontSize: "14px",
-                  borderRadius: "3px",
-                }}
-              >
-                {edit ? "Update" : "Edit"}
-              </Button>
-            </Col>
-          </Row>
+          {userData?.accountType == 2 && (
+            <Row
+              style={{
+                width: "100%",
+                margin: "0",
+                padding: isResponsive ? "0vw 1vw 0vw 1vw" : "0vw 10vw 0vw 13vw",
+              }}
+            >
+              <Col md={12}>
+                <Button
+                  onClick={() => {
+                    if (edit) {
+                    } else {
+                      setEdit(true);
+                    }
+                  }}
+                  style={{
+                    width: "100%",
+                    padding: "9px 14px",
+                    background: "black",
+                    color: "white",
+                    fontSize: "14px",
+                    borderRadius: "3px",
+                  }}
+                >
+                  {edit ? "Update" : "Edit"}
+                </Button>
+              </Col>
+            </Row>
+          )}
         </Col>
       </Row>
     </>
