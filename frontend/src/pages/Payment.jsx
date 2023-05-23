@@ -235,7 +235,7 @@ export default function Payment() {
                       //   background: "#FCFCFC",
                       width: "100%",
                     }}
-                    placeholder="Liquor Browdy"
+                    placeholder="Enter name"
                   />
                   <div
                     style={{ position: "absolute", top: "15%", right: "2%" }}
@@ -323,7 +323,7 @@ export default function Payment() {
                       //   background: "#FCFCFC",
                       width: "100%",
                     }}
-                    placeholder="Email"
+                    placeholder="Enter email"
                   />
                   <div
                     style={{ position: "absolute", top: "15%", right: "2%" }}
@@ -347,7 +347,7 @@ export default function Payment() {
                         //   background: "#FCFCFC",
                         width: "100%",
                       }}
-                      placeholder="12345"
+                      placeholder="Enter license number"
                     />
                     <div
                       style={{ position: "absolute", top: "15%", right: "2%" }}
@@ -362,7 +362,7 @@ export default function Payment() {
 
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
-                  liquor license Expiry Date
+                  Liquor license Expiry Date
                   <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
@@ -376,7 +376,8 @@ export default function Payment() {
                         width: "100%",
                       }}
                       type="date"
-                      placeholder="12345"
+                      placeholder="Enter license expiry date"
+                      min={new Date().toISOString().split('T')[0]}
                     />
 
                     <Spacer height="16px" />
@@ -405,7 +406,7 @@ export default function Payment() {
                                   //   background: "#FCFCFC",
                                   width: "100%",
                                 }}
-                                placeholder="Liquor Browdy"
+                                placeholder="Enter name"
                               />
                               <div
                                 style={{
@@ -438,8 +439,9 @@ export default function Payment() {
                                   //   background: "#FCFCFC",
                                   width: "100%",
                                 }}
-                                placeholder="Liquor Browdy"
+                                placeholder="Enter expiry date"
                                 type="date"
+                                min={new Date().toISOString().split('T')[0]}
                               />
 
                               <Spacer height="16px" />
@@ -465,7 +467,7 @@ export default function Payment() {
                                 fontSize: "14px",
                                 width: "100%",
                               }}
-                              placeholder="Email"
+                              placeholder="Enter email"
                             />
                             <div
                               style={{
@@ -498,7 +500,7 @@ export default function Payment() {
                                 fontSize: "14px",
                                 width: "100%",
                               }}
-                              placeholder="License Number"
+                              placeholder="Enter license number"
                             />
                             <div
                               style={{
@@ -572,7 +574,7 @@ export default function Payment() {
                             //   background: "#FCFCFC",
                             width: "100%",
                           }}
-                          placeholder="123456"
+                          placeholder="Enter license number"
                         />
                         <div
                           style={{
@@ -603,8 +605,9 @@ export default function Payment() {
                             //   background: "#FCFCFC",
                             width: "100%",
                           }}
-                          placeholder="Liquor Browdy"
+                          placeholder="Enter expiry date"
                           type="date"
+                          min={new Date().toISOString().split('T')[0]}
                         />
 
                         <Spacer height="16px" />

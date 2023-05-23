@@ -34,6 +34,7 @@ import {
   updateSingleManager,
 } from "../../service/redux/middleware/dutyManager";
 import { deleteGamingLicense } from "../../service/redux/middleware/licenses";
+import { getSingleUser } from "../../service/redux/middleware/getUser";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -80,6 +81,7 @@ export default function Profile() {
   const [profile, setProfile] = useState([]);
   useEffect(() => {
     if (userData) {
+      dispatch(getSingleUser());
       if (userData?.accountType === 1) {
         dispatch(getIndividualLicense()).then((res) => {
           setBusinessName(res?.payload?.data?.licenses[0]?.name);
@@ -419,6 +421,7 @@ export default function Profile() {
                                   onChange={(e) => {
                                     setLiquorLicenseExpiry(e.target.value);
                                   }}
+                                  min={new Date().toISOString().split('T')[0]}
                                 />
                               ) : (
                                 <Moment format="DD/MM/YYYY">
@@ -559,7 +562,7 @@ export default function Profile() {
                               >
                                 <Col className="mt-4" md={5} sm={5} xs={5}>
                                   <Input
-                                    placeholder={123456}
+                                    placeholder={"Enter license number"}
                                     value={addGamingLicenseNumber}
                                     onChange={(e) => {
                                       setAddGamingLicenseNumber(e.target.value);
@@ -570,11 +573,13 @@ export default function Profile() {
                                   <Input
                                     type="date"
                                     value={addGamingLicenseExpiryDate}
+                                    placeholder="Enter expiry date"
                                     onChange={(e) => {
                                       setAddGamingLicenseExpiryDate(
                                         e.target.value
                                       );
                                     }}
+                                    min={new Date().toISOString().split('T')[0]}
                                   />
                                 </Col>
                                 <Col className="mt-4" md={2} sm={2} xs={2}>
@@ -721,6 +726,7 @@ export default function Profile() {
                                       onChange={(e) => {
                                         setGamingLicenseExpiry(e.target.value);
                                       }}
+                                      min={new Date().toISOString().split('T')[0]}
                                     />
                                   ) : (
                                     <P color="#EF3061" weight="300">
@@ -785,7 +791,7 @@ export default function Profile() {
                                               dispatch(
                                                 deleteGamingLicense({
                                                   businessId: profile?._id,
-                                                  isGamingLicenseEnabled: true,
+                                                  isGamingLicenseEnabled: false,
                                                 })
                                               ).then((res) => {
                                                 if (res) {
@@ -1032,6 +1038,7 @@ export default function Profile() {
                                           onChange={(e) => {
                                             manager.expiryDate = e.target.value;
                                           }}
+                                          min={new Date().toISOString().split('T')[0]}
                                         />
                                       ) : (
                                         <Moment format="DD/MM/YYYY">
@@ -1190,6 +1197,7 @@ export default function Profile() {
                                     profile.dutyManager.expiryDate =
                                       e.target.value;
                                   }}
+                                  min={new Date().toISOString().split('T')[0]}
                                 />
                               ) : (
                                 <Moment format="DD/MM/YYYY">
@@ -1272,7 +1280,7 @@ export default function Profile() {
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                placeholder={"Enter Name"}
+                                placeholder={"Enter name"}
                                 value={newDutyManagerName}
                                 onChange={(e) => {
                                   setNewDutyManagerName(e.target.value);
@@ -1291,7 +1299,7 @@ export default function Profile() {
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                placeholder={"Enter  Email"}
+                                placeholder={"Enter email"}
                                 value={newDutyManagerEmail}
                                 onChange={(e) => {
                                   setNewDutyManagerEmail(e.target.value);
@@ -1306,7 +1314,7 @@ export default function Profile() {
                                     ? { background: "none", color: "black" }
                                     : { background: "none", color: "black" }
                                 }
-                                placeholder={"Enter Licence"}
+                                placeholder={"Enter license number"}
                                 value={newDutyManagerLicenseNumber}
                                 onChange={(e) => {
                                   setNewDutyManagerLicenseNumber(
@@ -1340,6 +1348,7 @@ export default function Profile() {
                                   );
                                   setIsNewDutyManagerAdded(true);
                                 }}
+                                min={new Date().toISOString().split('T')[0]}
                                 // placeholder= {manager?.expiryDate}
                               />
                             </Col>
@@ -1417,34 +1426,34 @@ export default function Profile() {
                         ""
                       )}
                     </Col>
-                    {edit ? (
-                      <Button
-                        style={{
-                          width: "100%",
-                          padding: "9px 14px",
-                          background: "black",
-                          color: "white",
-                          fontSize: "14px",
-                          borderRadius: "3px",
-                        }}
-                        disabled={addDutyManager ? true : false}
-                        onClick={() => {
-                          setAddDutyManager(true);
-                        }}
-                      >
-                        {" "}
-                        Add Duty Manager
-                      </Button>
-                    ) : (
+                    {/* {edit ? ( */}
+                    <Button
+                      style={{
+                        width: "100%",
+                        padding: "9px 14px",
+                        background: "black",
+                        color: "white",
+                        fontSize: "14px",
+                        borderRadius: "3px",
+                      }}
+                      disabled={addDutyManager ? true : false}
+                      onClick={() => {
+                        setAddDutyManager(true);
+                      }}
+                    >
+                      {" "}
+                      Add Duty Manager
+                    </Button>
+                    {/* ) : (
                       ""
-                    )}
+                    )} */}
                   </Row>
                 </Box>
               </Col>
             </Row>
           </Scrool>
           <Spacer />
-          {userData?.accountType == 2 && (
+          {/* {userData?.accountType == 2 && (
             <Row
               style={{
                 width: "100%",
@@ -1473,7 +1482,7 @@ export default function Profile() {
                 </Button>
               </Col>
             </Row>
-          )}
+          )} */}
         </Col>
       </Row>
     </>

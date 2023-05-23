@@ -82,8 +82,10 @@ export default function Blogin() {
     dispatch(postSignUp(data)).then((res) => {
       if(res.payload.status === 201){
         setSignUp(false);
-        navigate("/sign-in")
-        return toast.success("Account created successfully")
+        toast.success("Verification link has been sent to your email")
+        setTimeout(() => {
+          navigate("/sign-in")
+        }, 3000);
       }
     });
   };

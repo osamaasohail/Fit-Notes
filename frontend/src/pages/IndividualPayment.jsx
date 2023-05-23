@@ -13,6 +13,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useDispatch, useSelector } from "react-redux";
 import { individualLicense } from "../service/redux/middleware/licenses";
 import { ToastContainer } from "react-toastify";
+import { getSingleUser } from "../service/redux/middleware/getUser";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -151,7 +152,7 @@ export default function IndividualPayment() {
                       //   background: "#FCFCFC",
                       width: "100%",
                     }}
-                    placeholder="Liquor Browdy"
+                    placeholder="Enter name"
                   />
                   <div
                     style={{ position: "absolute", top: "15%", right: "2%" }}
@@ -233,7 +234,7 @@ export default function IndividualPayment() {
                         //   background: "#FCFCFC",
                         width: "100%",
                       }}
-                      placeholder="Name"
+                      placeholder="Enter name"
                     />
                     <div
                       style={{ position: "absolute", top: "15%", right: "2%" }}
@@ -259,7 +260,7 @@ export default function IndividualPayment() {
                         //   background: "#FCFCFC",
                         width: "100%",
                       }}
-                      placeholder="Email"
+                      placeholder="Enter email"
                       disabled={true}
                     />
                     <div
@@ -287,7 +288,7 @@ export default function IndividualPayment() {
                         //   background: "#FCFCFC",
                         width: "100%",
                       }}
-                      placeholder="12345"
+                      placeholder="Enter license number"
                       name="licenseNumber"
                     />
                     <div
@@ -317,6 +318,7 @@ export default function IndividualPayment() {
                         width: "100%",
                       }}
                       type="date"
+                      min={new Date().toISOString().split('T')[0]}
                     />
 
                     <Spacer height="16px" />

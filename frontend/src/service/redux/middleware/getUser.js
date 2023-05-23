@@ -20,3 +20,25 @@ export const getUser = createAsyncThunk("getUser", async (data) => {
     };
   }
 });
+
+export const getSingleUser = createAsyncThunk("getSingleUser", async (data) => {
+  try {
+    const res = await client.get("user");
+    localStorage.setItem("token", res.data.token)
+    return { status: res.status, data: res.data };
+  } catch (error) {
+    console.log(error);
+    if (error.response.status === 401) {
+      toast.error("Session Expired");
+      localStorage.clear();
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2000);
+    }
+    return {
+      message: error.response.data.error,
+      status: error.response.status,
+    };
+  }
+});
+
