@@ -125,19 +125,19 @@ export default function Notification() {
                           <P className="mx-1" color="black" weight="400">
                             {userData?.accountType === 1 && (
                               <span>
-                                Your license {item?.individualLicense} is going
+                                Your license {item?.licenseNumber} is going
                                 to be expired on{" "}
                                 <Moment format="DD/MM/YYYY">
-                                  {item?.createdAt}
+                                  {item?.expiryDate}
                                 </Moment>
                               </span>
                             )}
                             {userData?.accountType === 2 && (
                               <span>
-                                Your license {item?.businessLicense} is going to
+                                Your license {item?.licenseNumber} is going to
                                 be expired in
                                 <Moment format="DD/MM/YYYY">
-                                  {item?.createdAt}
+                                  {item?.expiryDate}
                                 </Moment>
                               </span>
                             )}
