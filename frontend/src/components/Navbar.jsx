@@ -68,7 +68,7 @@ export default function Navbar() {
               onClick={() => {
                 navigate("/");
               }}
-              fontSize="20px"
+              fontSize="25px"
               weight="700"
             >
               The Hospitality Guardian
@@ -288,7 +288,7 @@ export default function Navbar() {
               {/* </div> */}
               {isResponsive
                 ? ""
-                : tokens && (
+                : tokens.length > 0 && (
                     <Flex style={{ cursor: "pointer" }} alignItems="center">
                       <img src={Profile} />
                       <P
@@ -298,6 +298,20 @@ export default function Navbar() {
                         style={{ marginLeft: "10px" }}
                       >
                         Profile
+                      </P>
+                    </Flex>
+                )}
+                {isResponsive
+                ? ""
+                : tokens.length === 0 && (
+                    <Flex style={{ cursor: "pointer" }} alignItems="center">
+                      <P
+                        onClick={() => {
+                          navigate("/sign-in");
+                        }}
+                        style={{ marginLeft: "10px" }}
+                      >
+                        Login
                       </P>
                     </Flex>
                   )}

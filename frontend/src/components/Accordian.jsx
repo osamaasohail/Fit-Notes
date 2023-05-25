@@ -31,7 +31,7 @@ const data = [
   {
     id: 2,
     head: "When will I be billed?",
-    para: "At the end of your first year or first expiry date, whichever comes first. Then annually on this date of renewal.",
+    para: "The date of signing up for a business or individual account becomes the annual billing date for subsequent years.",
   },
   {
     id: 3,
@@ -46,9 +46,9 @@ const data = [
   {
     id: 5,
     head: "What are the differences between the plans?",
-    para: `liquor licenses are free to add but the  cost is calculated on how many mangers the business will add. Our single \n certificate category is for solo licensees or certifications business owners and is a free service. \n
-    Our 2 to 4 certificates option is for most small to medium hospitality businesses with management of multiple duty \n managers certificates. This service is $7.00 NZD monthly plus GST and applicable fees. \n
-    Our 5+ certificate option is designed for medium to large hospitality businesses, accounting for multiple duty \n managers for each day. This service is $10.00 monthly plus GST and applicable fees.`,
+    para: `The initial year of adding a Business Liquor license is free, but subsequent costs are determined based on the number of Duty Managers associated with the business. We offer a separate category called "Single Certificate" for individual licensees who can create an Individual account on our platform.\n
+    For small to medium hospitality businesses that require management of multiple duty managers' certificates, we provide the option of 2 to 4 certificates. This service costs $5.00 NZD per certificate annually, plus GST and applicable fees.\n
+    Medium to large hospitality businesses, with a need for multiple duty managers each day, can opt for our 5+ certificate option. This service is priced at $5.00 NZD per certificate annually, plus GST and applicable fees.`,
   },
   {
     id: 6,

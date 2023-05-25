@@ -1,4 +1,4 @@
-import HomeImage from "../images/Homeimage.svg";
+import HomeImage from "../images/aboutImage.svg";
 import styled from "styled-components";
 import { Button } from "./Button";
 import { H1 } from "./Typography";
@@ -60,7 +60,7 @@ export default function HeroSection({ box, buttonText, image, boxText }) {
   return (
     <>
       <Wrapper>
-        <img width={"100%"} height={"100%"} src={image} />
+        <img width={"100%"} height={"100%"} src={HomeImage} />
         {box ? (
           buttonText ? (
             <Buttons style={isResponsive?{fontSize:"12px",padding:"12px 15px"}:{fontSize:""}}>{buttonText}</Buttons>

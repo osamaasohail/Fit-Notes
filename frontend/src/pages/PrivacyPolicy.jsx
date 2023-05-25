@@ -123,7 +123,7 @@ You have the right to ask for a copy of any personal information we hold about y
                 </li>
               </ul>
               <P fontSize="24px" weight="400">
-                Besides our staff, we share this information with:
+                Besides our staff, we may share this information with:
               </P>
               <ul>
                 <li

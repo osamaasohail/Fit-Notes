@@ -55,8 +55,6 @@ export default function AboutUs() {
             comprehensive license management.
           </P>
           <Spacer height={isResponsive ? "23px" : "20px"} />
-
-          <Button style={{fontWeight:"700",color:"#161616"}}>Find out More</Button>
         </WhosText>
 
         <Footer background={"rgba(177, 149, 56, 1)"} color={"black"} />

@@ -9,7 +9,7 @@ import CardImage3 from "../images/cardimage3.svg";
 import { Col, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import { Spacer } from "./Spacer";
-
+import { useNavigate } from "react-router-dom";
 const CardWrape = styled.div`
   background: black;
   text-align: center;
@@ -52,6 +52,7 @@ export default function Card() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 990px)",
   });
+  const navigate = useNavigate();
   return (
     <>
       <Row style={isResponsive?{ margin: "0px",padding:"0px" }:{ margin: "0px",padding:"0 40px 0 40px" }}>
@@ -82,11 +83,14 @@ export default function Card() {
               >
                 Signing up is easy, quick <br /> and affordable.
               </P>
-              <div style={{ margin: "0 20px 0 20px" }}>
+              <div style={{ margin: "0 20px 0 20px" }} onClick={() => {
+                    navigate("/sign-up");
+                  }}>
                 <HeroSection
                   image={CardImage1}
-                  buttonText={"SignUp"}
+                  buttonText={"Sign Up"}
                   box={true}
+                  
                 />
               </div>
             </Flex>
@@ -150,13 +154,12 @@ export default function Card() {
                 lHeight={isResponsive ? "21px" : "36px"}
                 fontSize="24px"
               >
-                For a more detailed <br /> step-by-step process, <br /> please
-                click the link <br /> below
+                Our platform enables <br/> businesses to effortlessly <br/> manage their <br/> Certificates of Approval (CoA) <br/> as well. 
+                
               </P>
               <div style={{ margin: "0 20px 0 20px" }}>
                 <HeroSection
                   image={CardImage3}
-                  buttonText={"Learn More"}
                   box={true}
                 />
               </div>

@@ -54,6 +54,7 @@ export default function Notification() {
       if (res.payload.status === 201) {
         setNotifications(res.payload.data.notifications);
         console.log(res.payload.data.notifications);
+        console.log(userData);
       }
     });
   }, []);
@@ -123,37 +124,36 @@ export default function Notification() {
                         <div className="d-flex align-items-center">
                           <img className="mx-1" src={notification} />
                           <P className="mx-1" color="black" weight="400">
-                            Your [Liquor, Duty Manager, Gaming] license [License Number] will expire on [Date].
-                            {userData?.accountType === 1 && item.type === 'BL' && (
+                            {userData?.accountType === 2 && item.type === 'BL' && (
                               <span>
-                                Your Liquor license {item?.licenseNumber} will expire on {" "}.
+                                Your Liquor license {item?.licenseNumber} will expire on {" "}
                                 <Moment format="DD/MM/YYYY">
                                   {item?.expiryDate}
-                                </Moment>
+                                </Moment>.
                               </span>
                             )}
-                            {userData?.accountType === 1 && item.type === 'DM' && (
+                            {userData?.accountType === 2 && item.type === 'DM' && (
                               <span>
-                                Your Duty Manager license {item?.licenseNumber} will expire on {" "}.
+                                Your Duty Manager license {item?.licenseNumber} will expire on {" "}
                                 <Moment format="DD/MM/YYYY">
                                   {item?.expiryDate}
-                                </Moment>
-                              </span>
-                            )
-                            {userData?.accountType === 1 && item.type === 'GL' && (
-                              <span>
-                                Your Gaming license {item?.licenseNumber} will expire on {" "}.
-                                <Moment format="DD/MM/YYYY">
-                                  {item?.expiryDate}
-                                </Moment>
+                                </Moment>.
                               </span>
                             )}
-                            {userData?.accountType === 2 && (
+                            {userData?.accountType === 2 && item.type === 'GL' && (
                               <span>
-                                Your license {item?.licenseNumber} will expire on {" "}.
+                                Your Gaming license {item?.licenseNumber} will expire on {" "}
                                 <Moment format="DD/MM/YYYY">
                                   {item?.expiryDate}
-                                </Moment>
+                                </Moment>.
+                              </span>
+                            )}
+                            {userData?.accountType === 1 && (
+                              <span>
+                                Your license {item?.licenseNumber} will expire on {" "}
+                                <Moment format="DD/MM/YYYY">
+                                  {item?.expiryDate}
+                                </Moment>.
                               </span>
                             )}
                           </P>
