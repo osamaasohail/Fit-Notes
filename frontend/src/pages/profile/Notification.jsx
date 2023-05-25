@@ -123,10 +123,26 @@ export default function Notification() {
                         <div className="d-flex align-items-center">
                           <img className="mx-1" src={notification} />
                           <P className="mx-1" color="black" weight="400">
-                            {userData?.accountType === 1 && (
+                            Your [Liquor, Duty Manager, Gaming] license [License Number] will expire on [Date].
+                            {userData?.accountType === 1 && item.type === 'BL' && (
                               <span>
-                                Your license {item?.licenseNumber} is going
-                                to be expired on{" "}
+                                Your Liquor license {item?.licenseNumber} will expire on {" "}.
+                                <Moment format="DD/MM/YYYY">
+                                  {item?.expiryDate}
+                                </Moment>
+                              </span>
+                            )}
+                            {userData?.accountType === 1 && item.type === 'DM' && (
+                              <span>
+                                Your Duty Manager license {item?.licenseNumber} will expire on {" "}.
+                                <Moment format="DD/MM/YYYY">
+                                  {item?.expiryDate}
+                                </Moment>
+                              </span>
+                            )}
+                            {userData?.accountType === 1 &&  && item.type === 'GL' && (
+                              <span>
+                                Your Gaming license {item?.licenseNumber} will expire on {" "}.
                                 <Moment format="DD/MM/YYYY">
                                   {item?.expiryDate}
                                 </Moment>
@@ -134,8 +150,7 @@ export default function Notification() {
                             )}
                             {userData?.accountType === 2 && (
                               <span>
-                                Your license {item?.licenseNumber} is going to
-                                be expired in
+                                Your license {item?.licenseNumber} will expire on {" "}.
                                 <Moment format="DD/MM/YYYY">
                                   {item?.expiryDate}
                                 </Moment>
