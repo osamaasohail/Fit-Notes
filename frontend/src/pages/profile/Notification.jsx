@@ -139,8 +139,8 @@ export default function Notification() {
                                   {item?.expiryDate}
                                 </Moment>
                               </span>
-                            )}
-                            {userData?.accountType === 1 &&  && item.type === 'GL' && (
+                            )
+                            {userData?.accountType === 1 && item.type === 'GL' && (
                               <span>
                                 Your Gaming license {item?.licenseNumber} will expire on {" "}.
                                 <Moment format="DD/MM/YYYY">
