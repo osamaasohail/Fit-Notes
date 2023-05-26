@@ -229,6 +229,7 @@ export default function SideNavbar() {
             onClick={() => {
               localStorage.clear();
               navigate("/");
+              window.location.reload();
             }}
           >
             <img alt="logout" src={LogoutPic} />
