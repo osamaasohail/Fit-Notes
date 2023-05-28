@@ -198,8 +198,8 @@ export default function Blogin() {
                       weight="400"
                     >
                       By creating an account you are agreeing to{" "}
-                      {!isResponsive && <br />} our Terms and Conditions and
-                      Privacy Policy
+                      {!isResponsive && <br />} our Terms and Conditions and {" "}
+                      <a href="/privacy-policy" target="_blank">Privacy Policy</a>
                     </P>
                   </Col>
                 </Row>

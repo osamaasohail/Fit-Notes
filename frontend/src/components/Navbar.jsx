@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import Logo from "../images/logo-without-text.png"
 
 const Wrapper = styled.div`
   // background: black;
@@ -71,7 +72,14 @@ export default function Navbar() {
               fontSize="25px"
               weight="700"
             >
-              The Hospitality Guardian
+              <img
+                src={Logo}
+                alt="Logo"
+                width="auto"
+                height="60px"
+                style={{ cursor: "pointer" }}
+              />
+              <span style={{"marginLeft": "10px"}}>The Hospitality Guardian</span>
             </H1>
             {isResponsive ? (
               <img
@@ -82,8 +90,18 @@ export default function Navbar() {
                 src={Menu}
               />
             ) : (
-              <H1 fontSize="20px" weight="700">
-                info@hospitalityguardian.co.nz
+              <H1 fontSize="20px" weight="700" className="mt-3">
+                <a
+                  style={{
+                    color: "white",
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  }}
+                  href="mailto:info@hospitalityguardian.co.nz"
+                >
+                  info@hospitalityguardian.co.nz
+                </a>
+                {/* info@hospitalityguardian.co.nz */}
               </H1>
             )}
           </Flex>
@@ -300,8 +318,8 @@ export default function Navbar() {
                         Profile
                       </P>
                     </Flex>
-                )}
-                {isResponsive
+                  )}
+              {isResponsive
                 ? ""
                 : tokens.length === 0 && (
                     <Flex style={{ cursor: "pointer" }} alignItems="center">

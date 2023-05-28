@@ -12,7 +12,7 @@ import Delete from "../../images/delete.png";
 import Plus from "../../images/plus.png";
 
 import Navbar from "../../components/Navbar";
-import { Wrapper } from "../../components/Style";
+import { Flex, Wrapper } from "../../components/Style";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -421,7 +421,7 @@ export default function Profile() {
                                   onChange={(e) => {
                                     setLiquorLicenseExpiry(e.target.value);
                                   }}
-                                  min={new Date().toISOString().split('T')[0]}
+                                  min={new Date().toISOString().split("T")[0]}
                                 />
                               ) : (
                                 <Moment format="DD/MM/YYYY">
@@ -579,7 +579,7 @@ export default function Profile() {
                                         e.target.value
                                       );
                                     }}
-                                    min={new Date().toISOString().split('T')[0]}
+                                    min={new Date().toISOString().split("T")[0]}
                                   />
                                 </Col>
                                 <Col className="mt-4" md={2} sm={2} xs={2}>
@@ -726,7 +726,9 @@ export default function Profile() {
                                       onChange={(e) => {
                                         setGamingLicenseExpiry(e.target.value);
                                       }}
-                                      min={new Date().toISOString().split('T')[0]}
+                                      min={
+                                        new Date().toISOString().split("T")[0]
+                                      }
                                     />
                                   ) : (
                                     <P color="#EF3061" weight="300">
@@ -738,68 +740,77 @@ export default function Profile() {
                                 </Col>
                                 <Col className="mt-4" md={2} sm={2} xs={2}>
                                   {editGamingLicenseInfo ? (
-                                    <img
-                                      src={Tick}
-                                      alt="add"
-                                      onClick={() => {
-                                        if (!gamingLicenseNumber) {
-                                          toast.error(
-                                            "Please enter gaming license number"
-                                          );
-                                          return;
-                                        } else if (!gamingLicenseExpiry) {
-                                          toast.error(
-                                            "Please enter gaming license expiry date"
-                                          );
-                                          return;
-                                        }
-                                        dispatch(
-                                          editBasicInfoThunk({
-                                            gamingLicense: gamingLicenseNumber,
-                                            gamingLicenseExpiry:
-                                              gamingLicenseExpiry,
-                                            userId: profile?.refUser,
-                                          })
-                                        ).then((res) => {
-                                          dispatch(getBusinessLicense());
-                                          setEditGamingLicenseInfo(false);
-                                          toast.success(
-                                            "Gaming license updated successfully"
-                                          );
-                                        });
-                                      }}
-                                    />
+                                    <>
+                                      <Flex>
+                                        <img
+                                          src={Tick}
+                                          alt="add"
+                                          width={20}
+                                          height={20}
+                                          onClick={() => {
+                                            if (!gamingLicenseNumber) {
+                                              toast.error(
+                                                "Please enter gaming license number"
+                                              );
+                                              return;
+                                            } else if (!gamingLicenseExpiry) {
+                                              toast.error(
+                                                "Please enter gaming license expiry date"
+                                              );
+                                              return;
+                                            }
+                                            dispatch(
+                                              editBasicInfoThunk({
+                                                gamingLicense:
+                                                  gamingLicenseNumber,
+                                                gamingLicenseExpiry:
+                                                  gamingLicenseExpiry,
+                                                userId: profile?.refUser,
+                                              })
+                                            ).then((res) => {
+                                              dispatch(getBusinessLicense());
+                                              setEditGamingLicenseInfo(false);
+                                              toast.success(
+                                                "Gaming license updated successfully"
+                                              );
+                                            });
+                                          }}
+                                        />
+                                      </Flex>
+                                    </>
                                   ) : (
                                     <>
                                       {!editGamingLicenseInfo ? (
                                         <>
-                                          <img
-                                            src={Edit}
-                                            alt="edit"
-                                            onClick={() => {
-                                              console.log("Edit basic info");
-                                              setEditGamingLicenseInfo(true);
-                                            }}
-                                          />
-                                          <img
-                                            alt="deletee"
-                                            style={{ marginLeft: "10px" }}
-                                            width={20}
-                                            height={20}
-                                            src={Delete}
-                                            onClick={() => {
-                                              dispatch(
-                                                deleteGamingLicense({
-                                                  businessId: profile?._id,
-                                                  isGamingLicenseEnabled: false,
-                                                })
-                                              ).then((res) => {
-                                                if (res) {
-                                                  callLicenseAPI();
-                                                }
-                                              });
-                                            }}
-                                          />
+                                          <Flex>
+                                            <img
+                                              src={Edit}
+                                              alt="edit"
+                                              onClick={() => {
+                                                console.log("Edit basic info");
+                                                setEditGamingLicenseInfo(true);
+                                              }}
+                                            />
+                                            <img
+                                              alt="deletee"
+                                              style={{ marginLeft: "10px" }}
+                                              width={20}
+                                              height={20}
+                                              src={Delete}
+                                              onClick={() => {
+                                                dispatch(
+                                                  deleteGamingLicense({
+                                                    businessId: profile?._id,
+                                                    isGamingLicenseEnabled: false,
+                                                  })
+                                                ).then((res) => {
+                                                  if (res) {
+                                                    callLicenseAPI();
+                                                  }
+                                                });
+                                              }}
+                                            />
+                                          </Flex>
                                         </>
                                       ) : null}
                                     </>
@@ -1038,7 +1049,11 @@ export default function Profile() {
                                           onChange={(e) => {
                                             manager.expiryDate = e.target.value;
                                           }}
-                                          min={new Date().toISOString().split('T')[0]}
+                                          min={
+                                            new Date()
+                                              .toISOString()
+                                              .split("T")[0]
+                                          }
                                         />
                                       ) : (
                                         <Moment format="DD/MM/YYYY">
@@ -1047,29 +1062,54 @@ export default function Profile() {
                                       )}
                                     </Col>
                                     <Col md={1} sm={1} xs={1}>
-                                      {!editableManager[index] ? (
+                                      <Flex>
+                                        {!editableManager[index] ? (
+                                          <>
+                                            <img
+                                              src={Edit}
+                                              alt="edit"
+                                              onClick={() => {
+                                                var temp = [...editableManager];
+                                                temp[index] =
+                                                  !editableManager[index];
+                                                setEditableManager(temp);
+                                              }}
+                                            />
+                                          </>
+                                        ) : (
+                                          <img
+                                            src={Tick}
+                                            alt="edit"
+                                            onClick={() => {
+                                              dispatch(
+                                                updateSingleManager({
+                                                  name: manager?.name,
+                                                  email: manager?.email,
+                                                  licenseNumber:
+                                                    manager?.licenseNumber,
+                                                  expiryDate:
+                                                    manager?.expiryDate,
+                                                  certId: profile?._id,
+                                                  dutyManagerId: manager?._id,
+                                                })
+                                              ).then((res) => {
+                                                if (res) {
+                                                  callLicenseAPI();
+                                                }
+                                              });
+                                            }}
+                                          />
+                                        )}
+
                                         <img
-                                          src={Edit}
-                                          alt="edit"
-                                          onClick={() => {
-                                            var temp = [...editableManager];
-                                            temp[index] =
-                                              !editableManager[index];
-                                            setEditableManager(temp);
-                                          }}
-                                        />
-                                      ) : (
-                                        <img
-                                          src={Tick}
-                                          alt="edit"
+                                          alt="delete"
+                                          style={{ marginLeft: "10px" }}
+                                          width={20}
+                                          height={20}
+                                          src={Delete}
                                           onClick={() => {
                                             dispatch(
-                                              updateSingleManager({
-                                                name: manager?.name,
-                                                email: manager?.email,
-                                                licenseNumber:
-                                                  manager?.licenseNumber,
-                                                expiryDate: manager?.expiryDate,
+                                              deleteSingleManager({
                                                 certId: profile?._id,
                                                 dutyManagerId: manager?._id,
                                               })
@@ -1080,27 +1120,7 @@ export default function Profile() {
                                             });
                                           }}
                                         />
-                                      )}
-
-                                      <img
-                                        alt="delete"
-                                        style={{ marginLeft: "10px" }}
-                                        width={20}
-                                        height={20}
-                                        src={Delete}
-                                        onClick={() => {
-                                          dispatch(
-                                            deleteSingleManager({
-                                              certId: profile?._id,
-                                              dutyManagerId: manager?._id,
-                                            })
-                                          ).then((res) => {
-                                            if (res) {
-                                              callLicenseAPI();
-                                            }
-                                          });
-                                        }}
-                                      />
+                                      </Flex>
                                     </Col>
                                   </Row>
                                 )}
@@ -1197,7 +1217,7 @@ export default function Profile() {
                                     profile.dutyManager.expiryDate =
                                       e.target.value;
                                   }}
-                                  min={new Date().toISOString().split('T')[0]}
+                                  min={new Date().toISOString().split("T")[0]}
                                 />
                               ) : (
                                 <Moment format="DD/MM/YYYY">
@@ -1348,7 +1368,7 @@ export default function Profile() {
                                   );
                                   setIsNewDutyManagerAdded(true);
                                 }}
-                                min={new Date().toISOString().split('T')[0]}
+                                min={new Date().toISOString().split("T")[0]}
                                 // placeholder= {manager?.expiryDate}
                               />
                             </Col>

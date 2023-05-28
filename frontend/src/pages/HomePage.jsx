@@ -7,6 +7,7 @@ import { Spacer } from "../components/Spacer";
 import HomeImage from "../images/Homeimage.svg";
 import Startted from "../components/Startted";
 import { useMediaQuery } from "react-responsive";
+import { Footer } from "../components/Footer";
 
 export default function HomePage() {
   const isResponsive = useMediaQuery({
@@ -24,6 +25,7 @@ export default function HomePage() {
         <Card />
         <Spacer height={isResponsive ? "70px" : "179px"} />
         <Startted />
+        <Footer background={"rgba(177, 149, 56, 1)"} color={"#161616"} />
       </Wrapper>
     </>
   );

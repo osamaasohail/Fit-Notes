@@ -198,7 +198,7 @@ You have the right to ask for a copy of any personal information we hold about y
                 we hold about you, and to <br /> ask for it to be corrected if
                 you think it is wrong. If you’d like to ask for a copy of your{" "}
                 <br />
-                information, or to have it corrected, please contact us at <span style={{color:"rgba(177, 149, 56, 1)",textDecoration:"underline",cursor:"pointer"}}> info@hospitalityguardian.co.nz.</span>
+                information, or to have it corrected, please contact us at <span style={{color:"rgba(177, 149, 56, 1)",textDecoration:"underline",cursor:"pointer"}}> <a style={{color:"rgba(177, 149, 56, 1)",textDecoration:"underline",cursor:"pointer"}} href="mailto:info@hospitalityguardian.co.nz">info@hospitalityguardian.co.nz</a>.</span>
                
               </P>
             </div>
