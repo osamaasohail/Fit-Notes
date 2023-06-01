@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Flex, Margin } from "./Style";
 import { H1, P } from "./Typography";
 import { Spacer } from "./Spacer";
-import Profile from "../images/profilepic.svg";
+import Profile from "../images/navAvtar.svg";
 import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
 import { useState } from "react";
