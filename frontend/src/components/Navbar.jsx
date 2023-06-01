@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import Logo from "../images/logo-without-text.png"
+import Logo from "../images/logo-without-text.png";
 
 const Wrapper = styled.div`
   // background: black;
@@ -315,7 +315,7 @@ export default function Navbar() {
                         onClick={() => {
                           navigate("/profile/edit-profile");
                         }}
-                        style={{ marginLeft: "10px" }}
+                        style={{ marginLeft: "12px" }}
                       >
                         Profile
                       </P>
@@ -324,20 +324,23 @@ export default function Navbar() {
               {isResponsive
                 ? ""
                 : tokens.length === 0 && (
-                    <Flex style={{ cursor: "pointer" }} alignItems="center">
+                    <Flex
+                      style={{ cursor: "pointer", fontSize: "16px" }}
+                      alignItems="center"
+                    >
                       <img
                         src={Profile}
                         width={42}
-                        onClick={() => {
-                          navigate("/sign-in");
-                        }}
+                        // onClick={() => {
+                        //   navigate("/sign-in");
+                        // }}
                         // style={{ marginLeft: "10px" }}
                       />
                       <P
                         onClick={() => {
                           navigate("/sign-in");
                         }}
-                        style={{ marginLeft: "10px" }}
+                        style={{ marginLeft: "12px", fontSize: "16px" }}
                       >
                         Login
                       </P>
