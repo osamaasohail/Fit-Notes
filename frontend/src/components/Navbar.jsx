@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Flex, Margin } from "./Style";
 import { H1, P } from "./Typography";
 import { Spacer } from "./Spacer";
-import Profile from "../images/navAvtar.svg";
+import Profile from "../images/profilepic.svg";
 import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
 import { useState } from "react";
@@ -327,20 +327,20 @@ export default function Navbar() {
                     <Flex style={{ cursor: "pointer" }} alignItems="center">
                       <img
                         src={Profile}
-                        width={50}
+                        width={42}
                         onClick={() => {
                           navigate("/sign-in");
                         }}
                         // style={{ marginLeft: "10px" }}
                       />
-                      {/* <P
+                      <P
                         onClick={() => {
                           navigate("/sign-in");
                         }}
                         style={{ marginLeft: "10px" }}
                       >
                         Login
-                      </P> */}
+                      </P>
                     </Flex>
                   )}
             </Flex>
