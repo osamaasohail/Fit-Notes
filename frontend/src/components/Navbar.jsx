@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Flex, Margin } from "./Style";
 import { H1, P } from "./Typography";
 import { Spacer } from "./Spacer";
-import Profile from "../images/profile.svg";
+import Profile from "../images/profilepic.svg";
 import { useMediaQuery } from "react-responsive";
 import Menu from "../images/menu.png";
 import { useState } from "react";
@@ -79,7 +79,9 @@ export default function Navbar() {
                 height="60px"
                 style={{ cursor: "pointer" }}
               />
-              <span style={{"marginLeft": "10px"}}>The Hospitality Guardian</span>
+              <span style={{ marginLeft: "10px" }}>
+                The Hospitality Guardian
+              </span>
             </H1>
             {isResponsive ? (
               <img
@@ -323,14 +325,22 @@ export default function Navbar() {
                 ? ""
                 : tokens.length === 0 && (
                     <Flex style={{ cursor: "pointer" }} alignItems="center">
-                      <P
+                      <img
+                        src={Profile}
+                        width={50}
+                        onClick={() => {
+                          navigate("/sign-in");
+                        }}
+                        // style={{ marginLeft: "10px" }}
+                      />
+                      {/* <P
                         onClick={() => {
                           navigate("/sign-in");
                         }}
                         style={{ marginLeft: "10px" }}
                       >
                         Login
-                      </P>
+                      </P> */}
                     </Flex>
                   )}
             </Flex>

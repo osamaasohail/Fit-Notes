@@ -18,7 +18,7 @@ const WhosText = styled.div`
   }
 `;
 
-export default function AboutUs() {
+export default function   AboutUs() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
@@ -54,23 +54,35 @@ export default function AboutUs() {
             expiration date, for <br />
             comprehensive license management. */}
             At our small New Zealand owned business, our goal is to eliminate
-            the hassle <br/> of having expired certifications and licenses creep up
-            unexpectedly.We understand <br/>the inconvenience firsthand, having
-            experienced the frustration of reapplying due to<br/>expiring
-            certification ourselves. We offer a simple solution to manage
-            comprehensive<br/>reminders for Duty Manager's certificate expiry, Venue
-            Liquor licensing expiry, Gaming <br/>licenses, and Certificates of
-            Approval (CoA) for security staff. Our comprehensive license<br/>
-            management system ensures you never have to worry about expiration
-            dates again.<br/>With us, you can focus on running your business while
-            we keep tabs on when your<br/> important certification is due for
-            renewal. Say goodbye to the headaches of remembering<br/> expiring
-            certifications and licenses and enjoy a smoother, more efficient
-            process<br/>with our automated reminder systems. Join us in making
-            expired certification and licensing<br/> a thing of the past. Experience
-            the convenience and peace of mind of our streamlined<br/>license
-            management solution. Let us handle the complexities while you focus
-            on<br/> what truly matters.
+            the hassle of having expired
+            <br /> certifications and licenses creep up unexpectedly.We
+            understand the inconvenience firsthand, having
+            <br /> experienced the frustration of reapplying due to expiring
+            certification ourselves.
+            <br />
+            <br />
+            We offer a simple solution to manage comprehensive reminders for
+            Duty Manager's certificate expiry,
+            <br /> Venue Liquor licensing expiry, Gaming licenses, and
+            Certificates of Approval (CoA) for security staff.
+            <br /> Our comprehensive license management system ensures you never
+            have to
+            <br /> worry about expiration dates again.
+            <br />
+            <br />
+            With us, you can focus on running your business while we keep tabs
+            on when your important certification
+            <br /> is due for renewal. Say goodbye to the headaches of
+            remembering expiring certifications and licenses
+            <br /> and enjoy a smoother, more efficient process with our
+            automated reminder systems.
+            <br />
+            <br />
+            Join us in making expired certification and licensing a thing of the
+            past. Experience the convenience <br />
+            and peace of mind of our streamlined license management solution.
+            Let us handle the complexities
+            <br /> while you focus on what truly matters.
           </P>
           <Spacer height={isResponsive ? "23px" : "20px"} />
         </WhosText>

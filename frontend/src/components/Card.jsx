@@ -4,7 +4,6 @@ import HeroSection from "./HeroSection";
 import { Flex } from "./Style";
 import CardImage1 from "../images/cardimage1.svg";
 import CardImage2 from "../images/cardimage2.svg";
-
 import CardImage3 from "../images/cardimage3.svg";
 import { Col, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
@@ -55,7 +54,13 @@ export default function Card() {
   const navigate = useNavigate();
   return (
     <>
-      <Row style={isResponsive?{ margin: "0px",padding:"0px" }:{ margin: "0px",padding:"0 40px 0 40px" }}>
+      <Row
+        style={
+          isResponsive
+            ? { margin: "0px", padding: "0px" }
+            : { margin: "0px", padding: "0 40px 0 40px" }
+        }
+      >
         <Col
           style={
             isResponsive ? { marginBottom: "20px" } : { marginBottom: "0px" }
@@ -83,14 +88,16 @@ export default function Card() {
               >
                 Signing up is easy, quick <br /> and affordable.
               </P>
-              <div style={{ margin: "0 20px 0 20px" }} onClick={() => {
-                    navigate("/sign-up");
-                  }}>
+              <div
+                style={{ margin: "0 20px 0 20px" }}
+                // onClick={() => {
+                //   navigate("/sign-up");
+                // }}
+              >
                 <HeroSection
                   image={CardImage1}
-                  buttonText={"Sign Up"}
+                  // buttonText={"Sign Up"}
                   box={true}
-                  
                 />
               </div>
             </Flex>
@@ -124,8 +131,17 @@ export default function Card() {
                 manage their Duty <br /> Manager certificates <br /> and Liquor
                 licenses
               </P>
-              <div style={{ margin: "0 20px 0 20px" }}>
-                <HeroSection image={CardImage2} box={true} />
+              <div
+                style={{ margin: "0 20px 0 20px" }}
+                onClick={() => {
+                  navigate("/sign-up");
+                }}
+              >
+                <HeroSection
+                  image={CardImage2}
+                  box={true}
+                  buttonText={"Sign Up"}
+                />
               </div>
             </Flex>
           </CardWrape>
@@ -154,14 +170,14 @@ export default function Card() {
                 lHeight={isResponsive ? "21px" : "36px"}
                 fontSize="24px"
               >
-                Our platform enables <br/> businesses to effortlessly <br/> manage their <br/> Certificates of Approval (CoA) <br/> as well. 
-                
+                Our platform enables <br />
+                businesses to effortlessly <br />
+                manage their Certificates of
+                <br /> Approval (CoA's) for security <br />
+                staff as well.
               </P>
               <div style={{ margin: "0 20px 0 20px" }}>
-                <HeroSection
-                  image={CardImage3}
-                  box={true}
-                />
+                <HeroSection image={CardImage3} box={true} />
               </div>
             </Flex>
           </CardWrape>

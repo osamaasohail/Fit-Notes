@@ -4,7 +4,7 @@ import HeroSection from "../components/HeroSection";
 import Navbar from "../components/Navbar";
 import { Margin, Wrapper } from "../components/Style";
 import { Spacer } from "../components/Spacer";
-import HomeImage from "../images/Homeimage.svg";
+import HomeImage from "../images/aboutImage.svg";
 import Startted from "../components/Startted";
 import { useMediaQuery } from "react-responsive";
 import { Footer } from "../components/Footer";

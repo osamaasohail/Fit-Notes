@@ -60,7 +60,7 @@ export default function HeroSection({ box, buttonText, image, boxText }) {
   return (
     <>
       <Wrapper>
-        <img width={"100%"} height={"100%"} src={HomeImage} />
+        <img width={"100%"} height={"100%"} src={image} />
         {box ? (
           buttonText ? (
             <Buttons style={isResponsive?{fontSize:"12px",padding:"12px 15px"}:{fontSize:""}}>{buttonText}</Buttons>

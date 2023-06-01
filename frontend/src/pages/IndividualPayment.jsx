@@ -51,7 +51,7 @@ export default function IndividualPayment() {
   useEffect(() => {
     setFullName(userData.name);
     setDutyManagerEmail(userData.email);
-    if(userData?.isProfileCompleted){
+    if (userData?.isProfileCompleted) {
       navigate("/profile/edit-profile");
     }
   }, [userData]);
