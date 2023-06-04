@@ -53,24 +53,24 @@ export default function Blogin() {
   const [accountType, setAccountType] = useState(2);
   // const count = useSelector((state) => state.singup)
   // const count = useSelector((state) => state.singin)
-  const count = useSelector((state) => state)
+  const count = useSelector((state) => state);
   // dispatch(getUser())
-  
+
   const handleSignup = async () => {
-    if(!accountType) {
-      toast.error("Please select account type")
+    if (!accountType) {
+      toast.error("Please select account type");
       return;
-    } else if(!businessName) {
-      toast.error("Please enter business name")
+    } else if (!businessName) {
+      toast.error("Please enter business name");
       return;
-    } else if(!businessEmail) {
-      toast.error("Please enter business email")
+    } else if (!businessEmail) {
+      toast.error("Please enter business email");
       return;
-    } else if(!password) {
-      toast.error("Please enter password")
+    } else if (!password) {
+      toast.error("Please enter password");
       return;
-    } else if(!terms) {
-      toast.error("Please accept terms and conditions")
+    } else if (!terms) {
+      toast.error("Please accept terms and conditions");
       return;
     }
     const data = {
@@ -80,21 +80,21 @@ export default function Blogin() {
       password: password,
     };
     dispatch(postSignUp(data)).then((res) => {
-      if(res.payload.status === 201){
+      if (res.payload.status === 201) {
         setSignUp(false);
-        toast.success("Verification link has been sent to your email")
+        toast.success("Verification link has been sent to your email");
         setTimeout(() => {
-          navigate("/sign-in")
+          navigate("/sign-in");
         }, 3000);
       }
     });
   };
   const handleLogin = () => {
-    if(!loginEmail) {
+    if (!loginEmail) {
       toast.error("Please enter email");
       return;
-    } else if(!loginPassword) {
-      toast.error("Please enter password")
+    } else if (!loginPassword) {
+      toast.error("Please enter password");
       return;
     }
     const data = {
@@ -102,14 +102,14 @@ export default function Blogin() {
       password: loginPassword,
     };
     dispatch(signin(data)).then((res) => {
-      if(res.payload.status === 201){
-        if(res.payload.data.user.accountType === 1){
-          if(res.payload.data.user.isProfileCompleted === false){
-            navigate("/individual-payment")
+      if (res.payload.status === 201) {
+        if (res.payload.data.user.accountType === 1) {
+          if (res.payload.data.user.isProfileCompleted === false) {
+            navigate("/individual-payment");
           }
-        } else if(res.payload.data.user.accountType === 2){
-          if(res.payload.data.user.isProfileCompleted === false){
-            navigate("/payment")
+        } else if (res.payload.data.user.accountType === 2) {
+          if (res.payload.data.user.isProfileCompleted === false) {
+            navigate("/payment");
           }
         }
       }
@@ -119,134 +119,141 @@ export default function Blogin() {
   return (
     <>
       <Wrapper>
-      
-          <TextContainer>
-            <Scrool>
-              <div>
-                <H1 color="#161616" weight="500" fontSize="40px">
-                  Signup
-                </H1>
-                <Spacer height="16px" />
-                <P color="#161616" fontSize="14px" weight="400">
-                  Account Type <span style={{ color: "red" }}>*</span>
-                </P>
-                <select
-                  onChange={(e) => {
-                    setAccountType(e.target.value);
-                  }}
-                  style={{
-                    width: "100%",
-                    padding: "10px 12px",
-                    border: "none",
-                    background: "#F2F2F2",
-                    color: "#222427",
-                  }}
-                >
-                  <option value={2}>Business</option>
-                  <option value={1}>Individual</option>
-                </select>
-                <Spacer height="21px" />
-                <P color="#161616" fontSize="14px" weight="400">
-                  {accountType === 2
-                    ? "Business Name"
-                    : "Individual Name"}{" "}
-                  <span style={{ color: "red" }}>*</span>
-                </P>
-                <Input
-                  onChange={(e) => {
-                    setBusinessName(e.target.value);
-                  }}
-                />
-                <Spacer height="21px" />
+        <TextContainer>
+          <Scrool>
+            <div>
+              <H1 color="#161616" weight="500" fontSize="40px">
+                Signup
+              </H1>
+              <Spacer height="16px" />
+              <P color="#161616" fontSize="14px" weight="400">
+                Account Type <span style={{ color: "red" }}>*</span>
+              </P>
+              <select
+                onChange={(e) => {
+                  setAccountType(e.target.value);
+                }}
+                style={{
+                  width: "100%",
+                  padding: "10px 12px",
+                  border: "none",
+                  background: "#F2F2F2",
+                  color: "#222427",
+                }}
+              >
+                <option value={2}>Business</option>
+                <option value={1}>Individual</option>
+              </select>
+              <Spacer height="21px" />
+              <P color="#161616" fontSize="14px" weight="400">
+                {accountType === 2 ? "Business Name" : "Individual Name"}{" "}
+                <span style={{ color: "red" }}>*</span>
+              </P>
+              <Input
+                onChange={(e) => {
+                  setBusinessName(e.target.value);
+                }}
+              />
+              <Spacer height="21px" />
 
-                <P color="#161616" fontSize="14px" weight="400">
-                  Email<span style={{ color: "red" }}>*</span>
-                </P>
-                <Input
-                  onChange={(e) => {
-                    setBussinessEmail(e.target.value);
-                  }}
-                  type="email"
-                />
-                <Spacer height="21px" />
+              <P color="#161616" fontSize="14px" weight="400">
+                Email<span style={{ color: "red" }}>*</span>
+              </P>
+              <Input
+                onChange={(e) => {
+                  setBussinessEmail(e.target.value);
+                }}
+                type="email"
+              />
+              <Spacer height="21px" />
 
-                <P color="#161616" fontSize="14px" weight="400">
-                  Password<span style={{ color: "red" }}>*</span>
-                </P>
-                <Input
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  type="password"
-                />
-                <Spacer height="21px" />
+              <P color="#161616" fontSize="14px" weight="400">
+                Password<span style={{ color: "red" }}>*</span>
+              </P>
+              <Input
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                type="password"
+              />
+              <Spacer height="21px" />
 
-                <Row className="align-items-center">
-                  <Col style={{ paddingRight: "0px" }} sm={1} xs={2}>
-                    <Input
-                      onChange={() => {
-                        setTerms(!terms);
-                      }}
-                      type="checkbox"
-                    />
-                  </Col>
-                  <Col style={{ paddingLeft: "0px" }}>
-                    <P
-                      lHeight={isResponsive && "17px"}
-                      color="#161616"
-                      fontSize="14px"
-                      weight="400"
-                    >
-                      By creating an account you are agreeing to{" "}
-                      {!isResponsive && <br />} our Terms and Conditions and {" "}
-                      <a href="/privacy-policy" target="_blank">Privacy Policy</a>
-                    </P>
-                  </Col>
-                </Row>
-                <Spacer height="21px" />
-
-                <div style={{ width: "100%" }}>
-                  <ReCAPTCHA
-                    sitekey="6LcUQy0mAAAAADbfyzXAUGUejxIzxH5yPavs9PKz"
-                    ref={recaptchaRef}
-                    onChange={(e) => console.log("Recaptcha is : ", recaptchaRef.current.getValue())}
+              <Row className="align-items-center">
+                <Col style={{ paddingRight: "0px" }} sm={1} xs={2}>
+                  <Input
+                    onChange={() => {
+                      setTerms(!terms);
+                    }}
+                    type="checkbox"
                   />
-                </div>
-                <Spacer height="21px" />
-                <Button
-                  onClick={() => {
-                    handleSignup();
-                    // if (accountType === "Business") {
-                    //   handleSignup();
-                    // } else if (accountType === "Individual") {
-                    //   navigate("/individual-payment");
-                    // }
-                  }}
-                  background="black"
-                  style={{ color: "white", width: "100%" }}
-                >
-                  SIGNUP
-                </Button>
-                <Spacer height="21px" />
-                <P
-                  style={{ textAlign: "center" }}
-                  color="#161616"
-                  fontSize="14px"
-                  weight="400"
-                >
-                  Already have an account?{" "}
-                  <span
-                    onClick={() =>  navigate("/sign-in")}
-                    style={{ fontWeight: "bold", cursor: "pointer" }}
+                </Col>
+                <Col style={{ paddingLeft: "0px" }}>
+                  <P
+                    lHeight={isResponsive && "17px"}
+                    color="#161616"
+                    fontSize="14px"
+                    weight="400"
                   >
-                    Login
-                  </span>
-                </P>
-                <Spacer height="21px" />
+                    By creating an account you are agreeing to{" "}
+                    {!isResponsive && <br />} our
+                    <a href="/terms-and-conditions" target="_blank">
+                      Terms and Conditions
+                    </a>{" "}
+                    and{" "}
+                    <a href="/privacy-policy" target="_blank">
+                      Privacy Policy
+                    </a>
+                  </P>
+                </Col>
+              </Row>
+              <Spacer height="21px" />
+
+              <div style={{ width: "100%" }}>
+                <ReCAPTCHA
+                  sitekey="6LcUQy0mAAAAADbfyzXAUGUejxIzxH5yPavs9PKz"
+                  ref={recaptchaRef}
+                  onChange={(e) =>
+                    console.log(
+                      "Recaptcha is : ",
+                      recaptchaRef.current.getValue()
+                    )
+                  }
+                />
               </div>
-            </Scrool>
-          </TextContainer>
-        
+              <Spacer height="21px" />
+              <Button
+                onClick={() => {
+                  handleSignup();
+                  // if (accountType === "Business") {
+                  //   handleSignup();
+                  // } else if (accountType === "Individual") {
+                  //   navigate("/individual-payment");
+                  // }
+                }}
+                background="black"
+                style={{ color: "white", width: "100%" }}
+              >
+                SIGNUP
+              </Button>
+              <Spacer height="21px" />
+              <P
+                style={{ textAlign: "center" }}
+                color="#161616"
+                fontSize="14px"
+                weight="400"
+              >
+                Already have an account?{" "}
+                <span
+                  onClick={() => navigate("/sign-in")}
+                  style={{ fontWeight: "bold", cursor: "pointer" }}
+                >
+                  Login
+                </span>
+              </P>
+              <Spacer height="21px" />
+            </div>
+          </Scrool>
+        </TextContainer>
       </Wrapper>
     </>
   );

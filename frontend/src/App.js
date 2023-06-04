@@ -18,6 +18,7 @@ import ConfrimPassword from "./pages/profile/ConfirmPassword";
 import Payment from "./pages/Payment";
 import IndividualPayment from "./pages/IndividualPayment";
 import SingIn from "./pages/SingIn";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 function App() {
   const [pathName, setPathName] = useState();
@@ -40,20 +41,20 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route
+            path="/terms-and-conditions"
+            element={<TermsAndConditions />}
+          />
           <Route path="/how-it-works" element={<HowWorks />} />
           <Route path="/sign-up" element={<BussinessLogin />} />
           <Route path="/profile/edit-profile" element={<Profile />} />
           <Route path="/profile/subscription" element={<Subscribtion />} />
           <Route path="/profile/notification" element={<Notification />} />
           <Route path="/profile/reset" element={<ResetEmail />} />
-          <Route path="/profile/reset-password" element={<ConfrimPassword/>} />
-          <Route path="/payment" element={<Payment/>} />  
-          <Route path="/individual-payment" element={<IndividualPayment/>} />  
-          <Route path="/sign-in" element={<SingIn/>} />
-
-
-
-
+          <Route path="/profile/reset-password" element={<ConfrimPassword />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/individual-payment" element={<IndividualPayment />} />
+          <Route path="/sign-in" element={<SingIn />} />
         </Routes>
       </BrowserRouter>
     </>
