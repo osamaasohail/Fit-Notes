@@ -1,0 +1,408 @@
+             <H1 style={{ color: "#2587be" }}>Explanatory notes:</H1>
+              <br />
+              <H2 style={{ color: "white" }}>
+                Website terms and conditions template: on-demand IT service
+                provision
+              </H2>
+              <H1 style={{ color: "#2587be" }}>Paragraph specific notes:</H1>
+              <Para text={"Notes numbering refers to paragraph numbers."} />
+              {/* <H2 style={{ color: "white" }}>Definitions</H2> */}
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"1."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Definitions</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "We know nothing about your business, so we cannot provide you with defined terms which precisely describe what you sell. Most people do not read your terms (even if they have to “tick the box”). The people who do take the trouble to read them are likely to be the sort of people who expect the same attention to detail from you as they themselves give to their purchase of your goods or services. It therefore helps you to obtain their business if your terms are accurate and friendly. By all means use the find/replace function in your word processor to change them. Here are examples of changes to defined terms:"
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "35%" }}>
+                      <br />
+                      <H2 style={{ color: "white" }}>We use</H2>
+                    </div>
+                    <div style={{ width: "65%" }}>
+                      <br />
+                      <H2 style={{ color: "white" }}>
+                        you decide to change to
+                      </H2>
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "35%" }}>
+                      <Para text={"“Services” "} />
+                    </div>
+                    <div style={{ width: "65%" }}>
+                      <Para
+                        text={
+                          "“Super Game; Pro Poker”; “Jacob’s Personality Test”; “The Simulator”"
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "35%" }}>
+                      <Para text={"“Our Website”"} />
+                    </div>
+                    <div style={{ width: "65%" }}>
+                      <Para text={"“The Jones Site” / “The Site”"} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <Para
+                text={
+                  "But if you do change the defined word, make sure it applies to every use of it in the document."
+                }
+              />
+              <Para
+                text={
+                  "Remember too, that when a word or phrase is defined, the defined meaning, capitalised, takes precedence over the common meaning of that word or phrase."
+                }
+              />
+              <Para
+                text={
+                  "You should first decide on the contents of the document, then return to check what definitions are needed and whether they really fit the text you have left in place."
+                }
+              />
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"2."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Definitions</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "Leave these items in place unless there is a good reason to edit or remove. These items are not “lawyer’s blurb”. Every item has been carefully considered in the context of this agreement and has been included for a purpose. Many of them strengthen the framework within which the agreement operates. Leave these items in place unless there is a good reason to edit or remove."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"3."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Basis of contract</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "Technically, you are both selling services and granting a licence for use of your software or ideas or other intellectual property."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"4."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>
+                    Your account and personal information
+                  </H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={"Edit as required. We have no other comment."}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"5."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>The price</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para text={"We have no comment."} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"6."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>
+                    Security of your credit card
+                  </H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "This paragraph is more for information than contractual commitment. We have included it here because many users are reluctant to make payment, so this assurance given at the point of sale will allay their fears."
+                        }
+                      />
+                      <Para
+                        text={
+                          "For payment you may have various alternatives. Edit this paragraph accordingly."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"7."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>How we handle your Content</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "It is a question of balance and maybe how your buyers will react. You are free to delete all or any of it."
+                        }
+                      />
+                      <Para
+                        text={
+                          "This particular paragraph covers a sensitive issue. You should edit to suit the way you operate your business. You need to provide a balance between making precise promises which could trip you up on the one hand and giving a tight enough framework to convince doubters that you will not sell their data. You should also make sure you have the current Net Lawman privacy policy in support."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"8."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>
+                    Restrictions on what you may Post to Our Website
+                  </H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "This and the following three paragraphs relate directly to aspects of the interface between you and your buyers. The more they are allowed to enter data, upload, download, leave messages, and so on, the greater your risk. You cannot stop a criminal by a term in a document, but you can make clear to regular users, before and after the event, that you will take a tough line for bad behaviour."
+                        }
+                      />
+                      <Para
+                        text={
+                          "This paragraph has two purposes: the first is the obvious and named purpose of preventing damage to your website and establishing a contractual obligation by your site users not to do so. Secondly, it may assist in protecting you from civil or criminal charges for which you may otherwise be liable as a result of what someone else posts to your website."
+                        }
+                      />
+                      <Para
+                        text={
+                          "No matter what you put in this paragraph, there is no certainty that you may not be the subject of some sort of attack or other problems. However, we do think it is worth providing a full and strict policy. By doing so, you have the best possible defence against anyone who claims he has been insulted, injured, defamed, or whatever."
+                        }
+                      />
+                      <Para
+                        text={
+                          "We suggest that you edit this paragraph in line with the perceived extent of your risk. Obviously a business advice site will not need the same level of protection as a dating site. Edit as you require."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"9."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>
+                    Your Posting: restricted content
+                  </H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "This paragraph continues in the vein of the previous one. As you see, we intend to make clear that certain other activities are prohibited. We have separated it because it is an area of common problems. The clearer you make it, the less likely it is to be a problem for you. "
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"10."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>
+                    Removal of offensive Content
+                  </H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "This paragraph is targeted at anyone who is aggrieved at a posting. He may or may not be one of your customers or members. By stating and following this policy you will reduce the chance of any claim for defamation, breach of copyright, and so on. Depending on how you attract acceptance of the terms generally, this paragraph may not be enforceable against a visitor."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"11."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Security of Our Website</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "There is an intentional overlap here with the paragraph on restrictions on posting. Your need for this provision also depends on the extent to which users are able to post content of any sort. Delete provisions which are stronger than you need."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"12."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Interruption to Services</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para text={"We have no comment"} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"13."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Intellectual Property</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "Few business managers appreciate just how much IP is owned by the business. There is an enormous variety of IP rights, from domain names to trade marks. It is sensible to leave this provision in place, edited as appropriate."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"14."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>
+                    Disclaimers and limitation of liability
+                  </H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "The law is complicated and much depends on the facts of each case. Our best advice to you is to include these disclaimers so far as they apply to your business, but do not expect that you can conduct your business with disregard to the law."
+                        }
+                      />
+                      <Para
+                        text={
+                          "You will see that we have also included in the provision for directors and others to have the same protection. One way to get around disclaimer provision in the past was to claim not against the company with whom the claimant has a contract but against the directors or others in negligence."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"15."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>You indemnify us</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para text={"We suggest no edits."} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ width: "10%" }}>
+                  <Para text={"16."} />
+                </div>
+                <div style={{ width: "90%" }}>
+                  <br />
+                  <H2 style={{ color: "white" }}>Miscellaneous matters</H2>
+
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <div style={{ width: "100%" }}>
+                      <Para
+                        text={
+                          "A number of special points we have identified each of these as important to protect you. Some are relevant to particular paragraphs in the document, some apply more generally. Some are included to strengthen your position generally. Do not delete unless you are quite positive of the legal effect of doing so."
+                        }
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <H1 style={{ color: "#2587be" }}>End of notes</H1>

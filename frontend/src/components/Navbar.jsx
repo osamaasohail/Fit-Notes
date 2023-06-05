@@ -310,24 +310,6 @@ export default function Navbar() {
                 ? ""
                 : tokens.length > 0 && (
                     <Flex style={{ cursor: "pointer" }} alignItems="center">
-                      <img src={Profile} />
-                      <P
-                        onClick={() => {
-                          navigate("/profile/edit-profile");
-                        }}
-                        style={{ marginLeft: "12px" }}
-                      >
-                        Profile
-                      </P>
-                    </Flex>
-                  )}
-              {isResponsive
-                ? ""
-                : tokens.length === 0 && (
-                    <Flex
-                      style={{ cursor: "pointer", fontSize: "16px" }}
-                      alignItems="center"
-                    >
                       <img
                         src={Profile}
                         width={42}
@@ -336,6 +318,31 @@ export default function Navbar() {
                         // }}
                         // style={{ marginLeft: "10px" }}
                       />
+                      <P
+                        onClick={() => {
+                          navigate("/profile/edit-profile");
+                        }}
+                        style={{ marginLeft: "12px" }}
+                      >
+                        Profile
+                      </P>
+                    </Flex> 
+                  )}
+              {isResponsive
+                ? ""
+                : tokens.length === 0 && (
+                    <Flex
+                      style={{ cursor: "pointer", fontSize: "16px" }}
+                      alignItems="center"
+                    >
+                      {/* <img
+                        src={Profile}
+                        width={42}
+                        // onClick={() => {
+                        //   navigate("/sign-in");
+                        // }}
+                        // style={{ marginLeft: "10px" }}
+                      /> */}
                       <P
                         onClick={() => {
                           navigate("/sign-in");

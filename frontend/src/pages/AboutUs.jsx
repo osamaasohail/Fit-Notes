@@ -55,7 +55,7 @@ export default function   AboutUs() {
             comprehensive license management. */}
             At our small New Zealand owned business, our goal is to eliminate
             the hassle of having expired
-            <br /> certifications and licenses creep up unexpectedly.We
+            <br /> certifications and licenses creep up unexpectedly. We
             understand the inconvenience firsthand, having
             <br /> experienced the frustration of reapplying due to expiring
             certification ourselves.

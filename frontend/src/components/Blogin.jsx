@@ -195,7 +195,7 @@ export default function Blogin() {
                     weight="400"
                   >
                     By creating an account you are agreeing to{" "}
-                    {!isResponsive && <br />} our
+                    {!isResponsive && <br />} our{" "}
                     <a href="/terms-and-conditions" target="_blank">
                       Terms and Conditions
                     </a>{" "}
