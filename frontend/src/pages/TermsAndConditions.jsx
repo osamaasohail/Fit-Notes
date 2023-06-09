@@ -116,7 +116,7 @@ export default function TermsAndConditions() {
               />
               <Para
                 text={
-                  "Please read this agreement carefully and save it. If you do not  with it, you should leave Our Website immediately."
+                  "Please read this agreement carefully and save it. If you do not agree with it, you should leave Our Website immediately."
                 }
               />
               <H2 style={{ color: "white", marginTop: "32px" }}>
@@ -145,7 +145,7 @@ export default function TermsAndConditions() {
                 <div style={{ width: "65%" }}>
                   <Para
                     text={
-                      "means intellectual property owned by us, of every sort, whether or not registered or registrable in anycountry, including intellectual property of all kinds coming into existence after today; and including, among others, patents, trademarks, unregistered marks, designs, copyrights, software, domainnames, discoveries, know-how, creations and inventions, together with all rights which are derived from those rights."
+                      "means intellectual property owned by us, of every sort, whether or not registered or registrable in any country, including intellectual property of all kinds coming into existence after today; and including, among others, patents, trademarks, unregistered marks, designs, copyrights, software, domainnames, discoveries, know-how, creations and inventions, together with all rights which are derived from those rights."
                     }
                   />
                 </div>
@@ -226,7 +226,7 @@ export default function TermsAndConditions() {
                 <div style={{ width: "90%" }}>
                   <Para
                     text={
-                      "tthis agreement is made only in the English language. If there is any conflict in meaning between the English language version of this agreement and any version or translation of this agreement in any other language, the English language version shall prevail."
+                      "this agreement is made only in the English language. If there is any conflict in meaning between the English language version of this agreement and any version or translation of this agreement in any other language, the English language version shall prevail."
                     }
                   />
                 </div>
@@ -470,7 +470,7 @@ export default function TermsAndConditions() {
                 <div style={{ width: "90%" }}>
                   <Para
                     text={
-                      "Prices are inclusive of any applicable goods and services tax or other sales tax."
+                      "Prices are inclusive of any applicable goods and services tax or other sales tax. Prices are not inclusive of GST or any appliable fees (if any)."
                     }
                   />
                 </div>
@@ -586,7 +586,7 @@ export default function TermsAndConditions() {
                 <div style={{ width: "90%" }}>
                   <Para
                     text={
-                      "Even if access to your text is behind a user registration it remains effectively in the public domain because someone has only to register and log in, to access it. You should therefore avoid Posting unnecessary confidential information."
+                      "Even if access to your text is behind a user registration it remains effectively in the public domain because someone has only to register and log in, to access it. You should therefore avoid posting unnecessary confidential information."
                     }
                   />
                 </div>
@@ -1562,7 +1562,7 @@ export default function TermsAndConditions() {
                 <div style={{ width: "90%" }}>
                   <Para
                     text={
-                      ". If you become aware of any breach of any term of this agreement by any person, please tell us by contacting Us through Our website. We welcome your input but do not guarantee to agree with your judgement."
+                      "If you become aware of any breach of any term of this agreement by any person, please tell us by contacting Us through Our website. We welcome your input but do not guarantee to agree with your judgement."
                     }
                   />
                 </div>
@@ -1849,7 +1849,7 @@ export default function TermsAndConditions() {
                 </div>
               </div>
               <br />
- 
+
               {/*       */}
             </div>
           </PrivacyContent>
