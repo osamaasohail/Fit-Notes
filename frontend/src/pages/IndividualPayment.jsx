@@ -45,7 +45,13 @@ export default function IndividualPayment() {
   const [dutyManagerName, setDutyManagerName] = useState("");
   const [dutyManagerLicenseNumber, setDutyManagerLicenseNumber] = useState("");
   const [dutyManagerLicenseExpiry, setDutyManagerLicenseExpiry] = useState("");
+
+  const [securityCertificateEmail, setSecurityCertificateEmail] = useState("");
+  const [securityCertificateName, setSecurityCertificateName] = useState("");
+  const [securityCertificateLicenseNumber, setSecurityCertificateLicenseNumber] = useState("");
+  const [securityCertificateLicenseExpiry, setSecurityCertificateLicenseExpiry] = useState("");
   const userData = useSelector((state) => state.signin.signInData.data.user);
+  
   // const [dutyManagerName, setDutyManagerName] = useState("");
 
   useEffect(() => {
@@ -84,6 +90,12 @@ export default function IndividualPayment() {
         email: dutyManagerEmail,
         licenseNumber: dutyManagerLicenseNumber,
         expiryDate: dutyManagerLicenseExpiry,
+      },
+      securityCertificate: {
+        name: securityCertificateName,
+        email: securityCertificateEmail,
+        licenseNumber: securityCertificateLicenseNumber,
+        expiryDate: securityCertificateLicenseExpiry,
       },
       sendNotiBeforeExpiry: data
         .filter((item) => item.isChecked)
@@ -325,6 +337,116 @@ export default function IndividualPayment() {
                   </div>
                 </P>
               </div>
+
+              <Spacer height="24px" />
+
+
+              <div>
+                <P color="#161616" fontSize="14px" weight="600">
+                  Add Security Certificate<span style={{ color: "red" }}>*</span>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      onChange={(e) => {
+                        setSecurityCertificateName(e.target.value);
+                      }}
+                      value={securityCertificateName}
+                      style={{
+                        fontSize: "14px",
+                        //   background: "#FCFCFC",
+                        width: "100%",
+                      }}
+                      placeholder="Enter name"
+                    />
+                    <div
+                      style={{ position: "absolute", top: "15%", right: "2%" }}
+                    >
+                      <img src={Check} />
+                    </div>
+                    <Spacer height="16px" />
+                  </div>
+                </P>
+              </div>
+              <Spacer height="24px" />
+              <div>
+                <P color="#161616" fontSize="14px" weight="600">
+                  Add Security Certificate Email<span style={{ color: "red" }}>*</span>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      value={securityCertificateEmail}
+                      onChange={(e) => {
+                        setSecurityCertificateEmail(e.target.value);
+                      }}
+                      style={{
+                        fontSize: "14px",
+                        //   background: "#FCFCFC",
+                        width: "100%",
+                      }}
+                      placeholder="Enter email"
+                      disabled={true}
+                    />
+                    <div
+                      style={{ position: "absolute", top: "15%", right: "2%" }}
+                    >
+                      <img src={Check} />
+                    </div>
+                    <Spacer height="16px" />
+                  </div>
+                </P>
+              </div>
+              <Spacer height="24px" />
+              <div>
+                <P color="#161616" fontSize="14px" weight="600">
+                  Add Security Certificate License Number
+                  <span style={{ color: "red" }}>*</span>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      value={securityCertificateLicenseNumber}
+                      onChange={(e) => {
+                        setSecurityCertificateLicenseNumber(e.target.value);
+                      }}
+                      style={{
+                        fontSize: "14px",
+                        //   background: "#FCFCFC",
+                        width: "100%",
+                      }}
+                      placeholder="Enter license number"
+                      name="licenseNumber"
+                    />
+                    <div
+                      style={{ position: "absolute", top: "15%", right: "2%" }}
+                    >
+                      <img src={Check} />
+                    </div>
+                    <Spacer height="16px" />
+                  </div>
+                </P>
+              </div>
+              <Spacer height="24px" />
+
+              <div>
+                <P color="#161616" fontSize="14px" weight="600">
+                Security Certificate's license Expiry Date
+                  <span style={{ color: "red" }}>*</span>
+                  <div style={{ position: "relative" }}>
+                    <Input
+                      value={securityCertificateLicenseExpiry}
+                      onChange={(e) => {
+                        setSecurityCertificateLicenseExpiry(e.target.value);
+                      }}
+                      style={{
+                        fontSize: "14px",
+                        //   background: "#FCFCFC",
+                        width: "100%",
+                      }}
+                      type="date"
+                      min={new Date().toISOString().split('T')[0]}
+                    />
+
+                    <Spacer height="16px" />
+                  </div>
+                </P>
+              </div>
+
               <Spacer height="24px" />
 
               <div>

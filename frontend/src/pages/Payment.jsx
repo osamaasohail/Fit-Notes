@@ -45,17 +45,24 @@ export default function Payment() {
   const [term, setTerm] = useState(false);
 
   const [userData, token] = useSelector((state) => {
-    return [state.signin.signInData.data.user, state.signin.signInData.data.token];
+    return [
+      state.signin.signInData.data.user,
+      state.signin.signInData.data.token,
+    ];
   });
   useEffect(() => {
     setBusinessName(userData.name);
     setBussinerOwnerEmail(userData.email);
-    if(userData?.isProfileCompleted){
+    if (userData?.isProfileCompleted) {
       navigate("/profile/edit-profile");
     }
   }, [userData]);
 
   const [dutyManagers, setDutyManagers] = useState([
+    { name: "", email: "", licenseNumber: "", expiryDate: "" },
+  ]);
+
+  const [securityCertificates, setSecurityCertificates] = useState([
     { name: "", email: "", licenseNumber: "", expiryDate: "" },
   ]);
 
@@ -90,6 +97,26 @@ export default function Payment() {
     setDutyManagers(list);
   };
 
+  const onSecurityCertificateAdd = () => {
+    setSecurityCertificates([
+      ...securityCertificates,
+      { name: "", email: "", licenseNumber: "", expiryDate: "" },
+    ]);
+  };
+
+  const onSecurityCertificateRemove = (index) => {
+    const list = [...securityCertificates];
+    list.splice(index, 1);
+    setSecurityCertificates(list);
+  };
+
+  const handleSecurityCertificateChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...securityCertificates];
+    list[index][name] = value;
+    setSecurityCertificates(list);
+  };
+
   function handleReminderChange(e) {
     const value = e.target.value;
     const newArray = [...data];
@@ -103,75 +130,115 @@ export default function Payment() {
   }
 
   const handlePaymentAndSubmit = () => {
-    if(!businessName) {
+    if (!businessName) {
       toast.error("Please enter business name");
       return;
-    } else if(!role) {
+    } else if (!role) {
       toast.error("Please select role");
       return;
-    } else if(!licenseNumber) {
+    } else if (!licenseNumber) {
       toast.error("Please enter license number");
       return;
-    } else if(!liquorLicenseExpiry) {
+    } else if (!liquorLicenseExpiry) {
       toast.error("Please enter liquor license expiry");
       return;
-    } else if(!dutyManagers[0].name) {
+    } else if (!dutyManagers[0].name) {
       toast.error("Please enter duty manager name");
       return;
-    } else if(!dutyManagers[0].email) {
+    } else if (!dutyManagers[0].email) {
       toast.error("Please enter duty manager email");
       return;
-    } else if(!dutyManagers[0].licenseNumber) {
+    } else if (!dutyManagers[0].licenseNumber) {
       toast.error("Please enter duty manager license number");
       return;
-    } else if(!dutyManagers[0].expiryDate) {
+    } else if (!dutyManagers[0].expiryDate) {
       toast.error("Please enter duty manager expiry date");
       return;
-    } else if(gamingLicense && !gamingLicenseExpiry) {
+    } else if (!securityCertificates[0].name) {
+      toast.error("Please enter security Certificates name");
+      return;
+    } else if (!securityCertificates[0].email) {
+      toast.error("Please enter security Certificates email");
+      return;
+    } else if (!securityCertificates[0].licenseNumber) {
+      toast.error("Please enter security Certificates license number");
+      return;
+    } else if (!securityCertificates[0].expiryDate) {
+      toast.error("Please enter security Certificates  expiry date");
+      return;
+    } else if (gamingLicense && !gamingLicenseExpiry) {
       toast.error("Please enter gaming license expiry");
       return;
-    } else if(gamingLicenseExpiry && !gamingLicense) {
+    } else if (gamingLicenseExpiry && !gamingLicense) {
       toast.error("Please enter gaming license");
       return;
     }
+
     dutyManagers.forEach((item) => {
-      if(!item.name) {
+      if (!item.name) {
         toast.error("Please enter duty manager name");
         return;
-      } else if(!item.email) {
+      } else if (!item.email) {
         toast.error("Please enter duty manager email");
         return;
-      } else if(!item.licenseNumber) {
+      } else if (!item.licenseNumber) {
         toast.error("Please enter duty manager license number");
         return;
-      } else if(!item.expiryDate) {
+      } else if (!item.expiryDate) {
         toast.error("Please enter duty manager expiry date");
         return;
       }
     });
 
-    if(data.filter(item => item.isChecked).length === 0) {
+    securityCertificates.forEach((item) => {
+      if (!item.name) {
+        toast.error("Please enter security Certificates name");
+        return;
+      } else if (!item.email) {
+        toast.error("Please enter securityCertificates email");
+        return;
+      } else if (!item.licenseNumber) {
+        toast.error("Please enter securityCertificate license number");
+        return;
+      } else if (!item.expiryDate) {
+        toast.error("Please enter securityCertificates expiry date");
+        return;
+      }
+    });
+
+    if (data.filter((item) => item.isChecked).length === 0) {
       toast.error("Please select notification preference");
       return;
     }
+
     var userData = {
       name: businessName,
       role: parseInt(role),
       licenseNumber: licenseNumber,
       expiryDate: liquorLicenseExpiry,
       dutyManagers: dutyManagers,
+      securityCertificates: securityCertificates,
       gamingLicense: gamingLicense,
       gamingLicenseExpiry: gamingLicenseExpiry,
-      sendNotiBeforeExpiry: data.filter(item => item.isChecked).map(item => item.id),
-      isGamingLicenseEnabled: false
+      sendNotiBeforeExpiry: data
+        .filter((item) => item.isChecked)
+        .map((item) => item.id),
+      isGamingLicenseEnabled: false,
     };
+
     var calculateQuantity = dutyManagers?.length;
+    var calculateQuantity_sc = securityCertificates?.length;
+
     if ((gamingLicense && gamingLicenseExpiry) !== "") {
       calculateQuantity += 1;
       userData.isGamingLicenseEnabled = true;
     }
+
     userData.quantity = dutyManagers?.length;
-    console.log("User data is ", userData)
+
+    userData.quantity_sc = securityCertificates?.length;
+
+    console.log("User data is ", userData);
     dispatch(businessLicense(userData, token)).then((res) => {
       window.location.href = res.payload.data.url;
     });
@@ -377,7 +444,7 @@ export default function Payment() {
                       }}
                       type="date"
                       placeholder="Enter license expiry date"
-                      min={new Date().toISOString().split('T')[0]}
+                      min={new Date().toISOString().split("T")[0]}
                     />
 
                     <Spacer height="16px" />
@@ -441,7 +508,7 @@ export default function Payment() {
                                 }}
                                 placeholder="Enter expiry date"
                                 type="date"
-                                min={new Date().toISOString().split('T')[0]}
+                                min={new Date().toISOString().split("T")[0]}
                               />
 
                               <Spacer height="16px" />
@@ -558,6 +625,182 @@ export default function Payment() {
                 );
               })}
 
+              <Spacer height="24px" />
+              {securityCertificates.map((item, index) => {
+                return (
+                  <>
+                    <Row key={index} className="align-items-center">
+                      <Col md={6}>
+                        <div>
+                          <P color="#161616" fontSize="14px" weight="600">
+                            Add Security Certificates
+                            <span style={{ color: "red" }}>*</span>
+                            <div style={{ position: "relative" }}>
+                              <Input
+                                onChange={(e) =>
+                                  handleSecurityCertificateChange(e, index)
+                                }
+                                name="name"
+                                value={item.name}
+                                style={{
+                                  fontSize: "14px",
+                                  //   background: "#FCFCFC",
+                                  width: "100%",
+                                }}
+                                placeholder="Enter name"
+                              />
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: "15%",
+                                  right: "2%",
+                                }}
+                              >
+                                <img src={Check} />
+                              </div>
+                              <Spacer height="16px" />
+                            </div>
+                          </P>
+                        </div>
+                      </Col>
+                      <Col md={6}>
+                        <div>
+                          <P color="#161616" fontSize="14px" weight="600">
+                            License Expiry Date
+                            <span style={{ color: "red" }}>*</span>
+                            <div style={{ position: "relative" }}>
+                              <Input
+                                onChange={(e) =>
+                                  handleSecurityCertificateChange(e, index)
+                                }
+                                name="expiryDate"
+                                value={item.date}
+                                style={{
+                                  fontSize: "14px",
+                                  //   background: "#FCFCFC",
+                                  width: "100%",
+                                }}
+                                placeholder="Enter expiry date"
+                                type="date"
+                                min={new Date().toISOString().split("T")[0]}
+                              />
+
+                              <Spacer height="16px" />
+                            </div>
+                          </P>
+                        </div>
+                      </Col>
+                      <Col md={6}>
+                        <div>
+                          <P color="#161616" fontSize="14px" weight="600">
+                            Add Security Certificate Email
+                            <span style={{ color: "red" }}>*</span>
+                          </P>
+                          <Spacer height="2px" />
+                          <div style={{ position: "relative" }}>
+                            <Input
+                              onChange={(e) =>
+                                handleSecurityCertificateChange(e, index)
+                              }
+                              name="email"
+                              value={item.email}
+                              style={{
+                                fontSize: "14px",
+                                width: "100%",
+                              }}
+                              placeholder="Enter email"
+                            />
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "15%",
+                                right: "2%",
+                              }}
+                            >
+                              <img src={Check} />
+                            </div>
+                            <Spacer height="24px" />
+                          </div>
+                        </div>
+                      </Col>
+                      <Col md={6}>
+                        <div>
+                          <P color="#161616" fontSize="14px" weight="600">
+                            License Number
+                            <span style={{ color: "red" }}>*</span>
+                          </P>
+                          <Spacer height="2px" />
+                          <div style={{ position: "relative" }}>
+                            <Input
+                              onChange={(e) =>
+                                handleSecurityCertificateChange(e, index)
+                              }
+                              name="licenseNumber"
+                              value={item.licenseNumber}
+                              style={{
+                                fontSize: "14px",
+                                width: "100%",
+                              }}
+                              placeholder="Enter license number"
+                            />
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "15%",
+                                right: "2%",
+                              }}
+                            >
+                              <img src={Check} />
+                            </div>
+                            <Spacer height="24px" />
+                          </div>
+                        </div>
+                      </Col>
+                      <Col className="mt-2" md={4}>
+                        {securityCertificates.length - 1 === index && (
+                          <>
+                            <Button
+                              onClick={() => {
+                                onSecurityCertificateAdd();
+                              }}
+                              style={{
+                                padding: "0px 8px 0px 8px",
+                                color: "white",
+                                fontSize: "17px",
+                                fontWeight: "500",
+                              }}
+                              background="#11AF22"
+                            >
+                              +
+                            </Button>
+                            {securityCertificates.length !== 1 && (
+                              <Button
+                                onClick={() =>
+                                  onSecurityCertificateRemove(index)
+                                }
+                                style={{
+                                  padding: "0px 8px 0px 8px",
+                                  color: "white",
+                                  fontSize: "17px",
+                                  fontWeight: "500",
+                                  marginLeft: "10px",
+                                }}
+                                background="#FF1B1B"
+                              >
+                                -
+                              </Button>
+                            )}
+                          </>
+                        )}
+
+                        {/* <p>+</p> */}
+                      </Col>
+                    </Row>
+                    <Spacer height="24px" />
+                  </>
+                );
+              })}
+
               <Row>
                 <Col md={6}>
                   <div>
@@ -607,7 +850,7 @@ export default function Payment() {
                           }}
                           placeholder="Enter expiry date"
                           type="date"
-                          min={new Date().toISOString().split('T')[0]}
+                          min={new Date().toISOString().split("T")[0]}
                         />
 
                         <Spacer height="16px" />

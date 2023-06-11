@@ -139,3 +139,73 @@ export const deleteDutyManagerInfo = createAsyncThunk(
     }
   }
 );
+
+
+export const addNewSecurityCertificateInfo = createAsyncThunk(
+  "addNewSecurityCertificateInfo",
+  async (data) => {
+    try {
+      const res = await client.post(`/cert/${data.certId}/security-certificate`, data);
+      console.log("Get license is called", res.data);
+      return { status: res.status, dataSecurityCertificate: res.data };
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        toast.error("Session Expired");
+        localStorage.clear();
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      }
+      return {
+        message: error.response.data.error,
+        status: error.response.status,
+      };
+    }
+  }
+);
+export const updateSecurityCertificateInfo = createAsyncThunk(
+  "updateSecurityCertificateInfo",
+  async (data) => {
+    try {
+      const res = await client.put(
+        `cert/${data.certId}}/security-certificate/${data.securityCertificateId}`,
+        data
+      );
+      console.log("Get license is called", res.data);
+      return { status: res.status, data: res.data };
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        toast.error("Session Expired");
+        localStorage.clear();
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      }
+      return {
+        message: error.response.data.error,
+        status: error.response.status,
+      };
+    }
+  }
+);
+export const deleteSecurityCertificateInfo = createAsyncThunk(
+  "deleteSecurityCertificateInfo",
+  async (data) => {
+    try {
+      const res = await client.delete(
+        `cert/${data.certId}/security-certificate/${data.securityCertificateId}`,
+        data
+      );
+      console.log("Get license is called", res.data);
+      return { status: res.status, data: res.data };
+    } catch (error) {
+      console.log(error);
+      return {
+        message: error.response.data.error,
+        status: error.response.status,
+      };
+    }
+  }
+);

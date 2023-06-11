@@ -106,7 +106,8 @@ export default function IndividualLogin() {
           } else {
             navigate("/profile/edit-profile")
           }
-        } else if(res.payload.data.user.accountType === 2){
+        } else if (res.payload.data.user.accountType === 2) {
+          console.log("is profile completed:",res.payload.data.user);
           if(res.payload.data.user.isProfileCompleted === false){
             navigate("/payment")
           } else {

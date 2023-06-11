@@ -26,13 +26,22 @@ import { Input } from "../../components/Input";
 import {
   editBasicInfoThunk,
   updateDutyManagerInfo,
+  updateSecurityCertificateInfo
 } from "../../service/redux/middleware/profile";
+
 import { ToastContainer, toast } from "react-toastify";
 import {
   addDutyManagerThunk,
   deleteSingleManager,
   updateSingleManager,
 } from "../../service/redux/middleware/dutyManager";
+
+import {
+  addSecurityCertificateThunk,
+  deleteSecurityCertificate,
+  updateSecurityCertificate,
+} from "../../service/redux/middleware/securityCertificate";
+
 import { deleteGamingLicense } from "../../service/redux/middleware/licenses";
 import { getSingleUser } from "../../service/redux/middleware/getUser";
 
@@ -59,6 +68,23 @@ export default function Profile() {
   const [editLicenseInfo, setEditLicenseInfo] = useState(false);
   const [editGamingLicenseInfo, setEditGamingLicenseInfo] = useState(false);
   const [editDutyManagerInfo, setEditDutyManagerInfo] = useState(false);
+
+
+  const [addSecurityCertificate, setAddSecurityCertificate] = useState(false);
+  const [newSecurityCertificateName, setNewSecurityCertificateName] = useState("");
+  const [newSecurityCertificateEmail, setNewSecurityCertificateEmail] = useState("");
+  const [newSecurityCertificateLicenseNumber, setNewSecurityCertificateLicenseNumber] =
+    useState("");
+  const [newSecurityCertificateLicenseExpiry, setNewSecurityCertificateLicenseExpiry] =
+    useState("");
+  const [isNewSecurityCertificateAdded, setIsNewSecurityCertificateAdded] = useState(false);
+  const [editSecurityCertificateInfo, setEditSecurityCertificateInfo] = useState(false);
+
+
+
+
+
+
   const [businessName, setBusinessName] = useState("");
   const [liquorLicenseNumber, setLiquorLicenseNumber] = useState("");
   const [liquorLicenseExpiry, setLiquorLicenseExpiry] = useState("");
@@ -67,8 +93,13 @@ export default function Profile() {
   const [addGamingLicenseNumber, setAddGamingLicenseNumber] = useState("");
   const [addGamingLicenseExpiryDate, setAddGamingLicenseExpiryDate] =
     useState("");
-  const [editableManager, setEditableManager] = useState([]);
-  const [editableManagerInd, setEditableManagerInd] = useState(false);
+    const [editableManager, setEditableManager] = useState([]);
+    const [editableManagerInd, setEditableManagerInd] = useState(false);
+
+
+    const [editableSecurityCertificate, setEditableSecurityCertificate] = useState([]);
+    const [editableSecurityCertificateInd, setEditableSecurityCertificateInd] = useState(false);
+
   const [addGamingLicense, setAddGamingLicense] = useState(false);
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
@@ -90,8 +121,10 @@ export default function Profile() {
       } else {
         dispatch(getBusinessLicense()).then((res) => {
           console.log("Res for business profile :", res);
+
           if (res.payload.data.licenses.length > 0) {
-            setProfile(res.payload.data.licenses[0]);
+            setProfile(res?.payload?.data?.licenses[0]);
+
             setBusinessName(res?.payload?.data?.licenses[0]?.businessName);
             setLiquorLicenseNumber(
               res?.payload?.data?.licenses[0]?.licenseNumber
@@ -103,11 +136,19 @@ export default function Profile() {
             setGamingLicenseExpiry(
               res?.payload?.data?.licenses[0]?.gamingLicenseExpiry
             );
+
             var temp = [];
+            var temp1 = []
             res?.payload?.data?.licenses[0]?.dutyManagers?.map((item) => {
               temp.push(false);
             });
+
+            res?.payload?.data?.licenses[0]?.securityCertificates?.map((item) => {
+              temp1.push(false);
+            });
+
             setEditableManager(temp);
+            setEditableSecurityCertificate(temp1);
           }
         });
       }
@@ -137,10 +178,17 @@ export default function Profile() {
             res?.payload?.data?.licenses[0]?.gamingLicenseExpiry
           );
           var temp = [];
+          var temp1 = [];
           res?.payload?.data?.licenses[0]?.dutyManagers?.map((item) => {
             temp.push(false);
           });
+
+          res?.payload?.data?.licenses[0]?.securityCertificates?.map((item) => {
+            temp1.push(false);
+          });
+          
           setEditableManager(temp);
+          setEditableSecurityCertificate(temp1);
         }
       });
     }
@@ -1471,8 +1519,630 @@ export default function Profile() {
                 </Box>
               </Col>
             </Row>
-          </Scrool>
           <Spacer />
+
+          <Spacer height="10px" />
+            {/* ========================== Security Certificate Info =============================================*/}
+            <Row
+              style={{
+                padding: isResponsive ? "0vw 0vw 0vw 1vw" : "0vw 10vw 0vw 1vw",
+              }}
+              className=" align-items-center"
+            >
+              <Col md={2}>
+                <H1 color="black" fontSize="24px" weight="500">
+                Security Certificate Info
+                </H1>
+              </Col>
+              <Col md={7}>
+                <Box
+                  width={isResponsive ? "100%" : "55vw"}
+                  padding={
+                    isResponsive ? "41px 20px 20px 20px" : "41px 20px 52px 64px"
+                  }
+                >
+                  <Row className="align-items-center">
+                    {/* <Col md={5}>
+                  <H1 color="black" fontSize="24px" weight="500">
+                    Manager Info
+                  </H1>
+                </Col> */}
+                    <Col md={12}>
+                      <div>
+                        <Row
+                          style={
+                            isResponsive
+                              ? {
+                                  background: "#F2F2F2",
+                                  padding: "12px 2px 12px 2px",
+                                  margin: "0px 20px 0px 0px",
+                                  borderRadius: "8px",
+                                  overflow: "auto",
+                                }
+                              : {
+                                  background: "#F2F2F2",
+                                  padding: "12px 30px 12px 20px",
+                                  margin: "0px 20px 0px 0px",
+                                  borderRadius: "8px",
+                                  overflow: "auto",
+                                }
+                          }
+                        >
+                          <Col md={3} sm={3} xs={3}>
+                            <P color="black" weight="400">
+                              Name
+                            </P>
+                          </Col>
+                          <Col md={3} sm={3} xs={3}>
+                            <P color="black" weight="400">
+                              Email
+                            </P>
+                          </Col>
+                          <Col md={3} sm={3} xs={3}>
+                            <P color="black" weight="400">
+                              License Number
+                            </P>
+                          </Col>
+                          <Col md={2} sm={2} xs={2}>
+                            <P color="black" weight="400">
+                              Expiry
+                            </P>
+                          </Col>
+                          <Col md={1} sm={1} xs={1}>
+                            <P color="black" weight="400">
+                              Action
+                            </P>
+                          </Col>
+                        </Row>
+                      </div>
+                      {userData?.accountType == 2 && (
+                        <>
+                        
+                          {profile?.securityCertificates?.map((manager, index) => {
+                            return (
+                              <>
+                                {manager?.isActive && (
+                                  <Row
+                                    style={
+                                      isResponsive
+                                        ? {
+                                            padding: "16px 2px 12px 2px",
+                                            margin: "0px 20px 0px 0px",
+                                          }
+                                        : {
+                                            padding: "16px 30px 12px 20px",
+                                            margin: "0px 20px 0px 0px",
+                                          }
+                                    }
+                                  >
+                                    <Col md={3} sm={3} xs={3}>
+                                      <Input
+                                        style={
+                                          editableSecurityCertificate[index]
+                                            ? {
+                                                background: "none",
+                                                color: "black",
+                                              }
+                                            : {
+                                                background: "none",
+                                                color: "black",
+                                              }
+                                        }
+                                        disabled={
+                                          editableSecurityCertificate[index] ? false : true
+                                        }
+                                        placeholder={manager?.name}
+
+                                        onChange={(e) => {
+                                          manager.name = e.target.value;
+                                        }}
+                                        
+
+                                      />
+                                    </Col>
+                                    <Col md={3} sm={3} xs={3}>
+                                      <Input
+                                        style={
+                                          edit
+                                            ? {
+                                                background: "none",
+                                                color: "black",
+                                              }
+                                            : {
+                                                background: "none",
+                                                color: "black",
+                                              }
+                                        }
+                                        disabled={
+                                          editableSecurityCertificate[index] ? false : true
+                                        }
+                                        placeholder={manager?.email}
+                                        onChange={(e) => {
+                                          manager.email = e.target.value;
+                                        }}
+                                      />
+                                    </Col>
+                                    <Col md={3} sm={3} xs={3}>
+                                      <Input
+                                        style={
+                                          editableSecurityCertificate[index]
+                                            ? {
+                                                background: "none",
+                                                color: "black",
+                                              }
+                                            : {
+                                                background: "none",
+                                                color: "black",
+                                              }
+                                        }
+                                        disabled={
+                                          editableSecurityCertificate[index] ? false : true
+                                        }
+                                        placeholder={manager?.licenseNumber}
+
+                                        onChange={(e) => {
+                                          manager.licenseNumber =
+                                            e.target.value;
+                                        }}
+
+                                      />
+                                    </Col>
+                                    <Col
+                                      className="d-flex align-items-center"
+                                      md={2}
+                                      sm={2}
+                                      xs={2}
+                                    >
+                                      {editableSecurityCertificate[index] ? (
+                                        <Input
+                                          className="textPlaceholder"
+                                          style={
+                                            editableSecurityCertificate[index]
+                                              ? {
+                                                  background: "none",
+                                                  color: "black",
+                                                }
+                                              : {
+                                                  background: "none",
+                                                  color: "black",
+                                                }
+                                          }
+                                          disabled={
+                                            editableSecurityCertificate[index]
+                                              ? false
+                                              : true
+                                          }
+                                          type="date"
+                                          placeholder={manager?.expiryDate}
+                                          onChange={(e) => {
+                                            manager.expiryDate = e.target.value;
+                                          }}
+                                          min={
+                                            new Date()
+                                              .toISOString()
+                                              .split("T")[0]
+                                          }
+                                        />
+                                      ) : (
+                                        <Moment format="DD/MM/YYYY">
+                                          {manager?.expiryDate}
+                                        </Moment>
+
+                                      )}
+                                    </Col>
+                                    <Col md={1} sm={1} xs={1}>
+                                      <Flex>
+                                        {!editableSecurityCertificate[index] ? (
+                                          <>
+                                            <img
+                                              src={Edit}
+                                              alt="edit"
+                                              onClick={() => {
+                                                var temp = [...editableSecurityCertificate];
+                                                temp[index] =
+                                                  !editableSecurityCertificate[index];
+                                                setEditableSecurityCertificate(temp);
+                                              }}
+                                            />
+                                          </>
+                                        ) : (
+                                          <img
+                                            src={Tick}
+                                            alt="edit"
+                                            onClick={() => {
+                                              dispatch(
+                                                updateSecurityCertificate({
+                                                  name: manager?.name,
+                                                  email: manager?.email,
+                                                  licenseNumber:
+                                                    manager?.licenseNumber,
+                                                  expiryDate:
+                                                    manager?.expiryDate,
+                                                  certId: profile?._id,
+                                                  securityCertificateId: manager?._id,
+                                                })
+                                              ).then((res) => {
+                                                if (res) {
+                                                  callLicenseAPI();
+                                                }
+                                              });
+                                            }}
+                                          />
+                                        )}
+
+                                        <img
+                                          alt="delete"
+                                          style={{ marginLeft: "10px" }}
+                                          width={20}
+                                          height={20}
+                                          src={Delete}
+                                          onClick={() => {
+                                            dispatch(
+                                              deleteSecurityCertificate({
+                                                certId: profile?._id,
+                                                securityCertificateId: manager?._id,
+                                              })
+                                            ).then((res) => {
+                                              if (res) {
+                                                callLicenseAPI();
+                                              }
+                                            });
+                                          }}
+                                        />
+                                      </Flex>
+                                    </Col>
+                                  </Row>
+                                )}
+                              </>
+                            );
+                          })}
+                        </>
+                      )}
+
+                      {userData?.accountType == 1 && (
+                        <>
+                          <Row
+                            style={
+                              isResponsive
+                                ? {
+                                    padding: "16px 2px 12px 2px",
+                                    margin: "0px 20px 0px 0px",
+                                  }
+                                : {
+                                    padding: "16px 30px 12px 20px",
+                                    margin: "0px 20px 0px 0px",
+                                  }
+                            }
+                          >
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  editableSecurityCertificateInd
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                disabled={editableSecurityCertificateInd ? false : true}
+                                placeholder={profile?.securityCertificate?.name}
+                                onChange={(e) => {
+                                  profile.securityCertificate.name = e.target.value;
+                                }}
+                              />
+                            </Col>
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                disabled={true}
+                                placeholder={profile?.securityCertificate?.email}
+                                onChange={(e) => {
+                                  profile.securityCertificate.email = e.target.value;
+                                }}
+                              />
+                            </Col>
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  editableManagerInd
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                disabled={editableSecurityCertificateInd ? false : true}
+                                placeholder={
+                                  profile?.securityCertificate?.licenseNumber
+                                }
+                                onChange={(e) => {
+                                  profile.securityCertificate.licenseNumber =
+                                    e.target.value;
+                                }}
+                              />
+                            </Col>
+                            <Col
+                              className="d-flex align-items-center"
+                              md={2}
+                              sm={2}
+                              xs={2}
+                            >
+                              {editableSecurityCertificateInd ? (
+                                <Input
+                                  className="textPlaceholder"
+                                  style={
+                                    editableSecurityCertificateInd
+                                      ? {
+                                          background: "none",
+                                          color: "black",
+                                        }
+                                      : {
+                                          background: "none",
+                                          color: "black",
+                                        }
+                                  }
+                                  disabled={editableSecurityCertificateInd ? false : true}
+                                  type="date"
+                                  placeholder={profile?.securityCertificate?.expiryDate}
+                                  onChange={(e) => {
+                                    profile.securityCertificate.expiryDate =
+                                      e.target.value;
+                                  }}
+                                  min={new Date().toISOString().split("T")[0]}
+                                />
+                              ) : (
+                                <Moment format="DD/MM/YYYY">
+                                  {profile?.securityCertificate?.expiryDate}
+                                </Moment>
+                              )}
+                            </Col>
+                            <Col md={1} sm={1} xs={1}>
+                              {!editableSecurityCertificateInd ? (
+                                <img
+                                  src={Edit}
+                                  alt="edit"
+                                  onClick={() => {
+                                    // var temp = [...editableManager];
+                                    // temp[index] = !editableManagerInd;
+                                    setEditableSecurityCertificateInd(true);
+                                  }}
+                                />
+                              ) : (
+                                <img
+                                  src={Tick}
+                                  alt="edit"
+                                  onClick={() => {
+                                    console.log("Hello world");
+                                    dispatch(
+                                      updateSecurityCertificate({
+                                        name: profile?.securityCertificate?.name,
+                                        email: profile?.securityCertificate?.email,
+                                        licenseNumber:
+                                          profile?.securityCertificate?.licenseNumber,
+                                        expiryDate:
+                                          profile?.securityCertificate?.expiryDate,
+                                        certId: profile?._id,
+                                        securityCertificateId:
+                                          profile?.securityCertificate?._id,
+                                      })
+                                    ).then((res) => {
+                                      if (res) {
+                                        setEditableSecurityCertificateInd(false);
+                                        callLicenseAPI();
+                                        return toast.success(
+                                          "Security Certificate Updated Successfully"
+                                        );
+                                      }
+                                    });
+                                  }}
+                                />
+                              )}
+
+                              {/* <img
+                                alt="delete"
+                                style={{ marginLeft: "10px" }}
+                                width={20}
+                                height={20}
+                                src={Delete}
+                              /> */}
+                            </Col>
+                          </Row>
+                        </>
+                      )}
+                      {addSecurityCertificate ? (
+                        <>
+                          <Row
+                            style={
+                              isResponsive
+                                ? {
+                                    padding: "16px 2px 12px 2px",
+                                    margin: "0px 20px 0px 0px",
+                                  }
+                                : {
+                                    padding: "16px 30px 12px 20px",
+                                    margin: "0px 20px 0px 0px",
+                                  }
+                            }
+                          >
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                placeholder={"Enter name"}
+                                value={newSecurityCertificateName}
+                                onChange={(e) => {
+                                  setNewSecurityCertificateName(e.target.value);
+                                  setIsNewSecurityCertificateAdded(true);
+                                }}
+                              />
+                              {/* <P color="black" weight="400">
+                            {manager?.name}
+                            asad
+                          </P> */}
+                            </Col>
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                placeholder={"Enter email"}
+                                value={newSecurityCertificateEmail}
+                                onChange={(e) => {
+                                  setNewSecurityCertificateEmail(e.target.value);
+                                  setIsNewSecurityCertificateAdded(true);
+                                }}
+                              />
+                            </Col>
+                            <Col md={3} sm={3} xs={3}>
+                              <Input
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                placeholder={"Enter license number"}
+                                value={newSecurityCertificateLicenseNumber}
+                                onChange={(e) => {
+                                  setNewSecurityCertificateLicenseNumber(
+                                    e.target.value
+                                  );
+                                  setIsNewSecurityCertificateAdded(true);
+                                }}
+                              />
+                              {/* <P color="black" weight="400">
+                            {manager?.licenseNumber}
+                          </P> */}
+                            </Col>
+                            <Col
+                              className="d-flex align-items-center"
+                              md={2}
+                              sm={2}
+                              xs={2}
+                            >
+                              <Input
+                                className="textPlaceholder"
+                                style={
+                                  edit
+                                    ? { background: "none", color: "black" }
+                                    : { background: "none", color: "black" }
+                                }
+                                type="date"
+                                value={newSecurityCertificateLicenseExpiry}
+                                onChange={(e) => {
+                                  setNewSecurityCertificateLicenseExpiry(
+                                    e.target.value
+                                  );
+                                  setIsNewSecurityCertificateAdded(true);
+                                }}
+                                min={new Date().toISOString().split("T")[0]}
+                                // placeholder= {manager?.expiryDate}
+                              />
+                            </Col>
+                            <Col md={1} sm={1} xs={1}>
+                              <img
+                                style={{
+                                  marginLeft: "10px",
+                                  cursor: "pointer",
+                                }}
+                                alt="plus"
+                                width={20}
+                                height={20}
+                                src={Plus}
+                                onClick={() => {
+                                  if (!newSecurityCertificateName) {
+                                    toast.error("Please enter name");
+                                    return;
+                                  } else if (!newSecurityCertificateEmail) {
+                                    toast.error("Please enter email");
+                                    return;
+                                  } else if (!newSecurityCertificateLicenseNumber) {
+                                    toast.error("Please enter license number");
+                                    return;
+                                  } else if (!newSecurityCertificateLicenseExpiry) {
+                                    toast.error("Please enter license expiry");
+                                    return;
+                                  }
+                                  dispatch(
+                                    addSecurityCertificateThunk({
+                                      name: newSecurityCertificateName,
+                                      email: newSecurityCertificateEmail,
+                                      licenseNumber:
+                                        newSecurityCertificateLicenseNumber,
+                                      expiryDate: newSecurityCertificateLicenseExpiry,
+                                      certId: profile?._id,
+                                    })
+                                  ).then((res) => {
+                                    if (res) {
+                                      toast.success("Security Certificate Added");
+                                      setNewSecurityCertificateName("");
+                                      setNewSecurityCertificateEmail("");
+                                      setNewSecurityCertificateLicenseNumber("");
+                                      setNewSecurityCertificateLicenseExpiry("");
+                                      setAddSecurityCertificate(false);
+                                      setProfile(res);
+                                      callLicenseAPI();
+                                    }
+                                  });
+                                  // if (
+                                  //   newDutyManagerName !== "" &&
+                                  //   newDutyManagerEmail !== "" &&
+                                  //   newDutyManagerLicenseNumber !== "" &&
+                                  //   newDutyManagerLicenseExpiry !== ""
+                                  // ) {
+                                  //   profile?.dutyManagers.push({
+                                  //     name: newDutyManagerName,
+                                  //     email: newDutyManagerEmail,
+                                  //     licenseNumber:
+                                  //       newDutyManagerLicenseNumber,
+                                  //     expiryDate: newDutyManagerLicenseExpiry,
+                                  //   });
+                                  //   setNewDutyManagerName("");
+                                  //   setNewDutyManagerEmail("");
+                                  //   setNewDutyManagerLicenseNumber("");
+                                  //   setNewDutyManagerLicenseExpiry("");
+                                  //   setAddDutyManager(false);
+                                  //   setProfile(profile);
+                                  // }
+                                }}
+                              />
+                            </Col>
+                          </Row>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </Col>
+                    {/* {edit ? ( */}
+                    <Button
+                      style={{
+                        width: "100%",
+                        padding: "9px 14px",
+                        background: "black",
+                        color: "white",
+                        fontSize: "14px",
+                        borderRadius: "3px",
+                      }}
+                      disabled={addSecurityCertificate ? true : false}
+                      onClick={() => {
+                        setAddSecurityCertificate(true);
+                      }}
+                    >
+                      {" "}
+                      Add Security Certificate
+                    </Button>
+                    {/* ) : (
+                      ""
+                    )} */}
+                  </Row>
+                </Box>
+              </Col>
+            </Row>
+          <Spacer />
+          </Scrool>
+
           {/* {userData?.accountType == 2 && (
             <Row
               style={{

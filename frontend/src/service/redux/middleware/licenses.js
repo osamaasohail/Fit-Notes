@@ -30,6 +30,7 @@ export const businessLicense = createAsyncThunk(
   async (data) => {
     try {
       const res = await client.post("business-license", data);
+      // console.log("response is",res)
       return { status: res.status, data: res.data };
     } catch (error) {
       console.log(error);

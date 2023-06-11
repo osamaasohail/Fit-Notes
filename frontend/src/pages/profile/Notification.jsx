@@ -140,6 +140,17 @@ export default function Notification() {
                                 </Moment>.
                               </span>
                             )}
+
+{userData?.accountType === 2 && item.type === 'SC' && (
+                              <span>
+                                Your Security Certificate license {item?.licenseNumber} will expire on {" "}
+                                <Moment format="DD/MM/YYYY">
+                                  {item?.expiryDate}
+                                </Moment>.
+                              </span>
+                            )}
+
+
                             {userData?.accountType === 2 && item.type === 'GL' && (
                               <span>
                                 Your Gaming license {item?.licenseNumber} will expire on {" "}
