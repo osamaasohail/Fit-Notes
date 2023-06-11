@@ -4,7 +4,7 @@ import { Spacer } from "./Spacer";
 import { Input } from "./Input";
 import { Col, Row } from "react-bootstrap";
 import { Button } from "./Button";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -41,7 +41,6 @@ export default function Blogin() {
   const isResponsive = useMediaQuery({
     query: "(max-width: 768px)",
   });
-  const recaptchaRef = useRef();
   const [signup, setSignUp] = useState(true);
   const [businessName, setBusinessName] = useState("");
   const [businessEmail, setBussinessEmail] = useState("");
@@ -51,13 +50,14 @@ export default function Blogin() {
   const [loginPassword, setLoginPassword] = useState("");
   const [loginTerms, setLoginTerms] = useState(false);
   const [accountType, setAccountType] = useState(2);
+  const [isRecaptchaVerified, setRecaptchaVerified] = useState(false);
   // const count = useSelector((state) => state.singup)
   // const count = useSelector((state) => state.singin)
   const count = useSelector((state) => state);
   // dispatch(getUser())
 
   const handleSignup = async () => {
-    if (!accountType) {
+   if (!accountType) {
       toast.error("Please select account type");
       return;
     } else if (!businessName) {
@@ -72,7 +72,9 @@ export default function Blogin() {
     } else if (!terms) {
       toast.error("Please accept terms and conditions");
       return;
-    }
+    } else  if (!isRecaptchaVerified) {
+      return toast.error("Please verify captcha");
+    } 
     const data = {
       accountType: accountType,
       name: businessName,
@@ -211,13 +213,11 @@ export default function Blogin() {
               <div style={{ width: "100%" }}>
                 <ReCAPTCHA
                   sitekey="6LcUQy0mAAAAADbfyzXAUGUejxIzxH5yPavs9PKz"
-                  ref={recaptchaRef}
-                  onChange={(e) =>
-                    console.log(
-                      "Recaptcha is : ",
-                      recaptchaRef.current.getValue()
-                    )
-                  }
+                  // sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
+                  onChange={() => {
+                    console.log("Captcha resolved")
+                    setRecaptchaVerified(true);
+                  }}
                 />
               </div>
               <Spacer height="21px" />

@@ -77,3 +77,20 @@ body{
 
 }
 
+.payment-notification {
+  background-color: rgb(209, 13, 13);
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-notification button {
+  background-color: white;
+  color: red;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+

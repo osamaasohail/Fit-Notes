@@ -44,6 +44,7 @@ import {
 
 import { deleteGamingLicense } from "../../service/redux/middleware/licenses";
 import { getSingleUser } from "../../service/redux/middleware/getUser";
+import { getPaymentLinkForBusiness, getPaymentLinkForIndividual } from "../../service/redux/middleware/payment";
 
 const Scrool = styled.div`
   height: 81vh;
@@ -194,9 +195,41 @@ export default function Profile() {
     }
   };
 
+  const getPaymentLink = () => {
+    if(userData?.accountType === 2){
+    dispatch(getPaymentLinkForBusiness()).then((res) => {
+      console.log("Response is", res);
+      if (res.payload.status === 201) {
+        window.location.href = res.payload.data.url;
+      }
+    });
+  } else if(userData?.accountType === 1){
+    dispatch(getPaymentLinkForIndividual()).then((res) => {
+      if (res.payload.status === 201) {
+        window.location.href = res.payload.data.url;
+      }
+    });
+  }
+  };
+
   return (
     <>
       <ToastContainer />
+      {userData && userData?.isProfileCompleted === false && (
+        <Row style={{ margin: "0px" }}>
+          <Col
+            className="d-flex justify-content-evenly "
+            style={{ padding: "0px", flexDirection: "column" }}
+            lg={12}
+            md={12}
+          >
+            <div className="payment-notification">
+              <span>Pending payment. Please proceed to make a payment.</span>
+              <button onClick={() => getPaymentLink()}>Pay Now</button>
+            </div>
+          </Col>
+        </Row>
+      )}
       <Row style={{ margin: "0px" }}>
         <Col
           style={
