@@ -212,7 +212,8 @@ export default function Blogin() {
 
               <div style={{ width: "100%" }}>
                 <ReCAPTCHA
-                  sitekey="6LcUQy0mAAAAADbfyzXAUGUejxIzxH5yPavs9PKz"
+                  sitekey="6LdadbgmAAAAAJxailx1--whwf9wJHBVq65CNwGh"
+                  // sitekey="6LcUQy0mAAAAADbfyzXAUGUejxIzxH5yPavs9PKz"
                   // sitekey="6LcczbglAAAAAHc_JHrisgSMJ46quz86Vjnlkl17"
                   onChange={() => {
                     console.log("Captcha resolved")
