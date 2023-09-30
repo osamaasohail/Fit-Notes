@@ -76,7 +76,11 @@ export default function Subscribtion() {
             <P color="black">Premium Plan</P>
             <Spacer height="16px" />
             <P fontSize="14px" weight="400" color="black">
-               NZD {subscription?.totalQuantity? subscription?.totalQuantity*5 : 0}/Year
+              NZD{" "}
+              {subscription?.totalQuantity
+                ? subscription?.totalQuantity * 5
+                : 0}
+              /Year
             </P>
 
             <Spacer height="16px" />
@@ -84,14 +88,18 @@ export default function Subscribtion() {
               Your plan will be renewed on{" "}
               <span style={{ fontWeight: "bold" }}>
                 {" "}
-                  <Moment format="DD/MM/YYYY">
-                  {subscription?.nextInvoiceDate ? subscription?.nextInvoiceDate * 1000 : new Date()}
+                <Moment format="DD/MM/YYYY">
+                  {subscription?.nextInvoiceDate
+                    ? subscription?.nextInvoiceDate * 1000
+                    : new Date()}
                 </Moment>
-                
               </span>{" "}
               and you will be charged{" "}
               <span style={{ fontWeight: "bold" }}>
-                NZD {subscription?.nextInvoicePrice ? subscription?.nextInvoicePrice : 0}
+                NZD{" "}
+                {subscription?.nextInvoicePrice
+                  ? subscription?.nextInvoicePrice
+                  : 0}
               </span>{" "}
             </P>
           </Box>
@@ -104,7 +112,7 @@ export default function Subscribtion() {
             <br /> contact our customer support team at <br />{" "}
             <span style={{ fontWeight: "bold" }}>
               {" "}
-              support@liquormanagement.com.
+              Info@hospitalityguardian.co.nz
             </span>
           </P>
         </Col>
