@@ -65,14 +65,27 @@ function Accordian() {
   });
   return (
     <Wrapper>
-      <H1 style={{ textAlign: "center",fontWeight:"700" }} fontSize="30px" color="rgba(177, 149, 56, 1)">
+      <H1
+        style={{ textAlign: "center", fontWeight: "700" }}
+        fontSize="30px"
+        color="rgba(177, 149, 56, 1)"
+      >
         Frequently Asked Questions
       </H1>
       <Spacer height="39px" />
-      <P fontSize="20px" style={isResponsive?{ textAlign: "center",padding:"0 15px" }:{textAlign: "center",padding:"0"}}>
+      <P
+        fontSize="20px"
+        style={
+          isResponsive
+            ? { textAlign: "center", padding: "0 15px" }
+            : { textAlign: "center", padding: "0" }
+        }
+      >
         Please reach us at{" "}
-        <span style={{ color: "rgba(177, 149, 56, 1)" }}>info@hospitalityguardian.co </span>{" "}
-        .nz if you cannot find an answer to your question.
+        <span style={{ color: "rgba(177, 149, 56, 1)" }}>
+          info@hospitalityguardian.co.nz{" "}
+        </span>{" "}
+        if you cannot find an answer to your question.
       </P>
       <Spacer height="81px" />
       <Container>
@@ -85,15 +98,22 @@ function Accordian() {
                   setAccordianId(item.id);
                 }}
               >
-                <H1 style={{fontWeight:"600"}} fontSize="20px">{item.head}</H1>
+                <H1 style={{ fontWeight: "600" }} fontSize="20px">
+                  {item.head}
+                </H1>
                 <img src={DropArrow} />
               </Accordion>
               <Spacer height="12px" />
               {accordianOpen && accordianId === item.id ? (
                 <AccordionBody>
-                  <P dangerouslySetInnerHTML={{ __html: item.para.replace(/\n/g, "<br>") }} style={{ opacity: "0.6" }} fontSize="16px" weight="400">
-                    
-                  </P>
+                  <P
+                    dangerouslySetInnerHTML={{
+                      __html: item.para.replace(/\n/g, "<br>"),
+                    }}
+                    style={{ opacity: "0.6" }}
+                    fontSize="16px"
+                    weight="400"
+                  ></P>
                 </AccordionBody>
               ) : (
                 ""

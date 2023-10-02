@@ -73,7 +73,7 @@ function PricingCard() {
                     weight="400"
                   >
                     {" "}
-                    5NZD/Year
+                    5.5NZD/Year
                   </H1>
                 </Card.Title>
                 <Card.Text>
@@ -87,7 +87,7 @@ function PricingCard() {
                   >
                     {" "}
                     Get peace of mind with our <br /> certification expiry date
-                    registration <br /> service for just $5.00 NZD per <br />{" "}
+                    registration <br /> service for just $5.5 NZD per <br />{" "}
                     certificate. Whether you’re an <br /> individual or a
                     business of any size, <br />
                     we’ve got you covered!
@@ -143,7 +143,7 @@ function PricingCard() {
                     weight="400"
                   >
                     {" "}
-                    20NZD/Year
+                    21.4NZD/Year
                   </H1>
                 </Card.Title>
                 <Card.Text>
@@ -157,7 +157,7 @@ function PricingCard() {
                   >
                     {" "}
                     Don’t let your certifications expiry <br /> dates surprise
-                    you - register with us <br /> today for just $5.00 NZD per{" "}
+                    you - register with us <br /> today for just $5.5 NZD per{" "}
                     <br /> certificate. Our registration service is <br />{" "}
                     perfect for small to medium-sized <br /> liquor businesses
                     or larger <br /> enterprises with multiple certificates{" "}
@@ -227,11 +227,13 @@ function PricingCard() {
                     fontSize="20px"
                   >
                     {" "}
-                    Stay on top of your certification <br /> game with our affordable <br />
-                    registration service, starting at just <br /> $5.00 NZD per
-                    certificate. Whether <br /> you have one or multiple certificates <br />
-                    and licenses, we make it easy to <br /> manage your expiry dates
-                    and <br /> maintain compliance.
+                    Stay on top of your certification <br /> game with our
+                    affordable <br />
+                    registration service, starting at just <br /> $5.5 NZD per
+                    certificate. Whether <br /> you have one or multiple
+                    certificates <br />
+                    and licenses, we make it easy to <br /> manage your expiry
+                    dates and <br /> maintain compliance.
                   </P>
                 </Card.Text>
                 <Button style={{ fontWeight: "600" }}>Apply Here</Button>
@@ -243,8 +245,9 @@ function PricingCard() {
 
       <Spacer height="84px" />
       <Wrapper>
-        <P color="black" weight="400" fontSize="20px">
-          All prices are in NZD and exclude GST.
+        <P color="black" weight="400" fontSize="18px">
+          All prices are in NZD. You will be charged 15% GST at the time of
+          checkout
         </P>
       </Wrapper>
     </>

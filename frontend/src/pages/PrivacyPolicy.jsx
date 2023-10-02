@@ -123,7 +123,7 @@ You have the right to ask for a copy of any personal information we hold about y
                 </li>
               </ul>
               <P fontSize="24px" weight="400">
-                Besides our staff, we may share this information with:
+                Please note that no staff members have access to your data
               </P>
               <ul>
                 <li
@@ -141,26 +141,9 @@ You have the right to ask for a copy of any personal information we hold about y
                         }
                   }
                 >
-                  our cloud hosting service, who encrypt our files in order to
-                  take actions connected to a <br /> purpose for collection.
-                </li>
-                <li
-                  style={
-                    isResponsive
-                      ? {
-                          color: "white",
-                          marginTop: "12px",
-                          fontSize: "15px",
-                        }
-                      : {
-                          color: "white",
-                          marginTop: "12px",
-                          fontSize: "24px",
-                        }
-                  }
-                >
-                  License issuing agencies, District licensing Committees
-                  (DLC's), and occasionally the NZ <br /> Police.
+                  Our cloud hosting service encrypts our files, ensuring
+                  confidentiality <br /> and security for any necessary actions
+                  related to our services
                 </li>
               </ul>
               <P fontSize="24px" weight="400" lHeight="30px">
@@ -168,38 +151,39 @@ You have the right to ask for a copy of any personal information we hold about y
                 enter a certain type of <br /> information, we'll be unable to
                 provide specific services.
               </P>
-              <ul>
-                <li
-                  style={
-                    isResponsive
-                      ? {
-                          color: "white",
-                          marginTop: "12px",
-                          fontSize: "15px",
-                        }
-                      : {
-                          color: "white",
-                          marginTop: "12px",
-                          fontSize: "24px",
-                        }
-                  }
-                >
-                  If you choose not to enter we'll{" "}
-                </li>
-              </ul>
+
               <P fontSize="24px" weight="400" lHeight="30px">
-                We keep your information safe by storing it in encrypted files
-                and only allowing certain staff <br /> to access it . <br /> We
-                keep your information for a maximum of two years upon service
-                cancelation, at which <br /> point we will securely destroy all
-                your data by erasing all related data connected with your <br />
+                <br /> We keep your information for a maximum of two years upon
+                service cancelation, at which <br /> point we will securely
+                destroy all your data by erasing all related data connected with
+                your <br />
                 account. <br />
+                <br />
                 You have the right to ask for a copy of any personal information
                 we hold about you, and to <br /> ask for it to be corrected if
                 you think it is wrong. If you’d like to ask for a copy of your{" "}
                 <br />
-                information, or to have it corrected, please contact us at <span style={{color:"rgba(177, 149, 56, 1)",textDecoration:"underline",cursor:"pointer"}}> <a style={{color:"rgba(177, 149, 56, 1)",textDecoration:"underline",cursor:"pointer"}} href="mailto:info@hospitalityguardian.co.nz">info@hospitalityguardian.co.nz</a>.</span>
-               
+                information, or to have it corrected, please contact us at{" "}
+                <span
+                  style={{
+                    color: "rgba(177, 149, 56, 1)",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                >
+                  {" "}
+                  <a
+                    style={{
+                      color: "rgba(177, 149, 56, 1)",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                    href="mailto:info@hospitalityguardian.co.nz"
+                  >
+                    info@hospitalityguardian.co.nz
+                  </a>
+                  .
+                </span>
               </P>
             </div>
           </PrivacyContent>
