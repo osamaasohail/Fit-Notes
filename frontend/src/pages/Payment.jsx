@@ -154,19 +154,23 @@ export default function Payment() {
     } else if (!dutyManagers[0].expiryDate) {
       toast.error("Please enter duty manager expiry date");
       return;
-    } else if (!securityCertificates[0].name) {
-      toast.error("Please enter security Certificates name");
-      return;
-    } else if (!securityCertificates[0].email) {
-      toast.error("Please enter security Certificates email");
-      return;
-    } else if (!securityCertificates[0].licenseNumber) {
-      toast.error("Please enter security Certificates license number");
-      return;
-    } else if (!securityCertificates[0].expiryDate) {
-      toast.error("Please enter security Certificates  expiry date");
-      return;
-    } else if (gamingLicense && !gamingLicenseExpiry) {
+    }
+
+    //  else if (!securityCertificates[0].name) {
+    //   toast.error("Please enter security Certificates name");
+    //   return;
+    // } else if (!securityCertificates[0].email) {
+    //   toast.error("Please enter security Certificates email");
+    //   return;
+    // } else if (!securityCertificates[0].licenseNumber) {
+    //   toast.error("Please enter security Certificates license number");
+    //   return;
+    // } else if (!securityCertificates[0].expiryDate) {
+    //   toast.error("Please enter security Certificates  expiry date");
+    //   return;
+
+    // }
+    else if (gamingLicense && !gamingLicenseExpiry) {
       toast.error("Please enter gaming license expiry");
       return;
     } else if (gamingLicenseExpiry && !gamingLicense) {
@@ -190,21 +194,21 @@ export default function Payment() {
       }
     });
 
-    securityCertificates.forEach((item) => {
-      if (!item.name) {
-        toast.error("Please enter security Certificates name");
-        return;
-      } else if (!item.email) {
-        toast.error("Please enter securityCertificates email");
-        return;
-      } else if (!item.licenseNumber) {
-        toast.error("Please enter securityCertificate license number");
-        return;
-      } else if (!item.expiryDate) {
-        toast.error("Please enter securityCertificates expiry date");
-        return;
-      }
-    });
+    // securityCertificates.forEach((item) => {
+    //   if (!item.name) {
+    //     toast.error("Please enter security Certificates name");
+    //     return;
+    //   } else if (!item.email) {
+    //     toast.error("Please enter securityCertificates email");
+    //     return;
+    //   } else if (!item.licenseNumber) {
+    //     toast.error("Please enter securityCertificate license number");
+    //     return;
+    //   } else if (!item.expiryDate) {
+    //     toast.error("Please enter securityCertificates expiry date");
+    //     return;
+    //   }
+    // });
 
     if (data.filter((item) => item.isChecked).length === 0) {
       toast.error("Please select notification preference");
@@ -246,7 +250,8 @@ export default function Payment() {
   return (
     <>
       {/* style={{padding:"3vw 10vw 0vw 10vw"}} */}
-      <ToastContainer />userDatisProfilea
+      <ToastContainer />
+      userDatisProfilea
       <Wrapper>
         <Row style={{ height: "100%", margin: "0px" }}>
           <Row className="my-3">

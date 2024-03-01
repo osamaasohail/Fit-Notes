@@ -48,10 +48,16 @@ export default function IndividualPayment() {
 
   const [securityCertificateEmail, setSecurityCertificateEmail] = useState("");
   const [securityCertificateName, setSecurityCertificateName] = useState("");
-  const [securityCertificateLicenseNumber, setSecurityCertificateLicenseNumber] = useState("");
-  const [securityCertificateLicenseExpiry, setSecurityCertificateLicenseExpiry] = useState("");
+  const [
+    securityCertificateLicenseNumber,
+    setSecurityCertificateLicenseNumber,
+  ] = useState("");
+  const [
+    securityCertificateLicenseExpiry,
+    setSecurityCertificateLicenseExpiry,
+  ] = useState("");
   const userData = useSelector((state) => state.signin.signInData.data.user);
-  
+
   // const [dutyManagerName, setDutyManagerName] = useState("");
 
   useEffect(() => {
@@ -330,7 +336,7 @@ export default function IndividualPayment() {
                         width: "100%",
                       }}
                       type="date"
-                      min={new Date().toISOString().split('T')[0]}
+                      min={new Date().toISOString().split("T")[0]}
                     />
 
                     <Spacer height="16px" />
@@ -340,10 +346,9 @@ export default function IndividualPayment() {
 
               <Spacer height="24px" />
 
-
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
-                  Add Security Certificate<span style={{ color: "red" }}>*</span>
+                  Add Security Certificate
                   <div style={{ position: "relative" }}>
                     <Input
                       onChange={(e) => {
@@ -369,7 +374,7 @@ export default function IndividualPayment() {
               <Spacer height="24px" />
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
-                  Add Security Certificate Email<span style={{ color: "red" }}>*</span>
+                  Add Security Certificate Email
                   <div style={{ position: "relative" }}>
                     <Input
                       value={securityCertificateEmail}
@@ -397,7 +402,6 @@ export default function IndividualPayment() {
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
                   Add Security Certificate License Number
-                  <span style={{ color: "red" }}>*</span>
                   <div style={{ position: "relative" }}>
                     <Input
                       value={securityCertificateLicenseNumber}
@@ -425,8 +429,7 @@ export default function IndividualPayment() {
 
               <div>
                 <P color="#161616" fontSize="14px" weight="600">
-                Security Certificate's license Expiry Date
-                  <span style={{ color: "red" }}>*</span>
+                  Security Certificate's license Expiry Date
                   <div style={{ position: "relative" }}>
                     <Input
                       value={securityCertificateLicenseExpiry}
@@ -439,7 +442,7 @@ export default function IndividualPayment() {
                         width: "100%",
                       }}
                       type="date"
-                      min={new Date().toISOString().split('T')[0]}
+                      min={new Date().toISOString().split("T")[0]}
                     />
 
                     <Spacer height="16px" />
