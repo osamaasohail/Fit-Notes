@@ -639,7 +639,6 @@ export default function Payment() {
                         <div>
                           <P color="#161616" fontSize="14px" weight="600">
                             Add Security Certificates
-                            <span style={{ color: "red" }}>*</span>
                             <div style={{ position: "relative" }}>
                               <Input
                                 onChange={(e) =>
@@ -672,7 +671,6 @@ export default function Payment() {
                         <div>
                           <P color="#161616" fontSize="14px" weight="600">
                             License Expiry Date
-                            <span style={{ color: "red" }}>*</span>
                             <div style={{ position: "relative" }}>
                               <Input
                                 onChange={(e) =>
@@ -699,7 +697,6 @@ export default function Payment() {
                         <div>
                           <P color="#161616" fontSize="14px" weight="600">
                             Add Security Certificate Email
-                            <span style={{ color: "red" }}>*</span>
                           </P>
                           <Spacer height="2px" />
                           <div style={{ position: "relative" }}>
@@ -732,7 +729,6 @@ export default function Payment() {
                         <div>
                           <P color="#161616" fontSize="14px" weight="600">
                             License Number
-                            <span style={{ color: "red" }}>*</span>
                           </P>
                           <Spacer height="2px" />
                           <div style={{ position: "relative" }}>
