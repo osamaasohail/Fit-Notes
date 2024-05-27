@@ -12,6 +12,7 @@ import { Margin } from "./Style";
 import { Spacer } from "./Spacer";
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   background: rgba(177, 149, 56, 1);
@@ -20,6 +21,7 @@ const Wrapper = styled.div`
 `;
 
 function PricingCard() {
+  const navigate = useNavigate();
   const isResponsive = useMediaQuery({
     query: "(max-width: 358px)",
   });
@@ -93,7 +95,14 @@ function PricingCard() {
                     we’ve got you covered!
                   </P>
                 </Card.Text>
-                <Button style={{ fontWeight: "600" }}>Apply Here</Button>
+                <Button
+                  style={{ fontWeight: "600" }}
+                  onClick={() => {
+                    navigate("/sign-up");
+                  }}
+                >
+                  Apply Here
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -164,7 +173,14 @@ function PricingCard() {
                     <br /> to manage.
                   </P>
                 </Card.Text>
-                <Button style={{ fontWeight: "600" }}>Apply Here</Button>
+                <Button
+                  style={{ fontWeight: "600" }}
+                  onClick={() => {
+                    navigate("/sign-up");
+                  }}
+                >
+                  Apply Here
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -236,7 +252,14 @@ function PricingCard() {
                     dates and <br /> maintain compliance.
                   </P>
                 </Card.Text>
-                <Button style={{ fontWeight: "600" }}>Apply Here</Button>
+                <Button
+                  style={{ fontWeight: "600" }}
+                  onClick={() => {
+                    navigate("/sign-up");
+                  }}
+                >
+                  Apply Here
+                </Button>
               </Card.Body>
             </Card>
           </Col>

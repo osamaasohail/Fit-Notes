@@ -103,7 +103,7 @@ export default function TermsAndConditions() {
                   "We are Hospitality Guardian, a company registered in New Zealand, number 8649686."
                 }
               />
-              <Para text={"GST Number: Not registered for GST"} />
+              <Para text={"GST Number: 138-464-849"} />
               <Para
                 text={
                   "You are: Anyone who uses Our Website or buys any service from us."
